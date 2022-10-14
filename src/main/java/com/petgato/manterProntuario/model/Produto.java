@@ -17,13 +17,16 @@ import javax.persistence.Table;
  * @author alessandra
  */
 @Entity
-@Table(name = "prontuario")
+@Table(name = "produto")
 public class Produto implements Serializable{
     
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY) 
    private Long id;
    private String nome;
+
+    public Produto() {
+    }
     
    public Produto(ProdutoBuilder builder){
         this.id = builder.id;

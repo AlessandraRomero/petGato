@@ -6,14 +6,14 @@ package com.petgato.manterUsuario.view.modelView;
 
 import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.repository.GrupoUsuarioRepository;
+import com.petgato.padrao.componentsModel.PetGatoTableModel;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author alessandra
  */
-public class GrupoUsuarioTableModel extends AbstractTableModel {
+public class GrupoUsuarioTableModel extends PetGatoTableModel {
 
     private String colunas[] = {"id", "nome"};
     private List<GrupoUsuario> lista;
@@ -47,8 +47,6 @@ public class GrupoUsuarioTableModel extends AbstractTableModel {
         return colunas[column];
     }
     
-    
-
     @Override
     public Object getValueAt(int row, int column) {
         GrupoUsuario grupoUsuario = lista.get(row);

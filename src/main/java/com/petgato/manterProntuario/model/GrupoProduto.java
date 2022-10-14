@@ -11,6 +11,7 @@ import java.util.Objects;
  *
  * @author alessandra
  */
+
 public class GrupoProduto implements Serializable{
     
     private Long id;

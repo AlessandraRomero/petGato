@@ -11,13 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author alessandra
  */
 @Entity
-
+@Table(name = "prontuario")
 public class Prontuario implements Serializable {
 
     @Id

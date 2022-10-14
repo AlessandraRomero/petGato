@@ -5,9 +5,9 @@
 package com.petgato.manterUsuario.view;
 
 import com.petgato.manterUsuario.controller.GrupoUsuarioController;
+import com.petgato.manterUsuario.mediator.GrupoUsuarioMediator;
 import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.view.modelView.GrupoUsuarioTableModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +17,7 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
 
     private GrupoUsuarioTableModel model;
     private GrupoUsuarioController controle;
+    private GrupoUsuarioMediator mediator;
 
     /**
      * Creates new form CadastroUsuario
@@ -24,19 +25,19 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
     public CadastroGrupoUsuario() {
         model = new GrupoUsuarioTableModel();
         controle = new GrupoUsuarioController();
+        
         initComponents();
+
+        mediator = new GrupoUsuarioMediator();
+        mediator.registerTxtId(txtId)
+                .registerTxtNome(txtNome)
+                .registerGrupoUsuarioTableModel(model)
+                .registerController(controle)
+                .registerJTable(tabela)
+                .registerJTabbedPane(tab);
     }
 
-    private void limpar() {
-        txtNome.setText("");
-        txtId.setText("");
-        
-        if (tab.getSelectedIndex() == 1) {
-            tab.setSelectedIndex(0);
-        } else {
-            tab.setSelectedIndex(1);
-        }
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -559,11 +560,6 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
         txtId.setBackground(new java.awt.Color(204, 204, 204));
         txtId.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        txtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -687,51 +683,24 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        limpar();
+        mediator.cancelar();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
-        if (tabela.getSelectedRow() >= 0) {
-            int index = tabela.getSelectedRow();
-            Long id = (Long) model.getValueAt(index, 0);
-            GrupoUsuario gu = controle.buscarPorId(id);
-            tab.setSelectedIndex(1);
-            txtId.setText(gu.getId().toString());
-            txtNome.setText(gu.getNome());
-        }
+        mediator.alterar();
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
-        if (txtId.getText().isEmpty() || txtId.getText().isBlank()) {
-            controle.cadastrar(txtNome.getText());
-        } else {
-            controle.atualizar(Long.parseLong(txtId.getText()), txtNome.getText());
-        }
-        JOptionPane.showMessageDialog(this, "Dados gravados com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-        limpar();
-        model.atualizar();
+        mediator.gravar();
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-         if (tabela.getSelectedRow() >= 0) {
-            int index = tabela.getSelectedRow();
-            Long id = (Long) model.getValueAt(index, 0);
-            controle.deletar(id);
-             JOptionPane.showMessageDialog(this, "Exclusão realizada", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-       
-       }else{
-            JOptionPane.showMessageDialog(this, "Selecione uma linha para excluir", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-       }
-       model.atualizar();
+        mediator.excluir();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoActionPerformed
-        limpar();
+        mediator.novo();
     }//GEN-LAST:event_buttonNovoActionPerformed
-
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
 
     /**
      * @param args the command line arguments
