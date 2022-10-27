@@ -17,4 +17,5 @@ public interface Repository<T, K> {
     void delete(T value);
     List<T> findAll();
     T findById(K value);
+    T findByName(K value);
 }

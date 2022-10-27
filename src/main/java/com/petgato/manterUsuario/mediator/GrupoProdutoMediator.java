@@ -4,9 +4,10 @@
  */
 package com.petgato.manterUsuario.mediator;
 
-import com.petgato.manterUsuario.controller.GrupoUsuarioController;
+import com.petgato.manterProntuario.controller.GrupoProdutoController;
+import com.petgato.manterProntuario.model.GrupoProduto;
+import com.petgato.manterProntuario.view.modelView.GrupoProdutoTableModel;
 import com.petgato.manterUsuario.model.GrupoUsuario;
-import com.petgato.manterUsuario.view.modelView.GrupoUsuarioTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -15,35 +16,35 @@ import javax.swing.JTextField;
  *
  * @author alessandra
  */
-public class GrupoUsuarioMediator extends AbstractMediator {
+public class GrupoProdutoMediator extends AbstractMediator {
 
     private JTextField txtId;
     private JTextField txtNome;
     private JTextField txtBuscar;
-    private GrupoUsuarioController controle;
-    private GrupoUsuarioTableModel model;
+    private GrupoProdutoController controle;
+    private GrupoProdutoTableModel model;
 
-    public GrupoUsuarioMediator registerTxtId(JTextField txtId) {
+    public GrupoProdutoMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
 
-    public GrupoUsuarioMediator registerTxtNome(JTextField txtNome) {
+    public GrupoProdutoMediator registerTxtNome(JTextField txtNome) {
         this.txtNome = txtNome;
         return this;
     }
 
-    public GrupoUsuarioMediator registerTxtBuscar(JTextField txtBuscar) {
+    public GrupoProdutoMediator registerTxtBuscar(JTextField txtBuscar) {
         this.txtBuscar = txtBuscar;
         return this;
     }
 
-    public GrupoUsuarioMediator registerController(GrupoUsuarioController controle) {
+    public GrupoProdutoMediator registerController(GrupoProdutoController controle) {
         this.controle = controle;
         return this;
     }
 
-    public GrupoUsuarioMediator registerGrupoUsuarioTableModel(GrupoUsuarioTableModel model) {
+    public GrupoProdutoMediator registerGrupoUsuarioTableModel(GrupoProdutoTableModel model) {
         this.model = model;
         return this;
     }
@@ -59,7 +60,7 @@ public class GrupoUsuarioMediator extends AbstractMediator {
         return null;
     }
 
-    private GrupoUsuario getGrupo() {
+    private GrupoProduto getGrupo() {
         Long id = getIdGrupoFromTable();
 
         if (id != null) {
@@ -69,7 +70,7 @@ public class GrupoUsuarioMediator extends AbstractMediator {
     }
 
     public void alterar() {
-        GrupoUsuario grupo = getGrupo();
+        GrupoProduto grupo = getGrupo();
 
         if (grupo != null) {
             txtId.setText(grupo.getId().toString());

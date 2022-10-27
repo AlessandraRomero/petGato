@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.petgato.manterUsuario.controller;
+package com.petgato.manterProntuario.controller;
 
+import com.petgato.manterProntuario.model.GrupoProduto;
+import com.petgato.manterProntuario.repository.GrupoProdutoRepository;
+import com.petgato.manterUsuario.controller.*;
 import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.repository.GrupoUsuarioRepository;
 
@@ -11,39 +14,39 @@ import com.petgato.manterUsuario.repository.GrupoUsuarioRepository;
  *
  * @author alessandra
  */
-public class GrupoUsuarioController {
+public class GrupoProdutoController {
 
-    private GrupoUsuarioRepository repository;
+    private GrupoProdutoRepository repository;
     
 
-    public GrupoUsuarioController() {
-        repository = new GrupoUsuarioRepository();
+    public GrupoProdutoController() {
+        repository = new GrupoProdutoRepository();
     }
 
     public void cadastrar(String nome) {
 
-        GrupoUsuario grupo = new GrupoUsuario.GrupoUsuarioBuilder()
+        GrupoProduto grupo = new GrupoProduto.GrupoProdutoBuilder()
                 .whitNome(nome)
                 .build();
         repository.save(grupo);
     }
 
-    public GrupoUsuario buscarPorId(Long id) {
+    public GrupoProduto buscarPorId(Long id) {
         return repository.findById(id);
     }
 
     public void atualizar(Long id, String nome) {
-        GrupoUsuario grupo = buscarPorId(id);
+        GrupoProduto grupo = buscarPorId(id);
         grupo.setNome(nome);
         repository.update(grupo);
     }
     
     public void deletar(Long id){
-        GrupoUsuario grupo = buscarPorId(id);
+        GrupoProduto grupo = buscarPorId(id);
         repository.delete(grupo);
     }
     
-    public GrupoUsuario buscarPorNome(String nome){
-        return (GrupoUsuario) repository.findByNome(nome);
+    public GrupoProduto buscarPorNome(String nome){
+        return (GrupoProduto) repository.findByNome(nome);
     }
 }

@@ -1143,7 +1143,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a2" green="c7" red="59" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Condulta:"/>
+                <Property name="text" type="java.lang.String" value="Conduta:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtVacina">

@@ -5,9 +5,8 @@
 package com.petgato.manterProntuario.view;
 
 import com.petgato.manterProntuario.controller.ProdutoController;
-import com.petgato.manterProntuario.model.Produto;
+import com.petgato.manterProntuario.mediator.CadastroProdutoMediator;
 import com.petgato.manterProntuario.view.modelView.ProdutoTableModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,27 +14,27 @@ import javax.swing.JOptionPane;
  */
 public class CadastroProduto extends javax.swing.JFrame {
 
-    private ProdutoTableModel model;
-    private ProdutoController controle;
+    private final ProdutoTableModel model;
+    private final ProdutoController controle;
+    private final CadastroProdutoMediator mediator;
 
     /**
-     * Creates new form CadastroUsuario
+     * Creates new form
      */
     public CadastroProduto() {
-        model = new ProdutoTableModel();
+         model = new ProdutoTableModel();
         controle = new ProdutoController();
-        initComponents();
-    }
-
-    private void limpar() {
-        txtNome.setText("");
-        txtId.setText("");
         
-        if (tab.getSelectedIndex() == 1) {
-            tab.setSelectedIndex(0);
-        } else {
-            tab.setSelectedIndex(1);
-        }
+        initComponents();
+
+        mediator = new CadastroProdutoMediator();
+        mediator.registerTxtId(txtId)
+                .registerTxtNome(txtNome)
+                .registerTxtBuscar(txtBuscar)
+                .registerGrupoUsuarioTableModel(model)
+                .registerController(controle)
+                .registerJTable(tabela)
+                .registerJTabbedPane(tab);
     }
 
     /**
@@ -78,7 +77,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         tab = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         buttonBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -409,13 +408,13 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel22.setBackground(new java.awt.Color(89, 199, 162));
         jLabel22.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel22.setText("Produto:");
+        jLabel22.setText("Nome Produto:");
 
-        jTextField13.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jTextField13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscar.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                txtBuscarActionPerformed(evt);
             }
         });
 
@@ -478,7 +477,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -499,7 +498,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -677,55 +676,32 @@ public class CadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        limpar();
+       mediator.cancelar();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
-        if (tabela.getSelectedRow() >= 0) {
-            int index = tabela.getSelectedRow();
-            Long id = (Long) model.getValueAt(index, 0);
-            Produto prod = controle.buscarPorId(id);
-            tab.setSelectedIndex(1);
-            txtId.setText(prod.getId().toString());
-            txtNome.setText(prod.getNome());
-        }
+       mediator.alterar();
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
-        if (txtId.getText().isEmpty() || txtId.getText().isBlank()) {
-            controle.cadastrar(txtNome.getText());
-        } else {
-            controle.atualizar(Long.parseLong(txtId.getText()), txtNome.getText());
-        }
-        JOptionPane.showMessageDialog(this, "Dados gravados com sucesso", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-        limpar();
-        model.atualizar();
+        mediator.gravar();
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-         if (tabela.getSelectedRow() >= 0) {
-            int index = tabela.getSelectedRow();
-            Long id = (Long) model.getValueAt(index, 0);
-            controle.deletar(id);
-             JOptionPane.showMessageDialog(this, "Exclusão realizada", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-       
-       }else{
-            JOptionPane.showMessageDialog(this, "Selecione uma linha para excluir", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-       }
-       model.atualizar();
+        mediator.excluir();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoActionPerformed
-        limpar();
+        mediator.novo();
     }//GEN-LAST:event_buttonNovoActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -807,7 +783,6 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -815,6 +790,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTabbedPane tab;
     private javax.swing.JTable tabela;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables

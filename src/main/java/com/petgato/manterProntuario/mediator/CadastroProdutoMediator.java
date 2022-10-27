@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.petgato.manterUsuario.mediator;
+package com.petgato.manterProntuario.mediator;
 
-import com.petgato.manterUsuario.controller.GrupoUsuarioController;
-import com.petgato.manterUsuario.model.GrupoUsuario;
-import com.petgato.manterUsuario.view.modelView.GrupoUsuarioTableModel;
+import com.petgato.manterProntuario.controller.ProdutoController;
+import com.petgato.manterProntuario.model.Produto;
+import com.petgato.manterProntuario.view.modelView.ProdutoTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -15,40 +15,40 @@ import javax.swing.JTextField;
  *
  * @author alessandra
  */
-public class GrupoUsuarioMediator extends AbstractMediator {
+public class CadastroProdutoMediator extends AbstractMediator{
 
-    private JTextField txtId;
+   private  JTextField txtId;
     private JTextField txtNome;
     private JTextField txtBuscar;
-    private GrupoUsuarioController controle;
-    private GrupoUsuarioTableModel model;
-
-    public GrupoUsuarioMediator registerTxtId(JTextField txtId) {
+    private ProdutoController controle;
+    private ProdutoTableModel model; 
+    
+      public CadastroProdutoMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
 
-    public GrupoUsuarioMediator registerTxtNome(JTextField txtNome) {
+    public CadastroProdutoMediator registerTxtNome(JTextField txtNome) {
         this.txtNome = txtNome;
         return this;
     }
 
-    public GrupoUsuarioMediator registerTxtBuscar(JTextField txtBuscar) {
+    public CadastroProdutoMediator registerTxtBuscar(JTextField txtBuscar) {
         this.txtBuscar = txtBuscar;
         return this;
     }
 
-    public GrupoUsuarioMediator registerController(GrupoUsuarioController controle) {
+    public CadastroProdutoMediator registerController(ProdutoController controle) {
         this.controle = controle;
         return this;
     }
 
-    public GrupoUsuarioMediator registerGrupoUsuarioTableModel(GrupoUsuarioTableModel model) {
+    public CadastroProdutoMediator registerGrupoUsuarioTableModel(ProdutoTableModel model) {
         this.model = model;
         return this;
     }
-
-    private Long getIdGrupoFromTable() {
+    
+     private Long getIdGrupoFromTable() {
         int linha = tabela.getSelectedRow();
 
         if (linha >= 0) {
@@ -59,7 +59,7 @@ public class GrupoUsuarioMediator extends AbstractMediator {
         return null;
     }
 
-    private GrupoUsuario getGrupo() {
+    private Produto getGrupo() {
         Long id = getIdGrupoFromTable();
 
         if (id != null) {
@@ -69,7 +69,7 @@ public class GrupoUsuarioMediator extends AbstractMediator {
     }
 
     public void alterar() {
-        GrupoUsuario grupo = getGrupo();
+        Produto grupo = getGrupo();
 
         if (grupo != null) {
             txtId.setText(grupo.getId().toString());
@@ -100,7 +100,7 @@ public class GrupoUsuarioMediator extends AbstractMediator {
     private boolean isCampoTextoValido(JTextField campo) {
         return !(campo.getText().isEmpty() || campo.getText().isBlank());
     }
-    
+
     public void gravar() {
         boolean idValido = isCampoTextoValido(txtId);
         if (isCampoTextoValido(txtNome)) {
@@ -126,5 +126,6 @@ public class GrupoUsuarioMediator extends AbstractMediator {
         limpar();
         tab.setSelectedIndex(0);
     }   
+   
     
 }

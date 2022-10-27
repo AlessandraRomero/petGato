@@ -18,12 +18,15 @@ public class GrupoUsuarioRepository extends AdapterRepository<GrupoUsuario, Long
 
     @Override
     public List<GrupoUsuario> findAll() {
-        return getEntityManager().createQuery("SELECT gu FROM GrupoUsuario gu", GrupoUsuario.class).getResultList();
+        List<GrupoUsuario> grupos = getEntityManager().createQuery("SELECT gu FROM GrupoUsuario gu", GrupoUsuario.class).getResultList();
+        super.close();
+        return  grupos;
     }
 
     @Override
     public GrupoUsuario findById(Long value) {
-        return getEntityManager().find(GrupoUsuario.class, value);
+        GrupoUsuario grupo =  getEntityManager().find(GrupoUsuario.class, value);
+        return grupo;
     }
 
     public List<GrupoUsuario> findByNome(String value) {
@@ -42,8 +45,7 @@ public class GrupoUsuarioRepository extends AdapterRepository<GrupoUsuario, Long
         } else {
             grupos = query.getResultList();
         }
-        em.close();
+        close();
         return grupos;
     }
-
 }

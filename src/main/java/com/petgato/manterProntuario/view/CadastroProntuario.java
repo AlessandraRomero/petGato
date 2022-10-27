@@ -603,7 +603,7 @@ public class CadastroProntuario extends javax.swing.JFrame {
         jLabel19.setBackground(new java.awt.Color(89, 199, 162));
         jLabel19.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel19.setText("Condulta:");
+        jLabel19.setText("Conduta:");
 
         txtVacina.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtVacina.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));

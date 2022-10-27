@@ -3,16 +3,17 @@
   <persistence-unit name="petgato" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.petgato.manterUsuario.model.GrupoUsuario</class>
-    <class>com.petgato.manterProntuario.model.Prontuario</class>
+    <class>com.petgato.manterProntuario.model.Produto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgato?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="Info@1234"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="hibernate.hbm2ddl.auto" value="create"/>
       <!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>
+ 

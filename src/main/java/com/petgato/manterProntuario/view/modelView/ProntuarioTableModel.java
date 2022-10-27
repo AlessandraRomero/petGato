@@ -26,9 +26,13 @@ public class ProntuarioTableModel extends AbstractTableModel {
 
     }
 
-    public void atualizar() {
+    public void atualizar(){
+       atualizar(null);
+    }
+    
+     public void atualizar(String nome){
         lista.clear();
-        lista.addAll(repository.findAll());
+        lista.addAll(repository.findByNome(nome));
         fireTableStructureChanged();
     }
 

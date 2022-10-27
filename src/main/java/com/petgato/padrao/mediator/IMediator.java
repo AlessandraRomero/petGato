@@ -21,5 +21,7 @@ public interface IMediator {
     void gravar();
 
     void cancelar();
+    
+    void buscar();
 
 }

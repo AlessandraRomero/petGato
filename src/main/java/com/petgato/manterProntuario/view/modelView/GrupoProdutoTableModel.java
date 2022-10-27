@@ -4,9 +4,11 @@
  */
 package com.petgato.manterProntuario.view.modelView;
 
+import com.petgato.manterProntuario.model.GrupoProduto;
 import com.petgato.manterProntuario.model.Produto;
+import com.petgato.manterProntuario.repository.GrupoProdutoRepository;
 import com.petgato.manterProntuario.repository.ProdutoRepository;
-import com.petgato.manterUsuario.model.GrupoUsuario;
+
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,15 +16,14 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author alessandra
  */
-public class ProdutoTableModel extends AbstractTableModel {
+public class GrupoProdutoTableModel extends AbstractTableModel {
 
     private String colunas[] = {"id", "nome"};
-    private List<Produto> lista;
-    private ProdutoRepository repository;
+    private List<GrupoProduto> lista;
+    private GrupoProdutoRepository repository;
 
-    public ProdutoTableModel() {
-        repository = new ProdutoRepository();
-
+    public GrupoProdutoTableModel() {
+        repository = new GrupoProdutoRepository();
         this.lista = repository.findAll();
     }
     
@@ -54,14 +55,14 @@ public class ProdutoTableModel extends AbstractTableModel {
     
     @Override
     public Object getValueAt(int row, int column) {
-        Produto produto = lista.get(row);
+        GrupoProduto grupo = lista.get(row);
 
         switch (column) {
             case 0:
-                return produto.getId();
+                return grupo.getId();
 
             case 1:
-                return produto.getNome();
+                return grupo.getNome();
             default:
                 return null;
         }

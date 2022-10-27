@@ -6,7 +6,7 @@ package com.petgato.manterProntuario.controller;
 
 import com.petgato.manterProntuario.model.Produto;
 import com.petgato.manterProntuario.repository.ProdutoRepository;
-import com.petgato.manterUsuario.model.GrupoUsuario;
+
 
 
 /**
@@ -43,5 +43,9 @@ public class ProdutoController {
     public void deletar(Long id){
         Produto prod = buscarPorId(id);
         repository.delete(prod);
+    }
+    
+     public Produto buscarPorNome(String nome){
+        return (Produto) repository.findByNome(nome);
     }
 }

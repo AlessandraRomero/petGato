@@ -7,6 +7,8 @@ package com.petgato.manterProntuario.repository;
 import com.petgato.manterProntuario.model.Produto;
 import com.petgato.padrao.repository.AdapterRepository;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import org.hibernate.Session;
 
 /**
@@ -25,4 +27,24 @@ public class ProdutoRepository extends AdapterRepository<Produto, Long> {
     public Produto findById(Long value) {
         return getEntityManager().find(Produto.class, value);
     }  
+    
+      public List<Produto> findByNome(String value) {
+        EntityManager em = getEntityManager();
+        String condicao = "";
+        List<Produto> produtos = null;
+        boolean hasNome = value != null && !value.isBlank() && !value.isEmpty();
+        if (hasNome) {
+            condicao = "WHERE prod.nome LIKE ?1 ";
+        }
+
+        Query query = em.createQuery("SELECT prod FROM Produto prod " + condicao);
+        if (hasNome) {
+            produtos = query.setParameter(1, "%" + value + "%")
+                    .getResultList();
+        } else {
+            produtos = query.getResultList();
+        }
+        close();
+        return produtos;
+    }
 }

@@ -18,8 +18,8 @@ import org.hibernate.Session;
  */
 public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
-    @PersistenceContext(unitName = "agenda")
-    private final EntityManager entityManager;
+    @PersistenceContext(unitName = "petgato")
+    private  EntityManager entityManager;
     private final Class persistentClass;
 
     public AdapterRepository() {
@@ -28,16 +28,17 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
     }
 
     public EntityManager getEntityManager() {
-        return entityManager;
+         entityManager = EntityManagerUtil.getEntityManager();
+         return entityManager;
     }
 
     @Override
     public void save(T value) {
-        EntityTransaction tx = getEntityManager().getTransaction();
+        EntityTransaction tx = entityManager.getTransaction();
 
         try {
             tx.begin();
-            getEntityManager().persist(value);
+            entityManager.persist(value);
             tx.commit();
         } catch (Throwable t) {
             t.printStackTrace();
@@ -49,12 +50,12 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     @Override
     public void update(T value) {
-        EntityTransaction tx = getEntityManager().getTransaction();
+        EntityTransaction tx = entityManager.getTransaction();
 
         try {
             tx.begin();
-            getEntityManager().detach(value);
-            getEntityManager().merge(value);
+            entityManager.detach(value);
+            entityManager.merge(value);
             tx.commit();
         } catch (Throwable t) {
             t.printStackTrace();
@@ -66,11 +67,11 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     @Override
     public void delete(T value) {
-        EntityTransaction tx = getEntityManager().getTransaction();
+        EntityTransaction tx = entityManager.getTransaction();
 
         try {
             tx.begin();
-            getEntityManager().remove(value);
+            entityManager.remove(value);
             tx.commit();
         } catch (Throwable t) {
             t.printStackTrace();
@@ -89,10 +90,14 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
     public T findById(K value) {
         return null;
     }
+    
+    public T findByName(K value){
+        return null;
+    }
 
-    private void close() {
-        if (getEntityManager().isOpen()) {
-            getEntityManager().close();
+    protected void close() {
+        if (entityManager.isOpen()) {
+            entityManager.close();
         }
     }
 }

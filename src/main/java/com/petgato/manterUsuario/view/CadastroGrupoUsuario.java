@@ -6,8 +6,12 @@ package com.petgato.manterUsuario.view;
 
 import com.petgato.manterUsuario.controller.GrupoUsuarioController;
 import com.petgato.manterUsuario.mediator.GrupoUsuarioMediator;
-import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.view.modelView.GrupoUsuarioTableModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import mdlaf.MaterialLookAndFeel;
 
 /**
  *
@@ -15,9 +19,9 @@ import com.petgato.manterUsuario.view.modelView.GrupoUsuarioTableModel;
  */
 public class CadastroGrupoUsuario extends javax.swing.JFrame {
 
-    private GrupoUsuarioTableModel model;
-    private GrupoUsuarioController controle;
-    private GrupoUsuarioMediator mediator;
+    private final GrupoUsuarioTableModel model;
+    private final GrupoUsuarioController controle;
+    private final GrupoUsuarioMediator mediator;
 
     /**
      * Creates new form CadastroUsuario
@@ -31,6 +35,7 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
         mediator = new GrupoUsuarioMediator();
         mediator.registerTxtId(txtId)
                 .registerTxtNome(txtNome)
+                .registerTxtBuscar(txtBuscar)
                 .registerGrupoUsuarioTableModel(model)
                 .registerController(controle)
                 .registerJTable(tabela)
@@ -79,7 +84,7 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
         tab = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         buttonBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -412,11 +417,11 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(89, 199, 162));
         jLabel22.setText("Grupo:");
 
-        jTextField13.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        jTextField13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscar.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        txtBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                txtBuscarActionPerformed(evt);
             }
         });
 
@@ -479,7 +484,7 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -500,7 +505,7 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -674,12 +679,12 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
-        // TODO add your handling code here:
+        mediator.buscar();  
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
@@ -706,30 +711,34 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//</editor-fold>
+//</editor-fold>
+UIManager.setLookAndFeel(new MaterialLookAndFeel());
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(CadastroGrupoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -775,7 +784,6 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -783,6 +791,7 @@ public class CadastroGrupoUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTabbedPane tab;
     private javax.swing.JTable tabela;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
