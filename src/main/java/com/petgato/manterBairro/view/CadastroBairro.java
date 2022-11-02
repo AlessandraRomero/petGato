@@ -2,33 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.petgato.manterLogradouro.view;
+package com.petgato.manterBairro.view;
 
-import com.petgato.manterLogradouro.controller.LogradouroController;
-import com.petgato.manterLogradouro.mediator.LogradouroMediator;
-import com.petgato.manterLogradouro.model.Logradouro;
-import com.petgato.manterLogradouro.view.modelView.LogradouroTableModel;
+import com.petgato.manterBairro.controller.BairroController;
+import com.petgato.manterBairro.mediator.BairroMediator;
+import com.petgato.manterBairro.model.Bairro;
+import com.petgato.manterBairro.view.modelView.BairroTableModel;
 
 /**
  *
  * @author alessandra
  */
-public class CadastroLogradouro extends javax.swing.JFrame {
+public class CadastroBairro extends javax.swing.JFrame {
 
-    private final LogradouroTableModel model;
-    private final LogradouroController controle;
-    private final LogradouroMediator mediator;
+    private final BairroTableModel model;
+    private final BairroController controle;
+    private final BairroMediator mediator;
 
     /**
      * Creates new form CadastroUsuario
      */
-    public CadastroLogradouro() {
-        model = new LogradouroTableModel();
-        controle = new LogradouroController();
+    public CadastroBairro() {
+        model = new BairroTableModel();
+        controle = new BairroController();
 
         initComponents();
 
-        mediator = new LogradouroMediator();
+        mediator = new BairroMediator();
         mediator.registerTxtId(txtId)
                 .registerTxtNome(txtNome)
                 .registerTxtBuscar(txtBuscar)
@@ -378,7 +378,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Logradouro");
+        jLabel1.setText("Bairro");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -502,7 +502,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonBuscar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -511,14 +511,14 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Consultar Logradouro", jPanel5);
+        tab.addTab("Consultar Bairro", jPanel5);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setBackground(new java.awt.Color(89, 199, 162));
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel13.setText("Nome Logradouro:");
+        jLabel13.setText("Nome do Bairro");
 
         txtNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -580,7 +580,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                 .addGap(273, 273, 273))
         );
         jPanel4Layout.setVerticalGroup(
@@ -594,14 +594,14 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        tab.addTab("Cadastrar Logradouro", jPanel4);
+        tab.addTab("Cadastrar Bairro", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -714,19 +714,19 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bairro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bairro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bairro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bairro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }  //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroLogradouro().setVisible(true);
+                new CadastroBairro().setVisible(true);
             }
 
         });

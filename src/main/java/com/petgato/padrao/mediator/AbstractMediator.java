@@ -4,7 +4,6 @@
  */
 package com.petgato.padrao.mediator;
 
-import com.petgato.manterUsuario.controller.GrupoUsuarioController;
 import com.petgato.padrao.componentsModel.PetGatoTableModel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;

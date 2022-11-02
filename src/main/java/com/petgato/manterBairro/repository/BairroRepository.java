@@ -5,10 +5,10 @@
 package com.petgato.manterBairro.repository;
 
 import com.petgato.manterBairro.model.Bairro;
-import com.petgato.manterCidade.model.Cidade;
 import com.petgato.padrao.repository.AdapterRepository;
 import java.util.List;
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -16,9 +16,36 @@ import org.hibernate.Session;
  */
 public class BairroRepository extends AdapterRepository<Bairro, Long>{
     
-    @Override
+     @Override
     public List<Bairro> findAll() {
-        Session session = (Session) getEntityManager().getDelegate();
-        return session.createQuery("SELECT bairro FROM Bairro bairro", Bairro.class).list();
+        List<Bairro> bairro = getEntityManager().createQuery("SELECT bairro FROM Bairro bairro", Bairro.class).getResultList();
+        super.close();
+        return  bairro;
+    }
+
+    @Override
+    public Bairro findById(Long value) {
+        Bairro bairro =  getEntityManager().find(Bairro.class, value);
+        return bairro;
+    }
+
+    public List<Bairro> findByNome(String value) {
+        EntityManager em = getEntityManager();
+        String condicao = "";
+        List<Bairro> bairro = null;
+        boolean hasNome = value != null && !value.isBlank() && !value.isEmpty();
+        if (hasNome) {
+            condicao = "WHERE bairro.nome LIKE ?1 ";
+        }
+
+        Query query = em.createQuery("SELECT bairro FROM Bairro bairro " + condicao);
+        if (hasNome) {
+            bairro = query.setParameter(1, "%" + value + "%")
+                    .getResultList();
+        } else {
+            bairro = query.getResultList();
+        }
+        close();
+        return bairro;
     }
 }
