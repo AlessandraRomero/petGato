@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.petgato.manterUsuario.controller;
-
+    
 import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.repository.GrupoUsuarioRepository;
 
@@ -15,7 +15,6 @@ public class GrupoUsuarioController {
 
     private GrupoUsuarioRepository repository;
     
-
     public GrupoUsuarioController() {
         repository = new GrupoUsuarioRepository();
     }

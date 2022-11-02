@@ -2,25 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.petgato.manterProntuario.view.modelView;
+package com.petgato.manterLogradouro.view.modelView;
 
-import com.petgato.manterProntuario.model.GrupoProduto;
-import com.petgato.manterProntuario.repository.GrupoProdutoRepository;
+import com.petgato.manterLogradouro.model.Logradouro;
+import com.petgato.manterLogradouro.repository.LogradouroRepository;
+import com.petgato.padrao.componentsModel.PetGatoTableModel;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author alessandra
  */
-public class GrupoProdutoTableModel extends AbstractTableModel {
-
+public class LogradouroTableModel extends PetGatoTableModel{
+    
     private String colunas[] = {"id", "nome"};
-    private List<GrupoProduto> lista;
-    private GrupoProdutoRepository repository;
+    private List<Logradouro> lista;
+    private LogradouroRepository repository;
+    
+    public LogradouroTableModel() {
+        repository = new LogradouroRepository();
 
-    public GrupoProdutoTableModel() {
-        repository = new GrupoProdutoRepository();
         this.lista = repository.findAll();
     }
     
@@ -52,14 +53,14 @@ public class GrupoProdutoTableModel extends AbstractTableModel {
     
     @Override
     public Object getValueAt(int row, int column) {
-        GrupoProduto grupo = lista.get(row);
+        Logradouro log = lista.get(row);
 
         switch (column) {
             case 0:
-                return grupo.getId();
+                return log.getId();
 
             case 1:
-                return grupo.getNome();
+                return log.getNome();
             default:
                 return null;
         }

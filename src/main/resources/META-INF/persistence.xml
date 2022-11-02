@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.petgato.manterUsuario.model.GrupoUsuario</class>
     <class>com.petgato.manterProntuario.model.Produto</class>
+    <class>com.petgato.manterLogradouro.model.Logradouro</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgato?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
@@ -16,4 +17,3 @@
     </properties>
   </persistence-unit>
 </persistence>
- 

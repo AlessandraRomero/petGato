@@ -626,7 +626,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Grupo Produto"/>
+            <Property name="text" type="java.lang.String" value="Logradouro"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jIcon">
@@ -648,8 +648,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Consultar Grupo Produto">
-                <Property name="tabTitle" type="java.lang.String" value="Consultar Grupo Produto"/>
+              <JTabbedPaneConstraints tabName="Consultar Logradouro">
+                <Property name="tabTitle" type="java.lang.String" value="Consultar Logradouro"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -668,7 +668,7 @@
                               <Component id="buttonBuscar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" pref="643" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="684" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -717,7 +717,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a2" green="c7" red="59" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Grupo Produto"/>
+                <Property name="text" type="java.lang.String" value="Grupo:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBuscar">
@@ -866,8 +866,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Cadastrar Grupo Produto">
-                <Property name="tabTitle" type="java.lang.String" value="Cadastrar Grupo Produto"/>
+              <JTabbedPaneConstraints tabName="Cadastrar Logradouro">
+                <Property name="tabTitle" type="java.lang.String" value="Cadastrar Logradouro"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -876,27 +876,27 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
+                      <Component id="buttonCadastrar" min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonCancelar" min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
-                              <Component id="buttonCadastrar" min="-2" pref="77" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="buttonCancelar" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="txtId" min="-2" pref="83" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtId" pref="83" max="32767" attributes="0"/>
-                                  <Component id="txtNome" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="txtNome" pref="259" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="209" max="32767" attributes="0"/>
+                      <EmptySpace min="273" pref="273" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -909,9 +909,9 @@
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNome" alignment="0" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="114" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -935,7 +935,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a2" green="c7" red="59" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nome Grupo Produto"/>
+                <Property name="text" type="java.lang.String" value="Nome Logradouro:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNome">
@@ -1026,9 +1026,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

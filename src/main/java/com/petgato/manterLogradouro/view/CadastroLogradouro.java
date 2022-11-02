@@ -2,32 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.petgato.manterProntuario.view;
+package com.petgato.manterLogradouro.view;
 
-import com.petgato.manterProntuario.controller.GrupoProdutoController;
-import com.petgato.manterProntuario.view.modelView.GrupoProdutoTableModel;
-import com.petgato.manterUsuario.mediator.GrupoProdutoMediator;
+import com.petgato.manterLogradouro.controller.LogradouroController;
+import com.petgato.manterLogradouro.mediator.LogradouroMediator;
+import com.petgato.manterLogradouro.model.Logradouro;
+import com.petgato.manterLogradouro.view.modelView.LogradouroTableModel;
 
 /**
  *
  * @author alessandra
  */
-public class CadastroGrupoProduto extends javax.swing.JFrame {
+public class CadastroLogradouro extends javax.swing.JFrame {
 
-    private GrupoProdutoTableModel model;
-    private GrupoProdutoController controle;
-    private final GrupoProdutoMediator mediator;
+    private final LogradouroTableModel model;
+    private final LogradouroController controle;
+    private final LogradouroMediator mediator;
 
     /**
      * Creates new form CadastroUsuario
      */
-    public CadastroGrupoProduto() {
-      model = new GrupoProdutoTableModel();
-        controle = new GrupoProdutoController();
-        
+    public CadastroLogradouro() {
+        model = new LogradouroTableModel();
+        controle = new LogradouroController();
+
         initComponents();
 
-        mediator = new GrupoProdutoMediator();
+        mediator = new LogradouroMediator();
         mediator.registerTxtId(txtId)
                 .registerTxtNome(txtNome)
                 .registerTxtBuscar(txtBuscar)
@@ -35,8 +36,8 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
                 .registerController(controle)
                 .registerJTable(tabela)
                 .registerJTabbedPane(tab);
-
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -377,7 +378,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Grupo Produto");
+        jLabel1.setText("Logradouro");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -408,7 +409,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
         jLabel22.setBackground(new java.awt.Color(89, 199, 162));
         jLabel22.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel22.setText("Grupo Produto");
+        jLabel22.setText("Grupo:");
 
         txtBuscar.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -481,7 +482,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(228, 228, 228)
@@ -510,14 +511,14 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Consultar Grupo Produto", jPanel5);
+        tab.addTab("Consultar Logradouro", jPanel5);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setBackground(new java.awt.Color(89, 199, 162));
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel13.setText("Nome Grupo Produto");
+        jLabel13.setText("Nome Logradouro:");
 
         txtNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -558,33 +559,29 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
         txtId.setBackground(new java.awt.Color(204, 204, 204));
         txtId.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        txtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(274, 274, 274)
+                .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(txtNome))))
-                .addContainerGap(209, Short.MAX_VALUE))
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+                .addGap(273, 273, 273))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,9 +591,9 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -604,7 +601,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Cadastrar Grupo Produto", jPanel4);
+        tab.addTab("Cadastrar Logradouro", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -613,7 +610,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                .addComponent(tab)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -681,7 +678,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
-        // TODO add your handling code here:
+        mediator.buscar();
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
@@ -693,20 +690,16 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
-       mediator.gravar();
+        mediator.gravar();
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-       mediator.excluir();
+        mediator.excluir();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoActionPerformed
-        mediator.limpar();
+        mediator.novo();
     }//GEN-LAST:event_buttonNovoActionPerformed
-
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -715,7 +708,7 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -725,22 +718,21 @@ public class CadastroGrupoProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroGrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-    
+            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }  //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroGrupoProduto().setVisible(true);
+                new CadastroLogradouro().setVisible(true);
             }
+
         });
     }
 

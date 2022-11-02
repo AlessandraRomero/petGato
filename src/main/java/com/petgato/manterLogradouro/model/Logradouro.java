@@ -6,17 +6,31 @@ package com.petgato.manterLogradouro.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author alessandra
  */
+@Entity
+@Table(name = "logradouro")
 public class Logradouro implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     
     public Logradouro(){
+    }
+    
+    public Logradouro(LogradouroBuilder builder){
+        this.id = builder.id;
+        this.nome = builder.nome;
     }
 
     public Long getId() {
@@ -50,4 +64,26 @@ public class Logradouro implements Serializable {
         final Logradouro other = (Logradouro) obj;
         return Objects.equals(this.id, other.getId());
     }   
+    
+    public static class LogradouroBuilder{
+         private Long id;
+        private String nome;
+
+        public LogradouroBuilder() {
+        }
+
+        public LogradouroBuilder whitId(Long value) {
+            this.id = value;
+            return this;
+        }
+
+        public LogradouroBuilder whitNome(String value) {
+            this.nome = value;
+            return this;
+        }
+
+        public Logradouro build(){
+         return new Logradouro(this);
+        }
+    }
 }

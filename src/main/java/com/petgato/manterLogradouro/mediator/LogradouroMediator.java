@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.petgato.manterUsuario.mediator;
+package com.petgato.manterLogradouro.mediator;
 
-import com.petgato.manterProntuario.controller.GrupoProdutoController;
-import com.petgato.manterProntuario.model.GrupoProduto;
-import com.petgato.manterProntuario.view.modelView.GrupoProdutoTableModel;
-import com.petgato.manterUsuario.model.GrupoUsuario;
+import com.petgato.manterLogradouro.controller.LogradouroController;
+import com.petgato.manterLogradouro.model.Logradouro;
+import com.petgato.manterLogradouro.view.modelView.LogradouroTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -16,40 +15,40 @@ import javax.swing.JTextField;
  *
  * @author alessandra
  */
-public class GrupoProdutoMediator extends AbstractMediator {
+public class LogradouroMediator extends AbstractMediator {
 
     private JTextField txtId;
     private JTextField txtNome;
     private JTextField txtBuscar;
-    private GrupoProdutoController controle;
-    private GrupoProdutoTableModel model;
-
-    public GrupoProdutoMediator registerTxtId(JTextField txtId) {
+    private LogradouroController controle;
+    private LogradouroTableModel model;
+    
+    public LogradouroMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
 
-    public GrupoProdutoMediator registerTxtNome(JTextField txtNome) {
+    public LogradouroMediator registerTxtNome(JTextField txtNome) {
         this.txtNome = txtNome;
         return this;
     }
 
-    public GrupoProdutoMediator registerTxtBuscar(JTextField txtBuscar) {
+    public LogradouroMediator registerTxtBuscar(JTextField txtBuscar) {
         this.txtBuscar = txtBuscar;
         return this;
     }
 
-    public GrupoProdutoMediator registerController(GrupoProdutoController controle) {
+    public LogradouroMediator registerController(LogradouroController controle) {
         this.controle = controle;
         return this;
     }
 
-    public GrupoProdutoMediator registerGrupoUsuarioTableModel(GrupoProdutoTableModel model) {
+    public LogradouroMediator registerGrupoUsuarioTableModel(LogradouroTableModel model) {
         this.model = model;
         return this;
     }
-
-    private Long getIdGrupoFromTable() {
+    
+   private Long getIdGrupoFromTable() {
         int linha = tabela.getSelectedRow();
 
         if (linha >= 0) {
@@ -60,7 +59,7 @@ public class GrupoProdutoMediator extends AbstractMediator {
         return null;
     }
 
-    private GrupoProduto getGrupo() {
+    private Logradouro getGrupo() {
         Long id = getIdGrupoFromTable();
 
         if (id != null) {
@@ -70,7 +69,7 @@ public class GrupoProdutoMediator extends AbstractMediator {
     }
 
     public void alterar() {
-        GrupoProduto grupo = getGrupo();
+        Logradouro grupo = getGrupo();
 
         if (grupo != null) {
             txtId.setText(grupo.getId().toString());
@@ -126,6 +125,5 @@ public class GrupoProdutoMediator extends AbstractMediator {
     public void cancelar() {
         limpar();
         tab.setSelectedIndex(0);
-    }   
-    
+    }
 }

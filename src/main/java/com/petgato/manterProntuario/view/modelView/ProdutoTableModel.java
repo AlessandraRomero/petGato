@@ -6,7 +6,6 @@ package com.petgato.manterProntuario.view.modelView;
 
 import com.petgato.manterProntuario.model.Produto;
 import com.petgato.manterProntuario.repository.ProdutoRepository;
-import com.petgato.manterUsuario.model.GrupoUsuario;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
