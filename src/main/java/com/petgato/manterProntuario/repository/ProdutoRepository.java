@@ -9,7 +9,6 @@ import com.petgato.padrao.repository.AdapterRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import org.hibernate.Session;
 
 /**
  *
@@ -19,16 +18,18 @@ public class ProdutoRepository extends AdapterRepository<Produto, Long> {
 
      @Override
     public List<Produto> findAll() {
-        Session session = (Session) getEntityManager().getDelegate();
-        return session.createQuery("SELECT prod FROM Produto prod", Produto.class).list();
+        List<Produto> produtos = getEntityManager().createQuery("SELECT prod FROM Produto prod", Produto.class).getResultList();
+        super.close();
+        return  produtos;
     }
-    
+
     @Override
     public Produto findById(Long value) {
-        return getEntityManager().find(Produto.class, value);
-    }  
-    
-      public List<Produto> findByNome(String value) {
+        Produto prod =  getEntityManager().find(Produto.class, value);
+        return prod;
+    }
+
+    public List<Produto> findByNome(String value) {
         EntityManager em = getEntityManager();
         String condicao = "";
         List<Produto> produtos = null;

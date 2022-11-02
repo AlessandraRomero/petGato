@@ -15,15 +15,13 @@ import com.petgato.manterProntuario.repository.ProdutoRepository;
  */
 public class ProdutoController {
 
-    private ProdutoRepository repository;
-    
+   private ProdutoRepository repository;
 
     public ProdutoController() {
-        repository = new ProdutoRepository();
+        this.repository = new ProdutoRepository();
     }
-
-    public void cadastrar(String nome) {
-
+    
+     public void cadastrar(String nome) {
         Produto prod = new Produto.ProdutoBuilder()
                 .whitNome(nome)
                 .build();
@@ -45,7 +43,7 @@ public class ProdutoController {
         repository.delete(prod);
     }
     
-     public Produto buscarPorNome(String nome){
+    public Produto buscarPorNome(String nome){
         return (Produto) repository.findByNome(nome);
     }
 }

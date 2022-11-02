@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  *
  * @author alessandra
  */
-public class CadastroProdutoMediator extends AbstractMediator{
+public class ProdutoMediator extends AbstractMediator{
 
    private  JTextField txtId;
     private JTextField txtNome;
@@ -23,27 +23,27 @@ public class CadastroProdutoMediator extends AbstractMediator{
     private ProdutoController controle;
     private ProdutoTableModel model; 
     
-      public CadastroProdutoMediator registerTxtId(JTextField txtId) {
+      public ProdutoMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
 
-    public CadastroProdutoMediator registerTxtNome(JTextField txtNome) {
+    public ProdutoMediator registerTxtNome(JTextField txtNome) {
         this.txtNome = txtNome;
         return this;
     }
 
-    public CadastroProdutoMediator registerTxtBuscar(JTextField txtBuscar) {
+    public ProdutoMediator registerTxtBuscar(JTextField txtBuscar) {
         this.txtBuscar = txtBuscar;
         return this;
     }
 
-    public CadastroProdutoMediator registerController(ProdutoController controle) {
+    public ProdutoMediator registerController(ProdutoController controle) {
         this.controle = controle;
         return this;
     }
 
-    public CadastroProdutoMediator registerGrupoUsuarioTableModel(ProdutoTableModel model) {
+    public ProdutoMediator registerGrupoUsuarioTableModel(ProdutoTableModel model) {
         this.model = model;
         return this;
     }
@@ -125,7 +125,5 @@ public class CadastroProdutoMediator extends AbstractMediator{
     public void cancelar() {
         limpar();
         tab.setSelectedIndex(0);
-    }   
-   
-    
+    }     
 }
