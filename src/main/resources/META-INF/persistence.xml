@@ -6,6 +6,7 @@
     <class>com.petgato.manterProntuario.model.Produto</class>
     <class>com.petgato.manterLogradouro.model.Logradouro</class>
     <class>com.petgato.manterBairro.model.Bairro</class>
+    <class>com.petgato.manterAnimal.model.Especie</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgato?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
