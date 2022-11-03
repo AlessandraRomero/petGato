@@ -409,7 +409,7 @@ public class CadastroEspecie extends javax.swing.JFrame {
         jLabel22.setBackground(new java.awt.Color(89, 199, 162));
         jLabel22.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel22.setText("Grupo:");
+        jLabel22.setText("Espécie");
 
         txtBuscar.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
