@@ -12,7 +12,8 @@ import com.petgato.manterAnimal.repository.EspecieRepository;
  * @author alessandra
  */
 public class EspecieController {
-      private EspecieRepository repository;
+     
+    private EspecieRepository repository;
 
     public EspecieController() {
         this.repository = new EspecieRepository();

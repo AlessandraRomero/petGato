@@ -4,9 +4,9 @@
  */
 package com.petgato.manterAnimal.mediator;
 
-import com.petgato.manterAnimal.controller.EspecieController;
-import com.petgato.manterAnimal.model.Especie;
-import com.petgato.manterAnimal.view.modelView.EspecieTableModel;
+import com.petgato.manterAnimal.controller.RacaController;
+import com.petgato.manterAnimal.model.Raca;
+import com.petgato.manterAnimal.view.modelView.RacaTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -15,35 +15,35 @@ import javax.swing.JTextField;
  *
  * @author alessandra
  */
-public class EspecieMediator extends AbstractMediator {
-      
+public class RacaMediator extends AbstractMediator {
+    
     private JTextField txtId;
     private JTextField txtNome;
     private JTextField txtBuscar;
-    private EspecieController controle;
-    private EspecieTableModel model;
+    private RacaController controle;
+    private RacaTableModel model;
     
-    public EspecieMediator registerTxtId(JTextField txtId) {
+    public RacaMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
 
-    public EspecieMediator registerTxtNome(JTextField txtNome) {
+    public RacaMediator registerTxtNome(JTextField txtNome) {
         this.txtNome = txtNome;
         return this;
     }
 
-    public EspecieMediator registerTxtBuscar(JTextField txtBuscar) {
+    public RacaMediator registerTxtBuscar(JTextField txtBuscar) {
         this.txtBuscar = txtBuscar;
         return this;
     }
 
-    public EspecieMediator registerController(EspecieController controle) {
+    public RacaMediator registerController(RacaController controle) {
         this.controle = controle;
         return this;
     }
 
-    public EspecieMediator registerGrupoUsuarioTableModel(EspecieTableModel model) {
+    public RacaMediator registerGrupoUsuarioTableModel(RacaTableModel model) {
         this.model = model;
         return this;
     }
@@ -59,7 +59,7 @@ public class EspecieMediator extends AbstractMediator {
         return null;
     }
 
-    private Especie getGrupo() {
+    private Raca getGrupo() {
         Long id = getIdGrupoFromTable();
 
         if (id != null) {
@@ -69,11 +69,11 @@ public class EspecieMediator extends AbstractMediator {
     }
 
     public void alterar() {
-        Especie especs = getGrupo();
+        Raca racas = getGrupo();
 
-        if (especs != null) {
-            txtId.setText(especs.getId().toString());
-            txtNome.setText(especs.getNome());
+        if (racas != null) {
+            txtId.setText(racas.getId().toString());
+            txtNome.setText(racas.getNome());
             tab.setSelectedIndex(1);
         }
     }
@@ -127,3 +127,4 @@ public class EspecieMediator extends AbstractMediator {
         tab.setSelectedIndex(0);
     }
 }
+

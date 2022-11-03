@@ -6,17 +6,31 @@ package com.petgato.manterAnimal.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author alessandra
  */
+@Entity
+@Table(name = "raca")
 public class Raca implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     
     public Raca (){
+    }
+    
+    public Raca(Raca.RacaBuilder builder) {
+        this.id = builder.id;
+        this.nome = builder.nome;
     }
 
     public Long getId() {
@@ -50,4 +64,27 @@ public class Raca implements Serializable {
         final Raca other = (Raca) obj;
         return Objects.equals(this.id, other.getId());
     }    
+    
+     public static class RacaBuilder {
+
+        private Long id;
+        private String nome;
+
+        public RacaBuilder() {
+        }
+
+        public RacaBuilder whitId(Long value) {
+            this.id = value;
+            return this;
+        }
+
+        public RacaBuilder whitNome(String value) {
+            this.nome = value;
+            return this;
+        }
+
+        public Raca build() {
+            return new Raca(this);
+        }
+    }
 }

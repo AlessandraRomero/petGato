@@ -4,7 +4,6 @@
  */
 package com.petgato.manterAnimal.model;
 
-import com.petgato.manterLogradouro.model.Logradouro;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
