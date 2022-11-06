@@ -2,33 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.petgato.manterLogradouro.view;
+package com.petgato.manterProntuario.view;
 
-import com.petgato.manterLogradouro.controller.LogradouroController;
-import com.petgato.manterLogradouro.mediator.LogradouroMediator;
-import com.petgato.manterLogradouro.model.Logradouro;
-import com.petgato.manterLogradouro.view.modelView.LogradouroTableModel;
+import com.petgato.manterProntuario.controller.ProdutoController;
+import com.petgato.manterProntuario.mediator.ProdutoMediator;
+import com.petgato.manterProntuario.model.Produto;
+import com.petgato.manterProntuario.view.modelView.ProdutoTableModel;
 
 /**
  *
  * @author alessandra
  */
-public class CadastroLogradouro extends javax.swing.JFrame {
+public class CadastroProduto extends javax.swing.JFrame {
 
-    private final LogradouroTableModel model;
-    private final LogradouroController controle;
-    private final LogradouroMediator mediator;
+    private final ProdutoTableModel model;
+    private final ProdutoController controle;
+    private final ProdutoMediator mediator;
 
     /**
      * Creates new form CadastroUsuario
      */
-    public CadastroLogradouro() {
-        model = new LogradouroTableModel();
-        controle = new LogradouroController();
+    public CadastroProduto() {
+        model = new ProdutoTableModel();
+        controle = new ProdutoController();
 
         initComponents();
 
-        mediator = new LogradouroMediator();
+        mediator = new ProdutoMediator();
         mediator.registerTxtId(txtId)
                 .registerTxtNome(txtNome)
                 .registerTxtBuscar(txtBuscar)
@@ -378,7 +378,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Logradouro");
+        jLabel1.setText("Produto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -409,7 +409,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
         jLabel22.setBackground(new java.awt.Color(89, 199, 162));
         jLabel22.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel22.setText("Grupo:");
+        jLabel22.setText("Produto:");
 
         txtBuscar.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -511,7 +511,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Consultar Logradouro", jPanel5);
+        tab.addTab("Consultar Produto", jPanel5);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -601,7 +601,7 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Cadastrar Logradouro", jPanel4);
+        tab.addTab("Cadastrar Produto", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -714,19 +714,19 @@ public class CadastroLogradouro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Logradouro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }  //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroLogradouro().setVisible(true);
+                new CadastroProduto().setVisible(true);
             }
 
         });
