@@ -3,13 +3,23 @@
   <persistence-unit name="petgato" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.petgato.manterUsuario.model.GrupoUsuario</class>
-    <class>com.petgato.manterProntuario.model.Produto</class>
-    <class>com.petgato.manterLogradouro.model.Logradouro</class>
-    <class>com.petgato.manterBairro.model.Bairro</class>
+    <class>com.petgato.manterProntuario.model.GrupoProduto</class>
+    <class>com.petgato.manterCidade.model.Cidade</class>
+    <class>com.petgato.manterProntuario.model.ItemAtendimento</class>
+    <class>com.petgato.manterAdotante.model.Adotante</class>
+    <class>com.petgato.padrao.model.Pessoa</class>
+    <class>com.petgato.manterAnimal.model.Animal</class>
     <class>com.petgato.manterAnimal.model.Especie</class>
     <class>com.petgato.manterAnimal.model.Raca</class>
+    <class>com.petgato.manterBairro.model.Bairro</class>
+    <class>com.petgato.manterLogradouro.model.Logradouro</class>
+    <class>com.petgato.manterProntuario.model.Produto</class>
+    <class>com.petgato.manterProntuario.model.Prontuario</class>
+    <class>com.petgato.manterAdotante.model.Endereco</class>
+    <class>com.petgato.manterAdotante.model.Telefone</class>
+    <class>com.petgato.manterUsuario.model.Usuario</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgato?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgatov2?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="Info@1234"/>

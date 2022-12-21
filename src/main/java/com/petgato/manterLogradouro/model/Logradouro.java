@@ -4,6 +4,7 @@
  */
 package com.petgato.manterLogradouro.model;
 
+import com.petgato.manterBairro.model.Bairro;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "logradouro")
-public class Logradouro implements Serializable {
+public class Logradouro implements Serializable  {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +65,11 @@ public class Logradouro implements Serializable {
         final Logradouro other = (Logradouro) obj;
         return Objects.equals(this.id, other.getId());
     }   
+
+    @Override
+    public String toString() {
+        return nome;
+    }
     
     public static class LogradouroBuilder{
          private Long id;

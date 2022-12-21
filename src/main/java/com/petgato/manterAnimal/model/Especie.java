@@ -65,6 +65,13 @@ public class Especie implements Serializable {
         return Objects.equals(this.id, other.getId());
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    
+
     public static class EspecieBuilder {
 
         private Long id;

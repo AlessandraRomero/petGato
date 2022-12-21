@@ -65,6 +65,12 @@ public class GrupoUsuario implements Serializable {
         return Objects.equals(this.id, other.getId());
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+
     public static class GrupoUsuarioBuilder {
 
         private Long id;

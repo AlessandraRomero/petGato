@@ -10,7 +10,6 @@ import com.petgato.padrao.repository.AdapterRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import org.hibernate.Session;
 
 /**
  *
@@ -20,32 +19,34 @@ public class GrupoProdutoRepository extends AdapterRepository<GrupoProduto, Long
 
     @Override
     public List<GrupoProduto> findAll() {
-        Session session = (Session) getEntityManager().getDelegate();
-        return session.createQuery("SELECT grupProd FROM GrupoProduto grupProd", GrupoProduto.class).list();
+        List<GrupoProduto> produtos = getEntityManager().createQuery("SELECT grupoProd FROM GrupoProduto grupoProd", GrupoProduto.class).getResultList();
+        super.close();
+        return  produtos;
     }
-    
+
     @Override
     public GrupoProduto findById(Long value) {
-        return getEntityManager().find(GrupoProduto.class, value);
+        GrupoProduto grupoProd =  getEntityManager().find(GrupoProduto.class, value);
+        return grupoProd;
     }
-    
-     public List<GrupoProduto> findByNome(String value) {
+
+    public List<GrupoProduto> findByNome(String value) {
         EntityManager em = getEntityManager();
         String condicao = "";
-        List<GrupoProduto> produtos = null;
+        List<GrupoProduto> grupoProdutos = null;
         boolean hasNome = value != null && !value.isBlank() && !value.isEmpty();
         if (hasNome) {
-            condicao = "WHERE grupProd.nome LIKE ?1 ";
+            condicao = "WHERE prod.nome LIKE ?1 ";
         }
 
-        Query query = em.createQuery("SELECT grupProd FROM Produto grupProd " + condicao);
+        Query query = em.createQuery("SELECT prod FROM Produto prod " + condicao);
         if (hasNome) {
-            produtos = query.setParameter(1, "%" + value + "%")
+            grupoProdutos = query.setParameter(1, "%" + value + "%")
                     .getResultList();
         } else {
-            produtos = query.getResultList();
+            grupoProdutos = query.getResultList();
         }
         close();
-        return produtos;
+        return grupoProdutos;
     }
 }

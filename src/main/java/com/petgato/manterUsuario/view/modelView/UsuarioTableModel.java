@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.petgato.manterUsuario.view.modelView;
+
+import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.model.Usuario;
 import com.petgato.manterUsuario.repository.UsuarioRepository;
 import java.util.List;
@@ -14,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class UsuarioTableModel extends AbstractTableModel {
 
-    private String colunas[] = {"id", "username", "senha", "bloqueado", "situacao"};
+    private String colunas[] = {"id", "Nome", "Sobrenome", "Nascimento", "Email", "Username", "Grupo Usuário", "Bloqueado",};
     private List<Usuario> lista;
     private UsuarioRepository repository;
 
@@ -25,6 +27,10 @@ public class UsuarioTableModel extends AbstractTableModel {
     }
 
     public void atualizar() {
+        atualizar(null);
+    }
+
+    public void atualizar(String nome) {
         lista.clear();
         lista.addAll(repository.findAll());
         fireTableStructureChanged();
@@ -55,9 +61,20 @@ public class UsuarioTableModel extends AbstractTableModel {
         switch (column) {
             case 0:
                 return usuario.getId();
-
             case 1:
                 return usuario.getNome();
+            case 2:
+                return usuario.getSobrenome();
+            case 3:
+                return usuario.getIdade();
+            case 4:
+                return usuario.getEmail();
+            case 5:
+                return usuario.getUsername();
+            case 6:
+                return usuario.getGrupoUsuario().getNome();
+            case 7:
+                return usuario.isBloqueado() ? "Sim": "Não";
             default:
                 return null;
         }

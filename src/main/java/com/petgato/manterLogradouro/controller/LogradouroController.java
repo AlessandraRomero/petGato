@@ -42,6 +42,5 @@ public class LogradouroController {
     
     public Logradouro buscarPorNome(String nome){
         return (Logradouro) repository.findByNome(nome);
-    }
-      
+    }     
 }

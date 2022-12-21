@@ -15,16 +15,13 @@ import com.petgato.manterProntuario.repository.ItemAtendimentoRepository;
  * @author alessandra
  */
 public class ItemAtendimentoController {
-
-    private ItemAtendimentoRepository repository;
-    
+private ItemAtendimentoRepository repository;
 
     public ItemAtendimentoController() {
-        repository = new ItemAtendimentoRepository();
+        this.repository = new ItemAtendimentoRepository();
     }
-
-    public void cadastrar(int quantidade) {
-
+    
+     public void cadastrar(int quantidade) {
         ItemAtendimento item = new ItemAtendimento.ItemAtendimentoBuilder()
                 .whitQuantidade(quantidade)
                 .build();
@@ -45,4 +42,8 @@ public class ItemAtendimentoController {
         ItemAtendimento item = buscarPorId(id);
         repository.delete(item);
     }
+    
+    public ItemAtendimento buscarPorNome(String nome){
+        return (ItemAtendimento) repository.findByNome(nome);
+    }     
 }

@@ -15,19 +15,23 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ItemAtendimentoTableModel extends AbstractTableModel {
 
-    private String colunas[] = {"Id", "Qunatidade"};
+   private String colunas[] = {"id", "Quantidade"};
     private List<ItemAtendimento> lista;
     private ItemAtendimentoRepository repository;
-
+    
     public ItemAtendimentoTableModel() {
         repository = new ItemAtendimentoRepository();
 
         this.lista = repository.findAll();
     }
-
-    public void atualizar() {
+    
+     public void atualizar(){
+       atualizar(null);
+    }
+    
+    public void atualizar(String nome){
         lista.clear();
-        lista.addAll(repository.findAll());
+        lista.addAll(repository.findByNome(nome));
         fireTableStructureChanged();
     }
 
@@ -39,24 +43,24 @@ public class ItemAtendimentoTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return colunas.length;
-
+       
     }
 
     @Override
     public String getColumnName(int column) {
         return colunas[column];
     }
-
+    
     @Override
     public Object getValueAt(int row, int column) {
-        ItemAtendimento itemAtend = lista.get(row);
+        ItemAtendimento item = lista.get(row);
 
         switch (column) {
             case 0:
-                return itemAtend.getId();
+                return item.getId();
 
             case 1:
-                return itemAtend.getQuantidade();
+                return item.getQuantidade();
             default:
                 return null;
         }

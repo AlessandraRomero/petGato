@@ -4,31 +4,35 @@
  */
 package com.petgato.manterProntuario.view;
 
+import com.petgato.manterProntuario.controller.GrupoProdutoController;
 import com.petgato.manterProntuario.controller.ProdutoController;
+import com.petgato.manterProntuario.mediator.GrupoProdutoMediator;
 import com.petgato.manterProntuario.mediator.ProdutoMediator;
+import com.petgato.manterProntuario.model.GrupoProduto;
 import com.petgato.manterProntuario.model.Produto;
+import com.petgato.manterProntuario.view.modelView.GrupoProdutoTableModel;
 import com.petgato.manterProntuario.view.modelView.ProdutoTableModel;
 
 /**
  *
  * @author alessandra
  */
-public class CadastroProduto extends javax.swing.JFrame {
+public class CadastroGrupoProduto extends javax.swing.JFrame {
 
-    private final ProdutoTableModel model;
-    private final ProdutoController controle;
-    private final ProdutoMediator mediator;
+    private final GrupoProdutoTableModel model;
+    private final GrupoProdutoController controle;
+    private final GrupoProdutoMediator mediator;
 
     /**
      * Creates new form CadastroUsuario
      */
-    public CadastroProduto() {
-        model = new ProdutoTableModel();
-        controle = new ProdutoController();
+    public CadastroGrupoProduto() {
+        model = new GrupoProdutoTableModel();
+        controle = new GrupoProdutoController();
 
         initComponents();
 
-        mediator = new ProdutoMediator();
+        mediator = new GrupoProdutoMediator();
         mediator.registerTxtId(txtId)
                 .registerTxtNome(txtNome)
                 .registerTxtBuscar(txtBuscar)
@@ -378,7 +382,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Produto");
+        jLabel1.setText("Grupo Produto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -409,7 +413,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel22.setBackground(new java.awt.Color(89, 199, 162));
         jLabel22.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel22.setText("Produto:");
+        jLabel22.setText("Grupo Produto");
 
         txtBuscar.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -511,14 +515,14 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Consultar Produto", jPanel5);
+        tab.addTab("Consultar Grupo Produto", jPanel5);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel13.setBackground(new java.awt.Color(89, 199, 162));
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel13.setText("Nome Logradouro:");
+        jLabel13.setText("Nome Grupo Produto:");
 
         txtNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         txtNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -580,7 +584,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
                 .addGap(273, 273, 273))
         );
         jPanel4Layout.setVerticalGroup(
@@ -601,7 +605,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tab.addTab("Cadastrar Produto", jPanel4);
+        tab.addTab("Cadastrar Grupo Produto", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -714,19 +718,19 @@ public class CadastroProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GrupoProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }  //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroProduto().setVisible(true);
+                new CadastroGrupoProduto().setVisible(true);
             }
 
         });

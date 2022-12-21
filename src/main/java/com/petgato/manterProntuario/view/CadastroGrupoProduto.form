@@ -621,7 +621,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Produto"/>
+            <Property name="text" type="java.lang.String" value="Grupo Produto"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jIcon">
@@ -643,8 +643,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Consultar Produto">
-                <Property name="tabTitle" type="java.lang.String" value="Consultar Produto"/>
+              <JTabbedPaneConstraints tabName="Consultar Grupo Produto">
+                <Property name="tabTitle" type="java.lang.String" value="Consultar Grupo Produto"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -712,7 +712,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a2" green="c7" red="59" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Produto:"/>
+                <Property name="text" type="java.lang.String" value="Grupo Produto"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtBuscar">
@@ -861,8 +861,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Cadastrar Produto">
-                <Property name="tabTitle" type="java.lang.String" value="Cadastrar Produto"/>
+              <JTabbedPaneConstraints tabName="Cadastrar Grupo Produto">
+                <Property name="tabTitle" type="java.lang.String" value="Cadastrar Grupo Produto"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -889,7 +889,7 @@
                               <Component id="txtId" min="-2" pref="83" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtNome" pref="271" max="32767" attributes="0"/>
+                          <Component id="txtNome" pref="249" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="273" pref="273" max="-2" attributes="0"/>
                   </Group>
@@ -930,7 +930,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="a2" green="c7" red="59" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nome Logradouro:"/>
+                <Property name="text" type="java.lang.String" value="Nome Grupo Produto:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNome">

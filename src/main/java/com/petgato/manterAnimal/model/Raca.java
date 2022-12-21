@@ -64,6 +64,12 @@ public class Raca implements Serializable {
         final Raca other = (Raca) obj;
         return Objects.equals(this.id, other.getId());
     }    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
     
      public static class RacaBuilder {
 

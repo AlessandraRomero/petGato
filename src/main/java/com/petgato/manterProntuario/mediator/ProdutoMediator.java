@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  */
 public class ProdutoMediator extends AbstractMediator{
 
-   private  JTextField txtId;
+    private  JTextField txtId;
     private JTextField txtNome;
     private JTextField txtBuscar;
     private ProdutoController controle;

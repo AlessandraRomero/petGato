@@ -4,28 +4,44 @@
  */
 package com.petgato.manterCidade.model;
 
+import com.petgato.manterBairro.model.Bairro;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author alessandra
  */
-public class Cidade implements Serializable{
-    
-    private Long Id;
+@Entity
+@Table(name = "cidade")
+public class Cidade implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String uf;
-    
-    public Cidade(){
+
+    public Cidade() {
+    }
+
+    public Cidade(CidadeBuilder builder) {
+        this.id = builder.id;
+        this.nome = builder.nome;
+        this.uf = builder.uf;
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long Id) {
-        this.Id = Id;
+        this.id = Id;
     }
 
     public String getNome() {
@@ -47,7 +63,7 @@ public class Cidade implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.Id);
+        hash = 13 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -57,6 +73,41 @@ public class Cidade implements Serializable{
             return false;
         }
         final Cidade other = (Cidade) obj;
-        return Objects.equals(this.Id, other.getId());
-    }  
+        return Objects.equals(this.id, other.getId());
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
+    
+    public static class CidadeBuilder {
+
+        private Long id;
+        private String nome;
+        private String uf;
+
+        public CidadeBuilder() {
+        }
+
+        public CidadeBuilder whitId(Long value) {
+            this.id = value;
+            return this;
+        }
+
+        public CidadeBuilder whitNome(String value) {
+            this.nome = value;
+            return this;
+        }
+        
+         public CidadeBuilder whitUf(String value) {
+            this.uf = value;
+            return this;
+        }
+
+        public Cidade build() {
+            return new Cidade(this);
+        }
+    }
 }

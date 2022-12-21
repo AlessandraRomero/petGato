@@ -7,7 +7,12 @@ package com.petgato.manterUsuario.model;
 import com.petgato.padrao.model.Pessoa;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+
 
 /**
  *
@@ -16,11 +21,13 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Usuario extends Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String senha;
     private boolean bloqueado;
-    private String situacao;
+//  private String situacao;
 
     @ManyToOne
     private GrupoUsuario grupoUsuario;
@@ -32,7 +39,16 @@ public class Usuario extends Pessoa {
         super(builder);
         this.username = builder.username;
         this.senha = builder.senha;
+        this.bloqueado = builder.bloqueado;
         this.grupoUsuario = builder.grupoUsuario;
+    }
+    
+       public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -67,13 +83,13 @@ public class Usuario extends Pessoa {
         this.bloqueado = bloqueado;
     }
 
-    public String getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
-    }
+//    public String getSituacao() {
+//        return situacao;
+//    }
+//
+//    public void setSituacao(String situacao) {
+//        this.situacao = situacao;
+//    }
 
     @Override
     public int hashCode() {
@@ -81,7 +97,7 @@ public class Usuario extends Pessoa {
         hash = 31 * hash + Objects.hashCode(this.getUsername());
         hash = 31 * hash + Objects.hashCode(this.getSenha());
         hash = 31 * hash + (this.isBloqueado() ? 1 : 0);
-        hash = 31 * hash + Objects.hashCode(this.getSituacao());
+//        hash = 31 * hash + Objects.hashCode(this.getSituacao());
         hash = 31 * hash + Objects.hashCode(this.getGrupoUsuario());
         return hash;
     }
@@ -101,20 +117,29 @@ public class Usuario extends Pessoa {
         if (!Objects.equals(this.senha, other.getSenha())) {
             return false;
         }
-        if (!Objects.equals(this.situacao, other.getSenha())) {
-            return false;
-        }
+//        if (!Objects.equals(this.situacao, other.getSenha())) {
+//            return false;
+//        }
         return Objects.equals(this.grupoUsuario, other.getGrupoUsuario());
     }
 
     public static class UsuarioBuilder extends PessoaBuilder {
 
+        private Long id;
         private String username;
         private String senha;
         private boolean bloqueado;
-        private String situacao;
+//        private String situacao;
         private GrupoUsuario grupoUsuario;
+        
+         public UsuarioBuilder() {
+        }
 
+        public Usuario.UsuarioBuilder whitId(Long value) {
+            this.id = value;
+            return this;
+        }
+        
         public UsuarioBuilder whitUsername(String value) {
             this.username = value;
             return this;
@@ -130,10 +155,10 @@ public class Usuario extends Pessoa {
             return this;
         }
 
-        public UsuarioBuilder whitSituacao(String value) {
-            this.situacao = value;
-            return this;
-        }
+//        public UsuarioBuilder whitSituacao(String value) {
+//            this.situacao = value;
+//            return this;
+//        }
         
          public UsuarioBuilder whitGrupoUsuario(GrupoUsuario value) {
             this.grupoUsuario = value;

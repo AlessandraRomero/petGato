@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import org.hibernate.Session;
 
 /**
  *
@@ -24,7 +23,8 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     public AdapterRepository() {
         this.entityManager = EntityManagerUtil.getEntityManager();
-        this.persistentClass = (Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.persistentClass = (Class) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     public EntityManager getEntityManager() {

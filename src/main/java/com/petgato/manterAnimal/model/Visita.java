@@ -8,6 +8,7 @@ import com.petgato.manterAnimal.model.enums.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,6 +20,8 @@ public class Visita implements Serializable {
     private LocalDate dataVisita;
     private String observacao;
     private Status status;
+    @ManyToOne
+    private Adocao adocao;
 
     public Visita() {
     }
@@ -55,19 +58,50 @@ public class Visita implements Serializable {
         this.status = status;
     }
 
+    public Adocao getAdocao() {
+        return adocao;
+    }
+
+    public void setAdocao(Adocao adocao) {
+        this.adocao = adocao;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.dataVisita);
+        hash = 53 * hash + Objects.hashCode(this.observacao);
+        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 53 * hash + Objects.hashCode(this.adocao);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
         final Visita other = (Visita) obj;
-        return Objects.equals(this.id, other.getId());
-    }   
+        if (!Objects.equals(this.observacao, other.observacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataVisita, other.dataVisita)) {
+            return false;
+        }
+        if (this.status != other.status) {
+            return false;
+        }
+        return Objects.equals(this.adocao, other.adocao);
+    }
+
+    
+    
+   
 }
