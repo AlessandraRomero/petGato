@@ -10,6 +10,9 @@ import com.petgato.manterAnimal.model.Especie;
 import com.petgato.manterAnimal.model.Raca;
 import com.petgato.manterAnimal.view.modelView.AnimalTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
+import com.toedter.calendar.JDateChooser;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -23,8 +26,10 @@ public class AnimalMediator extends AbstractMediator {
     private JTextField txtId;
     private JTextField txtNome;
     private JTextField txtIdade;
-    private JComboBox comboBoxSexo;
+    private JTextField txtSexo;
     private JTextField txtPeso;
+    private JTextField txtAdotado;
+    private JDateChooser jDateDataResgate;
     private JTextField txtBuscar;
     private JComboBox comboBoxRaca;
     private JComboBox comboBoxEspecie;
@@ -46,13 +51,23 @@ public class AnimalMediator extends AbstractMediator {
         return this;
     }
 
-    public AnimalMediator registerComboBoxSexo(JComboBox comboBoxSexo) {
-        this.comboBoxSexo = comboBoxSexo;
+    public AnimalMediator registerTxtSexo(JTextField txtSexo) {
+        this.txtSexo = txtSexo;
         return this;
     }
 
     public AnimalMediator registerTxtPeso(JTextField txtPeso) {
         this.txtPeso = txtPeso;
+        return this;
+    }
+    
+    public AnimalMediator registerTxtAdotado(JTextField txtAdotado) {
+        this.txtAdotado = txtAdotado;
+        return this;
+    }
+
+    public AnimalMediator registerJDateDataResgate(JDateChooser jDateDataResgate) {
+        this.jDateDataResgate = jDateDataResgate;
         return this;
     }
 
@@ -76,7 +91,7 @@ public class AnimalMediator extends AbstractMediator {
         return this;
     }
 
-    public AnimalMediator registerGrupoUsuarioTableModel(AnimalTableModel model) {
+    public AnimalMediator registerAnimalTableModel(AnimalTableModel model) {
         this.model = model;
         return this;
     }
@@ -107,8 +122,12 @@ public class AnimalMediator extends AbstractMediator {
             txtId.setText(animais.getId().toString());
             txtNome.setText(animais.getNome());
             txtIdade.setText(String.valueOf(animais.getIdade()));
-            comboBoxSexo.setSelectedItem(animais.getSexo());
+            txtSexo.setText(animais.getSexo());
             txtPeso.setText(String.valueOf(animais.getPeso()));
+//            txtAdotado.setText(String.valueOf(animais.getAdotado().isAdotado()));
+            if (animais.getDataResgate() != null) {
+                jDateDataResgate.setDate(Date.from(animais.getDataResgate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            }
             comboBoxRaca.setSelectedItem(animais.getRaca());
             comboBoxEspecie.setSelectedItem(animais.getEspecie());
             tab.setSelectedIndex(1);
@@ -119,8 +138,10 @@ public class AnimalMediator extends AbstractMediator {
         txtId.setText("");
         txtNome.setText("");
         txtIdade.setText("");
-        comboBoxSexo.setSelectedItem(null);
+        txtSexo.setText("");
         txtPeso.setText("");
+        txtAdotado.setText("");
+        jDateDataResgate.setDate(null);
         comboBoxRaca.setSelectedItem(null);
         comboBoxEspecie.setSelectedItem(null);
     }
@@ -132,10 +153,12 @@ public class AnimalMediator extends AbstractMediator {
 
     public void excluir() {
         Long id = getIdAnimalFromTable();
-        if (id != null) {
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse animal?",
+                "Confirmação", JOptionPane.YES_OPTION);
+        if (id != null && resposta == JOptionPane.YES_OPTION) {
             controle.deletar(id);
             model.atualizar();
-            JOptionPane.showMessageDialog(null, "Exclusão realizada",
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!",
                     "Confirmação", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -146,15 +169,17 @@ public class AnimalMediator extends AbstractMediator {
 
     public void gravar() {
         boolean idValido = isCampoTextoValido(txtId);
-        if (isCampoTextoValido(txtNome)) {
+        if (isCampoTextoValido(txtNome) && isCampoTextoValido(txtIdade) && isCampoTextoValido(txtPeso)) {
             if (idValido) {
                 controle.atualizar(Long.parseLong(txtId.getText()), txtNome.getText(),
                         Float.parseFloat(txtIdade.getText()),
-                        (String) comboBoxSexo.getSelectedItem(), Float.parseFloat(txtPeso.getText()),
+                        txtSexo.getText(), Float.parseFloat(txtPeso.getText()),
+                        jDateDataResgate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                         (Raca) comboBoxRaca.getSelectedItem(), (Especie) comboBoxEspecie.getSelectedItem());
             } else {
                 controle.cadastrar(txtNome.getText(), Float.parseFloat(txtIdade.getText()),
-                        (String) comboBoxSexo.getSelectedItem(), Float.parseFloat(txtPeso.getText()),
+                        txtSexo.getText(), Float.parseFloat(txtPeso.getText()),
+                        jDateDataResgate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                         (Raca) comboBoxRaca.getSelectedItem(), (Especie) comboBoxEspecie.getSelectedItem());
             }
             limpar();
@@ -163,11 +188,20 @@ public class AnimalMediator extends AbstractMediator {
         } else {
             JOptionPane.showMessageDialog(null, "Nenhum campo deve ser vazio", "aviso", JOptionPane.WARNING_MESSAGE);
             txtNome.requestFocusInWindow();
+            txtIdade.requestFocusInWindow();
+            txtPeso.requestFocusInWindow();
+            jDateDataResgate.requestFocusInWindow();
+            comboBoxEspecie.requestFocusInWindow();
+            comboBoxRaca.requestFocusInWindow();
         }
     }
 
     public void buscar() {
         model.atualizar(txtBuscar.getText());
+    }
+
+    public void gerarRelatorio() {
+
     }
 
     public void cancelar() {

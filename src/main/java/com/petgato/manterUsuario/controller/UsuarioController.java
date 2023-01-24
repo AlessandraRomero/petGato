@@ -21,13 +21,14 @@ public class UsuarioController {
         repository = new UsuarioRepository();
     }
 
-    public void cadastrar(String nome, String sobrenome, LocalDate idade, String email, String username, String senha, boolean bloqueado, GrupoUsuario grupo) {
+    public void cadastrar(String nome, String sobrenome, LocalDate idade, 
+            String email, String username, String senha, boolean bloqueado, GrupoUsuario grupo) {
 
         Usuario usuario = (Usuario) new Usuario.UsuarioBuilder()
                 .whitUsername(username)
                 .whitSenha(senha)
-                .whitBloqueado(bloqueado)
-                .whitGrupoUsuario(grupo)
+                .withBloqueado(bloqueado)
+                .withGrupoUsuario(grupo)
                 .whitNome(nome)
                 .whitSobrenome(sobrenome)
                 .whitIdade(idade)

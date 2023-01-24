@@ -52,7 +52,8 @@ public class Especie implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
@@ -62,8 +63,13 @@ public class Especie implements Serializable {
             return false;
         }
         final Especie other = (Especie) obj;
+        if (!Objects.equals(this.nome, other.getNome())) {
+            return false;
+        }
         return Objects.equals(this.id, other.getId());
     }
+
+    
 
     @Override
     public String toString() {

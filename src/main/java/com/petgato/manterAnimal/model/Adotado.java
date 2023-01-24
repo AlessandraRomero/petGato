@@ -13,15 +13,22 @@ import javax.persistence.ManyToOne;
  *
  * @author alessandra
  */
-public class Adotado implements Serializable{
-    
+public class Adotado implements Serializable {
+
     private Long id;
     private LocalDate dataAdocao;
     private boolean adotado;
     @ManyToOne
     private Adocao adocao;
-    
-    public Adotado(){
+
+    public Adotado() {
+    }
+
+    public Adotado(AdotadoBuilder builder) {
+        this.id = builder.id;
+        this.dataAdocao = builder.dataAdocao;
+        this.adotado = builder.adotado;
+        this.adocao = builder.adocao;
     }
 
     public Long getId() {
@@ -85,8 +92,44 @@ public class Adotado implements Serializable{
             return false;
         }
         return Objects.equals(this.adocao, other.adocao);
-    }  
+    }
     
     
-    
+
+    public static class AdotadoBuilder {
+
+        private Long id;
+        private LocalDate dataAdocao;
+        private boolean adotado;
+        @ManyToOne
+        private Adocao adocao;
+
+        public AdotadoBuilder() {
+
+        }
+
+        public Adotado.AdotadoBuilder whitId(Long value) {
+            this.id = value;
+            return this;
+        }
+
+        public Adotado.AdotadoBuilder whitDataAdocao(LocalDate value) {
+            this.dataAdocao = value;
+            return this;
+        }
+
+        public Adotado.AdotadoBuilder whitAdotado(boolean value) {
+            this.adotado = value;
+            return this;
+        }
+
+        public Adotado.AdotadoBuilder whitAdocao(Adocao value) {
+            this.adocao = value;
+            return this;
+        }
+
+        public Adotado build() {
+            return new Adotado(this);
+        }
+    }
 }

@@ -4,10 +4,12 @@
  */
 package com.petgato.manterAnimal.controller;
 
+import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.model.Especie;
 import com.petgato.manterAnimal.model.Raca;
 import com.petgato.manterAnimal.repository.AnimalRepository;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,14 +23,16 @@ public class AnimalController {
         this.repository = new AnimalRepository();
     }
     
-     public void cadastrar(String nome, float idade, String sexo, float peso, Raca raca, Especie especie) {
-        Animal animal = (Animal) new Animal.AnimalBuilder()
+     public void cadastrar(String nome, float idade, String sexo, float peso, LocalDate dataResgate, Raca raca, Especie especie) {
+        Animal animal =  new Animal.AnimalBuilder()
                 .whitRaca(raca)
                 .whitEspecie(especie)
                 .whitName(nome)
                 .whitIdade(idade)
                 .whitSexo(sexo)
                 .whitPeso(peso)
+//                .whitAdotado(adotado)
+                .whitDataResgate(dataResgate)
                 .build();
         repository.save(animal);
     }
@@ -37,14 +41,16 @@ public class AnimalController {
         return repository.findById(id);
     }
 
-    public void atualizar(Long id, String nome, float idade, String sexo, float peso, Raca raca, Especie especie) {
+    public void atualizar(Long id, String nome, float idade, String sexo, float peso, LocalDate dataResgate, Raca raca, Especie especie) {
         Animal animal = buscarPorId(id);
         animal.setNome(nome);
         animal.setIdade(idade);
         animal.setSexo(sexo);
         animal.setPeso(peso);
         animal.setRaca(raca);
+        animal.setDataResgate(dataResgate);
         animal.setEspecie(especie);
+//        animal.setAdotado(adotado);
         repository.update(animal);
     }
     

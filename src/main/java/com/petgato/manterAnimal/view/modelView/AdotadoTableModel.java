@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class AdotadoTableModel extends PetGatoTableModel{
     
-    private String colunas[] = {"id", "Nome", "Data Adoção", "Adotado?"};
+    private String colunas[] = {"id", "Data Adoção", "Adotado?"};
     private List<Adotado> lista= new ArrayList();
 
     public AdotadoTableModel() {
@@ -58,15 +58,20 @@ public class AdotadoTableModel extends PetGatoTableModel{
 
     @Override
     public Object getValueAt(int row, int column) {
-        Adotado log = lista.get(row);
+        Adotado adotado = lista.get(row);
         switch (column) {
             case 0:
-                return log.getId();
+                return adotado.getId();
             case 1:
-                return log.getAdocao();
+                return adotado.getDataAdocao();
             case 2:
+                return adotado.getAdocao();
             default:
                 return null;
         }
+    }
+    
+     public Adotado getValue(int index){
+        return lista.get(index);
     }
 }

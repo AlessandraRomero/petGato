@@ -13,9 +13,9 @@ import java.util.List;
  *
  * @author alessandra
  */
-public class AnimalTableModel extends PetGatoTableModel{
-    
-    private String colunas[] = {"id", "Nome", "Data Nascimento", "Sexo", "Peso","Espécie", "Raça"};
+public class AnimalTableModel extends PetGatoTableModel {
+
+    private String colunas[] = {"id", "Nome", "Idade", "Sexo", "Peso", "Data Resgate", "Espécie", "Raça"};
     private List<Animal> lista;
     private AnimalRepository repository;
 
@@ -61,11 +61,17 @@ public class AnimalTableModel extends PetGatoTableModel{
             case 1:
                 return log.getNome();
             case 2:
-                return log.getIdade();    
+                return log.getIdade();
             case 3:
                 return log.getSexo();
             case 4:
                 return log.getPeso();
+            case 5:
+                return log.getDataResgate();
+            case 6:
+                return log.getEspecie();
+            case 7:
+                return log.getRaca();
             default:
                 return null;
         }

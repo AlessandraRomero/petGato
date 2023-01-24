@@ -14,18 +14,18 @@ import javax.persistence.Query;
  *
  * @author alessandra
  */
-public class AnimalRepository extends AdapterRepository<Animal, Long>{
-    
-   @Override
+public class AnimalRepository extends AdapterRepository<Animal, Long> {
+
+    @Override
     public List<Animal> findAll() {
         List<Animal> animais = getEntityManager().createQuery("SELECT animal FROM Animal animal", Animal.class).getResultList();
         super.close();
-        return  animais;
+        return animais;
     }
 
     @Override
     public Animal findById(Long value) {
-        Animal animal =  getEntityManager().find(Animal.class, value);
+        Animal animal = getEntityManager().find(Animal.class, value);
         return animal;
     }
 

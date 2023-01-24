@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
  * @author alessandra
  */
 public class Visita implements Serializable {
-    
+
     private Long id;
     private LocalDate dataVisita;
     private String observacao;
@@ -24,6 +24,15 @@ public class Visita implements Serializable {
     private Adocao adocao;
 
     public Visita() {
+    }
+
+    public Visita(VisitaBuilder builder) {
+        this.id = builder.id;
+        this.dataVisita = builder.dataVisita;
+        this.observacao = builder.observacao;
+        this.status = builder.status;
+        this.adocao = builder.adocao;
+
     }
 
     public Long getId() {
@@ -101,7 +110,45 @@ public class Visita implements Serializable {
         return Objects.equals(this.adocao, other.adocao);
     }
 
-    
-    
-   
+    public static class VisitaBuilder {
+
+        private Long id;
+        private LocalDate dataVisita;
+        private String observacao;
+        private Status status;
+        @ManyToOne
+        private Adocao adocao;
+
+        public VisitaBuilder() {
+        }
+
+        public Visita.VisitaBuilder whitId(Long value) {
+            this.id = value;
+            return this;
+        }
+
+        public Visita.VisitaBuilder whitDataVisita(LocalDate value) {
+            this.dataVisita = value;
+            return this;
+        }
+
+        public Visita.VisitaBuilder whitObservacao(String value) {
+            this.observacao = value;
+            return this;
+        }
+
+        public Visita.VisitaBuilder whitStatus(Status value) {
+            this.status = value;
+            return this;
+        }
+
+        public Visita.VisitaBuilder whitAdocao(Adocao value) {
+            this.adocao = value;
+            return this;
+        }
+
+        public Visita build() {
+            return new Visita(this);
+        }
+    }
 }

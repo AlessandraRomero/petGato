@@ -5,6 +5,7 @@
 package com.petgato.manterAnimal.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,22 +29,27 @@ public class Animal implements Serializable {
     private float idade;
     private String sexo;
     private float peso;
+    private LocalDate dataResgate;
     @ManyToOne
     private Especie especie;
     @ManyToOne
     private Raca raca;
+//    @ManyToOne
+//    private Adotado adotado;
 
     public Animal() {
     }
 
     public Animal(AnimalBuilder builder) {
+        super();
         this.id = builder.id;
         this.nome = builder.nome;
         this.idade = builder.idade;
         this.sexo = builder.sexo;
         this.peso = builder.peso;
-        this.especie = builder.especie;
         this.raca = builder.raca;
+        this.especie = builder.especie;
+//        this.adotado = builder.adotado;
     }
 
     public Long getId() {
@@ -102,20 +108,72 @@ public class Animal implements Serializable {
         this.raca = raca;
     }
 
+    public LocalDate getDataResgate() {
+        return dataResgate;
+    }
+
+    public void setDataResgate(LocalDate dataResgate) {
+        this.dataResgate = dataResgate;
+    }
+
+//    public Adotado getAdotado() {
+//        return adotado;
+//    }
+//
+//    public void setAdotado(Adotado adotado) {
+//        this.adotado = adotado;
+//    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Float.floatToIntBits(this.idade);
+        hash = 53 * hash + Objects.hashCode(this.sexo);
+        hash = 53 * hash + Float.floatToIntBits(this.peso);
+        hash = 53 * hash + Objects.hashCode(this.dataResgate);
+        hash = 53 * hash + Objects.hashCode(this.especie);
+        hash = 53 * hash + Objects.hashCode(this.raca);
+//        hash = 53 * hash + Objects.hashCode(this.adotado);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
         final Animal other = (Animal) obj;
-        return Objects.equals(this.id, other.getId());
+        if (Float.floatToIntBits(this.idade) != Float.floatToIntBits(other.idade)) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.peso) != Float.floatToIntBits(other.peso)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.sexo, other.sexo)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataResgate, other.dataResgate)) {
+            return false;
+        }
+        if (!Objects.equals(this.especie, other.especie)) {
+            return false;
+        }
+        if (!Objects.equals(this.raca, other.raca)) {
+            return false;
+        }
+//        return Objects.equals(this.adotado, other.adotado);
+        return false;
     }
 
     public static class AnimalBuilder {
@@ -125,10 +183,13 @@ public class Animal implements Serializable {
         private float idade;
         private String sexo;
         private float peso;
+        private LocalDate dataResgate;
         @ManyToOne
         private Especie especie;
         @ManyToOne
         private Raca raca;
+        @ManyToOne
+        private Adotado adotado;
 
         public AnimalBuilder() {
         }
@@ -158,16 +219,26 @@ public class Animal implements Serializable {
             return this;
         }
 
-        public AnimalBuilder whitEspecie(Especie value){
+        public AnimalBuilder whitEspecie(Especie value) {
             this.especie = value;
             return this;
         }
-        
-        public AnimalBuilder whitRaca(Raca value){
+
+        public AnimalBuilder whitRaca(Raca value) {
             this.raca = value;
             return this;
         }
-        
+
+        public AnimalBuilder whitDataResgate(LocalDate value) {
+            this.dataResgate = value;
+            return this;
+        }
+
+        public AnimalBuilder whitAdotado(Adotado value) {
+            this.adotado = value;
+            return this;
+        }
+
         public Animal build() {
             return new Animal(this);
         }

@@ -230,5 +230,9 @@ public class Adocao implements Serializable {
             this.visitas = value;
             return this;
         }
+        
+         public Adocao build() {
+            return new Adocao(this);
+        }
     }
 }

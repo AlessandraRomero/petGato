@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 
 /**
@@ -28,7 +27,6 @@ public class Usuario extends Pessoa {
     private String senha;
     private boolean bloqueado;
 //  private String situacao;
-
     @ManyToOne
     private GrupoUsuario grupoUsuario;
 
@@ -150,7 +148,7 @@ public class Usuario extends Pessoa {
             return this;
         }
 
-        public UsuarioBuilder whitBloqueado(boolean value) {
+        public UsuarioBuilder withBloqueado(boolean value) {
             this.bloqueado = value;
             return this;
         }
@@ -160,7 +158,7 @@ public class Usuario extends Pessoa {
 //            return this;
 //        }
         
-         public UsuarioBuilder whitGrupoUsuario(GrupoUsuario value) {
+         public UsuarioBuilder withGrupoUsuario(GrupoUsuario value) {
             this.grupoUsuario = value;
             return this;
         }

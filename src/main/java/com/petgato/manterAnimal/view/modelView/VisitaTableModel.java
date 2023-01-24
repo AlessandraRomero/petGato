@@ -4,7 +4,6 @@
  */
 package com.petgato.manterAnimal.view.modelView;
 
-import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.model.Visita;
 import com.petgato.padrao.componentsModel.PetGatoTableModel;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public class VisitaTableModel extends PetGatoTableModel{
     
-    private String colunas[] = {"id", "Data Visita", "Observação", "Status"};
+    private String colunas[] = {"id", "Data Visita", "Observação", "Status", "Adoção"};
     private List<Visita> lista= new ArrayList();
 
     public VisitaTableModel() {
@@ -72,5 +71,9 @@ public class VisitaTableModel extends PetGatoTableModel{
             default:
                 return null;
         }
+    }
+    
+    public Visita getValue(int index){
+        return lista.get(index);
     }
 }

@@ -121,12 +121,12 @@ public class UsuarioMediator extends AbstractMediator {
 
         if (usuario != null) {
             txtId.setText(usuario.getId().toString());
-            txtSobrenome.setText(usuario.getSobrenome().toString());
+            txtSobrenome.setText(usuario.getSobrenome());
             txtNome.setText(usuario.getNome());
             jDateChooserNascimento.setDate(Date.from(usuario.getIdade().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            txtEmail.setText(usuario.getEmail().toString());
-            txtUsuario.setText(usuario.getUsername().toString());
-            txtSenha.setText(usuario.getSenha().toString());
+            txtEmail.setText(usuario.getEmail());
+            txtUsuario.setText(usuario.getUsername());
+            txtSenha.setText(usuario.getSenha());
             comboBoxGU.setSelectedItem(usuario.getGrupoUsuario());
             jCheckBoxBloqueado.setSelected(usuario.isBloqueado());
 

@@ -51,8 +51,9 @@ public class Raca implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
@@ -62,8 +63,11 @@ public class Raca implements Serializable {
             return false;
         }
         final Raca other = (Raca) obj;
+        if (!Objects.equals(this.nome, other.getNome())) {
+            return false;
+        }
         return Objects.equals(this.id, other.getId());
-    }    
+    }
 
     @Override
     public String toString() {

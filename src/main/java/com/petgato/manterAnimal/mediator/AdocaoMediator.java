@@ -4,14 +4,19 @@
  */
 package com.petgato.manterAnimal.mediator;
 
-import com.petgato.manterAnimal.controller.AnimalController;
-import com.petgato.manterAnimal.model.Animal;
+import com.petgato.manterAdotante.model.Adotante;
+import com.petgato.manterAnimal.controller.AdocaoController;
+import com.petgato.manterAnimal.model.Adocao;
 import com.petgato.manterAnimal.model.Especie;
 import com.petgato.manterAnimal.model.Raca;
-import com.petgato.manterAnimal.view.modelView.AnimalTableModel;
+import com.petgato.manterAnimal.view.modelView.AdocaoTableModel;
+import com.petgato.manterUsuario.model.Usuario;
 import com.petgato.padrao.mediator.AbstractMediator;
+import com.toedter.calendar.JDateChooser;
+import java.time.ZoneId;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -21,67 +26,89 @@ import javax.swing.JTextField;
 public class AdocaoMediator extends AbstractMediator {
 
     private JTextField txtId;
-    private JTextField txtNome;
-    private JTextField txtIdade;
-    private JComboBox comboBoxSexo;
-    private JTextField txtPeso;
-    private JTextField txtBuscar;
-    private JComboBox comboBoxRaca;
-    private JComboBox comboBoxEspecie;
-    private AnimalController controle;
-    private AnimalTableModel model;
+    private JDateChooser jDateDataEmissao;
+    private JComboBox comboBoxAdotante;
+    private JTextField txtAtendente;
+    private JTextField txtStatus;
+    private JDateChooser jDateDataVisita;
+    private JComboBox comboBoxSituacao;
+    private JTextField txtObservacao;
+    private JDateChooser jDateDataAdocao;
+    private JRadioButton jRadioButtonS;
+    private JRadioButton jRadioButtonN;
+    private JRadioButton jRadioButtonAnalise;
+    private JComboBox comboBoxAnimal;
+    private AdocaoController controle;
+    private AdocaoTableModel model;
+
+    private VisitaMediator visitaMediator = new VisitaMediator();
+    
+     public AdocaoMediator registerVisitaMediator(VisitaMediator visitaMediator) {
+        this.visitaMediator = visitaMediator;
+        return this;
+    }
 
     public AdocaoMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
 
-    public AdocaoMediator registerTxtNome(JTextField txtNome) {
-        this.txtNome = txtNome;
+    public AdocaoMediator registerJDateDataEmissao(JDateChooser jDateDataEmissao) {
+        this.jDateDataEmissao = jDateDataEmissao;
         return this;
     }
 
-    public AdocaoMediator registerTxtIdade(JTextField txtIdade) {
-        this.txtIdade = txtIdade;
+    public AdocaoMediator registerComboBoxAdotante(JComboBox comboBoxAdotante) {
+        this.comboBoxAdotante = comboBoxAdotante;
         return this;
     }
 
-    public AdocaoMediator registerComboBoxSexo(JComboBox comboBoxSexo) {
-        this.comboBoxSexo = comboBoxSexo;
+    public AdocaoMediator registerTxtAtendente(JTextField txtAtendente) {
+        this.txtAtendente = txtAtendente;
         return this;
     }
 
-    public AdocaoMediator registerTxtPeso(JTextField txtPeso) {
-        this.txtPeso = txtPeso;
+    public AdocaoMediator registerTxtStatus(JTextField txtStatus) {
+        this.txtStatus = txtStatus;
         return this;
     }
 
-    public AdocaoMediator registerComboBoxRaca(JComboBox comboBoxRaca) {
-        this.comboBoxRaca = comboBoxRaca;
+    public AdocaoMediator registerJDateDataVisita(JDateChooser jDateDataVisita) {
+        this.jDateDataVisita = jDateDataVisita;
         return this;
     }
 
-    public AdocaoMediator registerComboBoxEspecie(JComboBox comboBoxEspecie) {
-        this.comboBoxEspecie = comboBoxEspecie;
+    public AdocaoMediator registerComboBoxSituacao(JComboBox comboBoxSituacao) {
+        this.comboBoxSituacao = comboBoxSituacao;
         return this;
     }
 
-    public AdocaoMediator registerTxtBuscar(JTextField txtBuscar) {
-        this.txtBuscar = txtBuscar;
+    public AdocaoMediator registerTxtJDateDataAdocao(JDateChooser jDateDataAdocao) {
+        this.jDateDataAdocao = jDateDataAdocao;
         return this;
     }
 
-    public AdocaoMediator registerController(AnimalController controle) {
+    public AdocaoMediator registerTxtJRadioButtonS(JRadioButton jRadioButtonS) {
+        this.jRadioButtonS = jRadioButtonS;
+        return this;
+    }
+
+    public AdocaoMediator registerTxtJRadioButtonN(JRadioButton jRadioButtonN) {
+        this.jRadioButtonN = jRadioButtonN;
+        return this;
+    }
+
+    public AdocaoMediator registerTxtJRadioButtonAnalise(JRadioButton jRadioButtonAnalise) {
+        this.jRadioButtonAnalise = jRadioButtonAnalise;
+        return this;
+    }
+
+    public AdocaoMediator registerAdocaoController(AdocaoController controle) {
         this.controle = controle;
         return this;
     }
 
-    public AdocaoMediator registerGrupoUsuarioTableModel(AnimalTableModel model) {
-        this.model = model;
-        return this;
-    }
-
-    private Long getIdAnimalFromTable() {
+    private Long getIdAdocaoFromTable() {
         int linha = tabela.getSelectedRow();
 
         if (linha >= 0) {
@@ -92,8 +119,8 @@ public class AdocaoMediator extends AbstractMediator {
         return null;
     }
 
-    private Animal getAnimal() {
-        Long id = getIdAnimalFromTable();
+    private Adocao getAdocao() {
+        Long id = getIdAdocaoFromTable();
         if (id != null) {
             return controle.buscarPorId(id);
         }
@@ -101,28 +128,24 @@ public class AdocaoMediator extends AbstractMediator {
     }
 
     public void alterar() {
-        Animal animais = getAnimal();
+        Adocao adocoes = getAdocao();
 
-        if (animais != null) {
-            txtId.setText(animais.getId().toString());
-            txtNome.setText(animais.getNome());
-            txtIdade.setText(String.valueOf(animais.getIdade()));
-            comboBoxSexo.setSelectedItem(animais.getSexo());
-            txtPeso.setText(String.valueOf(animais.getPeso()));
-            comboBoxRaca.setSelectedItem(animais.getRaca());
-            comboBoxEspecie.setSelectedItem(animais.getEspecie());
+        if (adocoes != null) {
+            txtId.setText(adocoes.getId().toString());
+            txtAtendente.setText(adocoes.getAtendente().getNome());
+            txtStatus.setText(adocoes.getStatus().toString());
+            comboBoxAdotante.setSelectedItem(adocoes.getAdotante());
+            comboBoxAnimal.setSelectedItem(adocoes.getAdotados());
+            visitaMediator.carregarDados(adocoes.getVisitas());
             tab.setSelectedIndex(1);
         }
     }
 
     public void limpar() {
         txtId.setText("");
-        txtNome.setText("");
-        txtIdade.setText("");
-        comboBoxSexo.setSelectedItem(null);
-        txtPeso.setText("");
-        comboBoxRaca.setSelectedItem(null);
-        comboBoxEspecie.setSelectedItem(null);
+        txtAtendente.setText("");
+        comboBoxAdotante.setSelectedItem(null);
+
     }
 
     public void novo() {
@@ -131,7 +154,7 @@ public class AdocaoMediator extends AbstractMediator {
     }
 
     public void excluir() {
-        Long id = getIdAnimalFromTable();
+        Long id = getIdAdocaoFromTable();
         if (id != null) {
             controle.deletar(id);
             model.atualizar();
@@ -146,12 +169,12 @@ public class AdocaoMediator extends AbstractMediator {
 
     public void gravar() {
         boolean idValido = isCampoTextoValido(txtId);
-        if (isCampoTextoValido(txtNome)) {
+        if (isCampoTextoValido(txtAtendente)) {
             if (idValido) {
-                controle.atualizar(Long.parseLong(txtId.getText()), txtNome.getText(),
-                        Float.parseFloat(txtIdade.getText()),
-                        (String) comboBoxSexo.getSelectedItem(), Float.parseFloat(txtPeso.getText()),
-                        (Raca) comboBoxRaca.getSelectedItem(), (Especie) comboBoxEspecie.getSelectedItem());
+                controle.atualizar(Long.parseLong(txtId.getText()),
+                        jDateDataEmissao.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        txtStatus.getText(), (Adotante) comboBoxAdotante.getSelectedItem(),(Usuario)txtAtendente.getText());
+
             } else {
                 controle.cadastrar(txtNome.getText(), Float.parseFloat(txtIdade.getText()),
                         (String) comboBoxSexo.getSelectedItem(), Float.parseFloat(txtPeso.getText()),

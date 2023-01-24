@@ -4,7 +4,6 @@
  */
 package com.petgato.manterUsuario.view.modelView;
 
-import com.petgato.manterUsuario.model.GrupoUsuario;
 import com.petgato.manterUsuario.model.Usuario;
 import com.petgato.manterUsuario.repository.UsuarioRepository;
 import java.util.List;

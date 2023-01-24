@@ -7,8 +7,6 @@ package com.petgato.manterAnimal.controller;
 import com.petgato.manterAdotante.model.Adotante;
 import com.petgato.manterAnimal.model.Adocao;
 import com.petgato.manterAnimal.model.Animal;
-import com.petgato.manterAnimal.model.Especie;
-import com.petgato.manterAnimal.model.Raca;
 import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterAnimal.repository.AdocaoRepository;
 import com.petgato.manterUsuario.model.Usuario;
@@ -28,31 +26,38 @@ public class AdocaoController {
     }
     
      public void cadastrar(LocalDate dataEmissao, Status status, Adotante adotante,
-             Usuario atendente, List adotados, List Visitas) {
-        Adocao adocao = (adocao) new Adocao.AdocaoBuilder()
-                .whit
+             Usuario atendente) {
+        Adocao adocao = new Adocao.AdocaoBuilder()
+                .whitDataEmissao(dataEmissao)
+                .whitStatus(status)
+                .whitAdotante(adotante)
+                .whitAdotante(adotante)
+                .whitAtendente(atendente)
+//                .whitAdotados(adotados)
+//                .whitVisitas(Visitas)
                 .build();
         repository.save(adocao);
     }
      
-     public Animal buscarPorId(Long id) {
+     public Adocao buscarPorId(Long id) {
         return repository.findById(id);
     }
 
-    public void atualizar(Long id, String nome, float idade, String sexo, float peso, Raca raca, Especie especie) {
-        Animal animal = buscarPorId(id);
-        animal.setNome(nome);
-        animal.setIdade(idade);
-        animal.setSexo(sexo);
-        animal.setPeso(peso);
-        animal.setRaca(raca);
-        animal.setEspecie(especie);
-        repository.update(animal);
+    public void atualizar(Long id, LocalDate dataEmissao, Status status, Adotante adotante,
+             Usuario atendente, List adotados, List Visitas) {
+        Adocao adocao = buscarPorId(id);
+        adocao.setDataEmissao(dataEmissao);
+        adocao.setStatus(status);
+        adocao.setAdotante(adotante);
+        adocao.setAtendente(atendente);
+        adocao.setAdotados(adotados);
+        adocao.setVisitas(Visitas);
+        repository.update(adocao);
     }
     
     public void deletar(Long id){
-        Animal animal = buscarPorId(id);
-        repository.delete(animal);
+        Adocao adocao = buscarPorId(id);
+        repository.delete(adocao);
     }
     
     public Animal buscarPorNome(String nome){
