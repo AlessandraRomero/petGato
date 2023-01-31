@@ -22,6 +22,10 @@ public class AdotadoTableModel extends PetGatoTableModel{
  
     }
     
+     public List<Adotado> getAdotados(){
+        return lista;
+    }
+    
     public void setLista(List<Adotado> lista){
         this.lista = lista;
     }
@@ -65,7 +69,7 @@ public class AdotadoTableModel extends PetGatoTableModel{
             case 1:
                 return adotado.getDataAdocao();
             case 2:
-                return adotado.getAdocao();
+                return adotado.isAdotado();
             default:
                 return null;
         }

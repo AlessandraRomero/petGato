@@ -16,32 +16,34 @@ import java.time.LocalDate;
  * @author alessandra
  */
 public class AnimalController {
-     
+
     private AnimalRepository repository;
 
     public AnimalController() {
         this.repository = new AnimalRepository();
     }
-    
-     public void cadastrar(String nome, float idade, String sexo, float peso, LocalDate dataResgate, Raca raca, Especie especie) {
-        Animal animal =  new Animal.AnimalBuilder()
-                .whitRaca(raca)
-                .whitEspecie(especie)
-                .whitName(nome)
-                .whitIdade(idade)
-                .whitSexo(sexo)
-                .whitPeso(peso)
-//                .whitAdotado(adotado)
-                .whitDataResgate(dataResgate)
+
+    public void cadastrar(String nome, float idade, String sexo, float peso,
+            LocalDate dataResgate, Raca raca, Especie especie) {
+        Animal animal = (Animal) new Animal.AnimalBuilder()
+                .withRaca(raca)
+//                .withAdotado(adotado)
+                .withEspecie(especie)
+                .withName(nome)
+                .withIdade(idade)
+                .withSexo(sexo)
+                .withPeso(peso)
+                .withDataResgate(dataResgate)
                 .build();
         repository.save(animal);
     }
-     
-     public Animal buscarPorId(Long id) {
+
+    public Animal buscarPorId(Long id) {
         return repository.findById(id);
     }
 
-    public void atualizar(Long id, String nome, float idade, String sexo, float peso, LocalDate dataResgate, Raca raca, Especie especie) {
+    public void atualizar(Long id, String nome, float idade, String sexo,
+            float peso, LocalDate dataResgate, Raca raca, Especie especie) {
         Animal animal = buscarPorId(id);
         animal.setNome(nome);
         animal.setIdade(idade);
@@ -53,13 +55,13 @@ public class AnimalController {
 //        animal.setAdotado(adotado);
         repository.update(animal);
     }
-    
-    public void deletar(Long id){
+
+    public void deletar(Long id) {
         Animal animal = buscarPorId(id);
         repository.delete(animal);
     }
-    
-    public Animal buscarPorNome(String nome){
+
+    public Animal buscarPorNome(String nome) {
         return (Animal) repository.findByNome(nome);
     }
 }

@@ -144,7 +144,6 @@ public class UsuarioMediator extends AbstractMediator {
         txtSenha.setText("");
         comboBoxGU.setSelectedItem(null);
         jCheckBoxBloqueado.setSelected(false);
-
     }
 
     public void novo() {

@@ -34,8 +34,8 @@ public class Animal implements Serializable {
     private Especie especie;
     @ManyToOne
     private Raca raca;
-//    @ManyToOne
-//    private Adotado adotado;
+    @ManyToOne
+    private Adotado adotado;
 
     public Animal() {
     }
@@ -49,7 +49,8 @@ public class Animal implements Serializable {
         this.peso = builder.peso;
         this.raca = builder.raca;
         this.especie = builder.especie;
-//        this.adotado = builder.adotado;
+        this.dataResgate = builder.dataResgate;
+        this.adotado = builder.adotado;
     }
 
     public Long getId() {
@@ -116,26 +117,26 @@ public class Animal implements Serializable {
         this.dataResgate = dataResgate;
     }
 
-//    public Adotado getAdotado() {
-//        return adotado;
-//    }
-//
-//    public void setAdotado(Adotado adotado) {
-//        this.adotado = adotado;
-//    }
+    public Adotado getAdotado() {
+        return adotado;
+    }
+
+    public void setAdotado(Adotado adotado) {
+        this.adotado = adotado;
+    }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + Float.floatToIntBits(this.idade);
-        hash = 53 * hash + Objects.hashCode(this.sexo);
-        hash = 53 * hash + Float.floatToIntBits(this.peso);
-        hash = 53 * hash + Objects.hashCode(this.dataResgate);
-        hash = 53 * hash + Objects.hashCode(this.especie);
-        hash = 53 * hash + Objects.hashCode(this.raca);
-//        hash = 53 * hash + Objects.hashCode(this.adotado);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.nome);
+        hash = 41 * hash + Float.floatToIntBits(this.idade);
+        hash = 41 * hash + Objects.hashCode(this.sexo);
+        hash = 41 * hash + Float.floatToIntBits(this.peso);
+        hash = 41 * hash + Objects.hashCode(this.dataResgate);
+        hash = 41 * hash + Objects.hashCode(this.especie);
+        hash = 41 * hash + Objects.hashCode(this.raca);
+        hash = 41 * hash + Objects.hashCode(this.adotado);
         return hash;
     }
 
@@ -148,32 +149,31 @@ public class Animal implements Serializable {
             return false;
         }
         final Animal other = (Animal) obj;
-        if (Float.floatToIntBits(this.idade) != Float.floatToIntBits(other.idade)) {
+        if (Float.floatToIntBits(this.idade) != Float.floatToIntBits(other.getIdade())) {
             return false;
         }
-        if (Float.floatToIntBits(this.peso) != Float.floatToIntBits(other.peso)) {
+        if (Float.floatToIntBits(this.peso) != Float.floatToIntBits(other.getPeso())) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (!Objects.equals(this.nome, other.getNome())) {
             return false;
         }
-        if (!Objects.equals(this.sexo, other.sexo)) {
+        if (!Objects.equals(this.sexo, other.getSexo())) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.id, other.getId())) {
             return false;
         }
-        if (!Objects.equals(this.dataResgate, other.dataResgate)) {
+        if (!Objects.equals(this.dataResgate, other.getDataResgate())) {
             return false;
         }
-        if (!Objects.equals(this.especie, other.especie)) {
+        if (!Objects.equals(this.especie, other.getEspecie())) {
             return false;
         }
-        if (!Objects.equals(this.raca, other.raca)) {
+        if (!Objects.equals(this.raca, other.getRaca())) {
             return false;
         }
-//        return Objects.equals(this.adotado, other.adotado);
-        return false;
+        return Objects.equals(this.adotado, other.getAdotado());
     }
 
     public static class AnimalBuilder {
@@ -194,47 +194,47 @@ public class Animal implements Serializable {
         public AnimalBuilder() {
         }
 
-        public Animal.AnimalBuilder whitId(Long value) {
+        public Animal.AnimalBuilder withId(Long value) {
             this.id = value;
             return this;
         }
 
-        public AnimalBuilder whitName(String value) {
+        public AnimalBuilder withName(String value) {
             this.nome = value;
             return this;
         }
 
-        public AnimalBuilder whitIdade(float value) {
+        public AnimalBuilder withIdade(float value) {
             this.idade = value;
             return this;
         }
 
-        public AnimalBuilder whitSexo(String value) {
+        public AnimalBuilder withSexo(String value) {
             this.sexo = value;
             return this;
         }
 
-        public AnimalBuilder whitPeso(float value) {
+        public AnimalBuilder withPeso(float value) {
             this.peso = value;
             return this;
         }
 
-        public AnimalBuilder whitEspecie(Especie value) {
+        public AnimalBuilder withEspecie(Especie value) {
             this.especie = value;
             return this;
         }
 
-        public AnimalBuilder whitRaca(Raca value) {
+        public AnimalBuilder withRaca(Raca value) {
             this.raca = value;
             return this;
         }
 
-        public AnimalBuilder whitDataResgate(LocalDate value) {
+        public AnimalBuilder withDataResgate(LocalDate value) {
             this.dataResgate = value;
             return this;
         }
-
-        public AnimalBuilder whitAdotado(Adotado value) {
+        
+         public AnimalBuilder withAdotado(Adotado value) {
             this.adotado = value;
             return this;
         }

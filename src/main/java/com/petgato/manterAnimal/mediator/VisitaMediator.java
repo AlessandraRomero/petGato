@@ -81,6 +81,10 @@ public class VisitaMediator extends AbstractMediator {
                 "Aviso", JOptionPane.WARNING_MESSAGE);
         return null;
     }
+    
+    public List<Visita> getDados(){
+        return model.getVisitas();
+    }
 
     private Visita getVisita() {
         Long id = getIdVisitaFromTable();
@@ -123,7 +127,7 @@ public class VisitaMediator extends AbstractMediator {
 
     public void excluir() {
         int linhaVisita = tabelaVisita.getSelectedRow();
-            Visita visita = model.getValue(linhaVisita);
+        Visita visita = model.getValue(linhaVisita);
         if (visita != null) {
             model.remover(visita);
             model.atualizar();
@@ -153,12 +157,13 @@ public class VisitaMediator extends AbstractMediator {
             int linhaVisita = tabelaVisita.getSelectedRow();
             Visita visita = model.getValue(linhaVisita);
             visita.setDataVisita(jDataVisita.getDate().toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate());
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
             visita.setObservacao(txtObservacao.getText());
             visita.setStatus((Status.valueOf(comboBoxStatus.getSelectedItem().toString())));
-            model.fireTableStructureChanged();
+
         }
+        model.fireTableStructureChanged();
     }
 
     public void buscar() {

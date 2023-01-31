@@ -22,6 +22,10 @@ public class VisitaTableModel extends PetGatoTableModel{
  
     }
     
+    public List<Visita> getVisitas(){
+        return lista;
+    }
+    
     public void setLista(List<Visita> lista){
         this.lista = lista;
     }

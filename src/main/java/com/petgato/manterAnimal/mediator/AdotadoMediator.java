@@ -4,7 +4,6 @@
  */
 package com.petgato.manterAnimal.mediator;
 
-import com.petgato.manterAnimal.model.Adocao;
 import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.view.modelView.AdotadoTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
@@ -14,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -25,8 +25,11 @@ public class AdotadoMediator extends AbstractMediator {
 
     private JTextField txtId;
     private JDateChooser jDataAdocao;
-    private JComboBox comboBoxAnimal;
     private JComboBox comboBoxAdocao;
+    private JComboBox comboBoxAnimal;
+    private JRadioButton jRadioButtonS;
+    private JRadioButton jRadioButtonN;
+    private JRadioButton jRadioButtonAnalise;
     private JTable tabelaAdotado;
 
     private AdotadoTableModel model;
@@ -41,7 +44,7 @@ public class AdotadoMediator extends AbstractMediator {
         return this;
     }
 
-    public AdotadoMediator registerTxtObservacao(JTextField txtId) {
+    public AdotadoMediator registerTxtAdotado(JTextField txtId) {
         this.txtId = txtId;
         return this;
     }
@@ -51,13 +54,28 @@ public class AdotadoMediator extends AbstractMediator {
         return this;
     }
 
-    public AdotadoMediator registerComboBoxAnimal(JComboBox comboBoxAnimal) {
+    public AdotadoMediator registerComboBoxAdocao(JComboBox comboBoxAdocao) {
+        this.comboBoxAdocao = comboBoxAdocao;
+        return this;
+    }
+    
+     public AdotadoMediator registerComboBoxAdotado(JComboBox comboBoxAnimal) {
         this.comboBoxAnimal = comboBoxAnimal;
         return this;
     }
 
-    public AdotadoMediator registerComboBoxAdocao(JComboBox comboBoxAdocao) {
-        this.comboBoxAdocao = comboBoxAdocao;
+    public AdotadoMediator registerJRadioButtonS(JRadioButton jRadioButtonS) {
+        this.jRadioButtonS = jRadioButtonS;
+        return this;
+    }
+
+    public AdotadoMediator registerJRadioButtonN(JRadioButton jRadioButtonN) {
+        this.jRadioButtonN = jRadioButtonN;
+        return this;
+    }
+
+    public AdotadoMediator registerJRadioButtonAnalise(JRadioButton jRadioButtonAnalise) {
+        this.jRadioButtonAnalise = jRadioButtonAnalise;
         return this;
     }
 
@@ -65,7 +83,7 @@ public class AdotadoMediator extends AbstractMediator {
 //        this.txtBuscar = txtBuscar;
 //        return this;
 //    }
-    public AdotadoMediator registerVisitaTableModel(AdotadoTableModel model) {
+    public AdotadoMediator registerAdotadoTableModel(AdotadoTableModel model) {
         this.model = model;
         return this;
     }
@@ -90,6 +108,10 @@ public class AdotadoMediator extends AbstractMediator {
         return null;
     }
 
+    public List<Adotado> getDados() {
+        return model.getAdotados();
+    }
+
     public void carregarDados(List<Adotado> lista) {
         model.setLista(lista);
     }
@@ -99,8 +121,17 @@ public class AdotadoMediator extends AbstractMediator {
 
         if (adotado != null) {
             txtId.setText(adotado.getId().toString());
+            if (adotado.getIsAdotado()!= null) {
+                jRadioButtonAnalise.setSelected(true);
+
+            } else if (adotado.isAdotado()) {
+                jRadioButtonS.setSelected(true);
+            } else {
+                jRadioButtonN.setSelected(true);
+            }
             jDataAdocao.setDate(Date.from(adotado.getDataAdocao().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             comboBoxAdocao.setSelectedItem(adotado.getAdocao());
+            comboBoxAnimal.setSelectedItem(adotado.getAnimais());
             tab.setSelectedIndex(1);
         }
     }
@@ -109,6 +140,8 @@ public class AdotadoMediator extends AbstractMediator {
         txtId.setText("");
         jDataAdocao.setDate(null);
         comboBoxAdocao.setSelectedItem(null);
+        comboBoxAnimal.setSelectedItem(null);
+        jRadioButtonAnalise.setSelected(true);
     }
 
     public void novo() {
@@ -118,7 +151,7 @@ public class AdotadoMediator extends AbstractMediator {
 
     public void excluir() {
         int linhaAdotado = tabelaAdotado.getSelectedRow();
-            Adotado adotado = model.getValue(linhaAdotado);
+        Adotado adotado = model.getValue(linhaAdotado);
         if (adotado != null) {
             model.remover(adotado);
             model.atualizar();
@@ -135,10 +168,12 @@ public class AdotadoMediator extends AbstractMediator {
         if (!idValido) {
 
             Adotado adotado = new Adotado.AdotadoBuilder()
-                    .whitDataAdocao(jDataAdocao.getDate().toInstant()
+                    .withDataAdocao(jDataAdocao.getDate().toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate())
-                
+                    .withIsAdotado(
+                            (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
+                    )
                     .build();
 
             limpar();
@@ -147,11 +182,13 @@ public class AdotadoMediator extends AbstractMediator {
             int linhaAdotado = tabelaAdotado.getSelectedRow();
             Adotado adotado = model.getValue(linhaAdotado);
             adotado.setDataAdocao(jDataAdocao.getDate().toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate());
-        
-            model.fireTableStructureChanged();
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
+            adotado.setAdotado(
+                    (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
+            );
         }
+        model.fireTableStructureChanged();
     }
 
     public void buscar() {

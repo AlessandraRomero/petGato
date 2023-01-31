@@ -7,8 +7,7 @@ package com.petgato.manterAnimal.mediator;
 import com.petgato.manterAdotante.model.Adotante;
 import com.petgato.manterAnimal.controller.AdocaoController;
 import com.petgato.manterAnimal.model.Adocao;
-import com.petgato.manterAnimal.model.Especie;
-import com.petgato.manterAnimal.model.Raca;
+import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterAnimal.view.modelView.AdocaoTableModel;
 import com.petgato.manterUsuario.model.Usuario;
 import com.petgato.padrao.mediator.AbstractMediator;
@@ -16,7 +15,6 @@ import com.toedter.calendar.JDateChooser;
 import java.time.ZoneId;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -28,23 +26,27 @@ public class AdocaoMediator extends AbstractMediator {
     private JTextField txtId;
     private JDateChooser jDateDataEmissao;
     private JComboBox comboBoxAdotante;
-    private JTextField txtAtendente;
+    private JComboBox comboBoxAdotado;
+    private JComboBox comboBoxAtendende;
     private JTextField txtStatus;
     private JDateChooser jDateDataVisita;
     private JComboBox comboBoxSituacao;
     private JTextField txtObservacao;
     private JDateChooser jDateDataAdocao;
-    private JRadioButton jRadioButtonS;
-    private JRadioButton jRadioButtonN;
-    private JRadioButton jRadioButtonAnalise;
-    private JComboBox comboBoxAnimal;
+
     private AdocaoController controle;
     private AdocaoTableModel model;
 
     private VisitaMediator visitaMediator = new VisitaMediator();
-    
-     public AdocaoMediator registerVisitaMediator(VisitaMediator visitaMediator) {
+    private AdotadoMediator adotadoMediator = new AdotadoMediator();
+
+    public AdocaoMediator registerVisitaMediator(VisitaMediator visitaMediator) {
         this.visitaMediator = visitaMediator;
+        return this;
+    }
+
+    public AdocaoMediator registerAdotadoMediator(AdotadoMediator adotadoMediator) {
+        this.adotadoMediator = adotadoMediator;
         return this;
     }
 
@@ -63,8 +65,13 @@ public class AdocaoMediator extends AbstractMediator {
         return this;
     }
 
-    public AdocaoMediator registerTxtAtendente(JTextField txtAtendente) {
-        this.txtAtendente = txtAtendente;
+    public AdocaoMediator registerComboBoxAdotado(JComboBox comboBoxAdotado) {
+        this.comboBoxAdotado = comboBoxAdotado;
+        return this;
+    }
+
+    public AdocaoMediator registerComboBoxAtendente(JComboBox comboBoxAtendende) {
+        this.comboBoxAtendende = comboBoxAtendende;
         return this;
     }
 
@@ -85,21 +92,6 @@ public class AdocaoMediator extends AbstractMediator {
 
     public AdocaoMediator registerTxtJDateDataAdocao(JDateChooser jDateDataAdocao) {
         this.jDateDataAdocao = jDateDataAdocao;
-        return this;
-    }
-
-    public AdocaoMediator registerTxtJRadioButtonS(JRadioButton jRadioButtonS) {
-        this.jRadioButtonS = jRadioButtonS;
-        return this;
-    }
-
-    public AdocaoMediator registerTxtJRadioButtonN(JRadioButton jRadioButtonN) {
-        this.jRadioButtonN = jRadioButtonN;
-        return this;
-    }
-
-    public AdocaoMediator registerTxtJRadioButtonAnalise(JRadioButton jRadioButtonAnalise) {
-        this.jRadioButtonAnalise = jRadioButtonAnalise;
         return this;
     }
 
@@ -132,19 +124,21 @@ public class AdocaoMediator extends AbstractMediator {
 
         if (adocoes != null) {
             txtId.setText(adocoes.getId().toString());
-            txtAtendente.setText(adocoes.getAtendente().getNome());
+            comboBoxAtendende.setSelectedItem(adocoes.getAtendente());
             txtStatus.setText(adocoes.getStatus().toString());
             comboBoxAdotante.setSelectedItem(adocoes.getAdotante());
-            comboBoxAnimal.setSelectedItem(adocoes.getAdotados());
+            comboBoxAdotado.setSelectedItem(adocoes.getAdotados());
             visitaMediator.carregarDados(adocoes.getVisitas());
+            adotadoMediator.carregarDados(adocoes.getAdotados());
             tab.setSelectedIndex(1);
         }
     }
 
     public void limpar() {
         txtId.setText("");
-        txtAtendente.setText("");
+        comboBoxAtendende.setSelectedItem(null);
         comboBoxAdotante.setSelectedItem(null);
+        comboBoxAdotado.setSelectedItem(null);
 
     }
 
@@ -167,30 +161,43 @@ public class AdocaoMediator extends AbstractMediator {
         return !(campo.getText().isEmpty() || campo.getText().isBlank());
     }
 
+    private boolean isCamposValidos() {
+        return comboBoxAtendende.getSelectedItem() != null && comboBoxAdotante.getSelectedItem() != null;
+    }
+
     public void gravar() {
         boolean idValido = isCampoTextoValido(txtId);
-        if (isCampoTextoValido(txtAtendente)) {
+        if (isCamposValidos()) {
             if (idValido) {
-                controle.atualizar(Long.parseLong(txtId.getText()),
+                controle.atualizar(
+                        Long.parseLong(txtId.getText()),
                         jDateDataEmissao.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-                        txtStatus.getText(), (Adotante) comboBoxAdotante.getSelectedItem(),(Usuario)txtAtendente.getText());
+                        isCampoTextoValido(txtStatus) ? Status.valueOf(txtStatus.getText()) : Status.PENDENTE,
+                        (Adotante) comboBoxAdotante.getSelectedItem(),
+                        (Usuario) comboBoxAtendende.getSelectedItem(),
+                        adotadoMediator.getDados(),
+                        visitaMediator.getDados()
+                );
 
             } else {
-                controle.cadastrar(txtNome.getText(), Float.parseFloat(txtIdade.getText()),
-                        (String) comboBoxSexo.getSelectedItem(), Float.parseFloat(txtPeso.getText()),
-                        (Raca) comboBoxRaca.getSelectedItem(), (Especie) comboBoxEspecie.getSelectedItem());
+                controle.cadastrar(jDateDataEmissao.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        isCampoTextoValido(txtStatus) ? Status.valueOf(txtStatus.getText()) : Status.PENDENTE,
+                        (Adotante) comboBoxAdotante.getSelectedItem(),
+                        (Usuario) comboBoxAtendende.getSelectedItem(),
+                        adotadoMediator.getDados(),
+                        visitaMediator.getDados());
             }
             limpar();
             model.atualizar();
             tab.setSelectedIndex(0);
         } else {
             JOptionPane.showMessageDialog(null, "Nenhum campo deve ser vazio", "aviso", JOptionPane.WARNING_MESSAGE);
-            txtNome.requestFocusInWindow();
+
         }
     }
 
     public void buscar() {
-        model.atualizar(txtBuscar.getText());
+   
     }
 
     public void cancelar() {

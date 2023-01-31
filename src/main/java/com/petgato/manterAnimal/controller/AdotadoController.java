@@ -6,8 +6,10 @@ package com.petgato.manterAnimal.controller;
 
 import com.petgato.manterAnimal.model.Adocao;
 import com.petgato.manterAnimal.model.Adotado;
+import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.repository.AdotadoRepository;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -21,11 +23,12 @@ public class AdotadoController {
         this.repository = new AdotadoRepository();
     }
 
-    public void cadastrar(LocalDate dataAdocao, boolean adotado, Adocao adocao) {
+    public void cadastrar(LocalDate dataAdocao, boolean isAdotado, List<Animal> animais, Adocao adocao) {
         Adotado adotad = new Adotado.AdotadoBuilder()
-                .whitDataAdocao(dataAdocao)
-                .whitAdotado(adotado)
-                .whitAdocao(adocao)
+                .withDataAdocao(dataAdocao)
+                .withIsAdotado(isAdotado)
+                .withAdocao(adocao)
+                .withAnimais(animais)
                 .build();
         repository.save(adotad);
     }
@@ -34,10 +37,11 @@ public class AdotadoController {
         return repository.findById(id);
     }
 
-    public void atualizar(long id, LocalDate dataAdocao, boolean adotado, Adocao adocao) {
+    public void atualizar(long id, LocalDate dataAdocao, boolean isAdotado, List<Animal> animais, Adocao adocao) {
         Adotado adotad = buscarPorId(id);
         adotad.setDataAdocao(dataAdocao);
-        adotad.setAdotado(adotado);
+        adotad.setAdotado(isAdotado);
+        adotad.setAnimais(animais);
         adotad.setAdocao(adocao);
         repository.update(adotad);
     }

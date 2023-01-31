@@ -5,14 +5,17 @@
 package com.petgato.manterAnimal.mediator;
 
 import com.petgato.manterAnimal.controller.AnimalController;
+import com.petgato.manterAnimal.criteriaBuilder.AnimalCriteriaBuilder;
 import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.model.Especie;
 import com.petgato.manterAnimal.model.Raca;
 import com.petgato.manterAnimal.view.modelView.AnimalTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -28,8 +31,8 @@ public class AnimalMediator extends AbstractMediator {
     private JTextField txtIdade;
     private JTextField txtSexo;
     private JTextField txtPeso;
-    private JTextField txtAdotado;
     private JDateChooser jDateDataResgate;
+    private JDateChooser jDateDataResgateBuscar;
     private JTextField txtBuscar;
     private JComboBox comboBoxRaca;
     private JComboBox comboBoxEspecie;
@@ -58,11 +61,6 @@ public class AnimalMediator extends AbstractMediator {
 
     public AnimalMediator registerTxtPeso(JTextField txtPeso) {
         this.txtPeso = txtPeso;
-        return this;
-    }
-    
-    public AnimalMediator registerTxtAdotado(JTextField txtAdotado) {
-        this.txtAdotado = txtAdotado;
         return this;
     }
 
@@ -140,7 +138,6 @@ public class AnimalMediator extends AbstractMediator {
         txtIdade.setText("");
         txtSexo.setText("");
         txtPeso.setText("");
-        txtAdotado.setText("");
         jDateDataResgate.setDate(null);
         comboBoxRaca.setSelectedItem(null);
         comboBoxEspecie.setSelectedItem(null);
@@ -197,7 +194,23 @@ public class AnimalMediator extends AbstractMediator {
     }
 
     public void buscar() {
-        model.atualizar(txtBuscar.getText());
+        String nome = null;
+        Especie especie = null;
+        LocalDate dataResgateBuscar = null;
+
+        if (txtBuscar.getText().isBlank() == false && txtBuscar.getText().isEmpty() == false) {
+            nome = txtBuscar.getText();
+        }
+        if (comboBoxEspecie.getSelectedItem() != null) {
+            especie = (Especie) comboBoxEspecie.getSelectedItem();
+        }
+        if (jDateDataResgateBuscar.getDate() != null) {
+            dataResgateBuscar = jDateDataResgateBuscar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+        AnimalCriteriaBuilder builder = new AnimalCriteriaBuilder();
+        List<Animal> resultados = builder.findBy(nome, dataResgateBuscar, especie);
+
+        model.atualizar(resultados);
     }
 
     public void gerarRelatorio() {
@@ -207,5 +220,10 @@ public class AnimalMediator extends AbstractMediator {
     public void cancelar() {
         limpar();
         tab.setSelectedIndex(0);
+    }
+
+    public AnimalMediator registerJDateDataResgateBuscar(JDateChooser jDateDataResgateBuscar) {
+        this.jDateDataResgateBuscar = jDateDataResgateBuscar;
+        return this;
     }
 }

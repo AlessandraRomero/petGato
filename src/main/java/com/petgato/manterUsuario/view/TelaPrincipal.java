@@ -11,12 +11,15 @@ import com.petgato.manterAnimal.view.CadastroEspecie;
 import com.petgato.manterAnimal.view.CadastroRaca;
 import com.petgato.manterBairro.view.CadastroBairro;
 import com.petgato.manterLogradouro.view.CadastroLogradouro;
+import com.petgato.manterUsuario.model.Usuario;
 
 /**
  *
  * @author alessandra
  */
 public class TelaPrincipal extends javax.swing.JFrame {
+
+    private Usuario usuarioLogado;
 
     /**
      * Creates new form TelaPrincipal
@@ -286,7 +289,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuIUsuarioActionPerformed
 
     private void jMenuGrupoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGrupoUsuarioActionPerformed
-        CadastroGrupoUsuario grupoUsuario = new  CadastroGrupoUsuario();
+        CadastroGrupoUsuario grupoUsuario = new CadastroGrupoUsuario();
         grupoUsuario.setVisible(true);
     }//GEN-LAST:event_jMenuGrupoUsuarioActionPerformed
 

@@ -6,7 +6,9 @@ package com.petgato.manterAnimal.controller;
 
 import com.petgato.manterAdotante.model.Adotante;
 import com.petgato.manterAnimal.model.Adocao;
+import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.model.Animal;
+import com.petgato.manterAnimal.model.Visita;
 import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterAnimal.repository.AdocaoRepository;
 import com.petgato.manterUsuario.model.Usuario;
@@ -26,15 +28,15 @@ public class AdocaoController {
     }
     
      public void cadastrar(LocalDate dataEmissao, Status status, Adotante adotante,
-             Usuario atendente) {
+             Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
         Adocao adocao = new Adocao.AdocaoBuilder()
                 .whitDataEmissao(dataEmissao)
                 .whitStatus(status)
                 .whitAdotante(adotante)
                 .whitAdotante(adotante)
                 .whitAtendente(atendente)
-//                .whitAdotados(adotados)
-//                .whitVisitas(Visitas)
+                .whitAdotados(adotados)
+                .whitVisitas(visitas)
                 .build();
         repository.save(adocao);
     }
@@ -44,7 +46,7 @@ public class AdocaoController {
     }
 
     public void atualizar(Long id, LocalDate dataEmissao, Status status, Adotante adotante,
-             Usuario atendente, List adotados, List Visitas) {
+             Usuario atendente, List<Adotado> adotados, List<Visita> Visitas) {
         Adocao adocao = buscarPorId(id);
         adocao.setDataEmissao(dataEmissao);
         adocao.setStatus(status);

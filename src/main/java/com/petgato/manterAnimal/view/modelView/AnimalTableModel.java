@@ -26,12 +26,18 @@ public class AnimalTableModel extends PetGatoTableModel {
     }
 
     public void atualizar() {
-        atualizar(null);
+        atualizar("");
     }
 
     public void atualizar(String nome) {
         lista.clear();
         lista.addAll(repository.findByNome(nome));
+        fireTableStructureChanged();
+    }
+
+    public void atualizar(List<Animal> resultados) {
+        lista.clear();
+        lista = resultados;
         fireTableStructureChanged();
     }
 
@@ -53,25 +59,27 @@ public class AnimalTableModel extends PetGatoTableModel {
 
     @Override
     public Object getValueAt(int row, int column) {
-        Animal log = lista.get(row);
+        Animal animal = lista.get(row);
 
         switch (column) {
             case 0:
-                return log.getId();
+                return animal.getId();
             case 1:
-                return log.getNome();
+                return animal.getNome();
             case 2:
-                return log.getIdade();
+                return animal.getIdade();
             case 3:
-                return log.getSexo();
+                return animal.getSexo();
             case 4:
-                return log.getPeso();
+                return animal.getPeso();
             case 5:
-                return log.getDataResgate();
+                return animal.getDataResgate();
             case 6:
-                return log.getEspecie();
+                return animal.getEspecie();
             case 7:
-                return log.getRaca();
+                return animal.getRaca();
+//            case 8:
+//                return animal.getAdotado().getIsAdotado();
             default:
                 return null;
         }

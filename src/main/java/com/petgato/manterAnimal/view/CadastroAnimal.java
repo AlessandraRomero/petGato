@@ -4,22 +4,12 @@
  */
 package com.petgato.manterAnimal.view;
 
-import static com.petgato.configuracao.EntityManagerUtil.getEntityManager;
 import com.petgato.manterAnimal.controller.AnimalController;
 import com.petgato.manterAnimal.mediator.AnimalMediator;
 import com.petgato.manterAnimal.model.Animal;
-import com.petgato.manterAnimal.model.Animal_;
-import com.petgato.manterAnimal.model.Especie;
-import com.petgato.manterAnimal.model.Especie_;
 import com.petgato.manterAnimal.view.modelView.AnimalTableModel;
 import com.petgato.manterAnimal.view.modelView.EspecieComboBoxModel;
 import com.petgato.manterAnimal.view.modelView.RacaComboBoxModel;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -52,6 +42,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
                 .registerComboBoxEspecie(comboBoxEspecie)
                 .registerTxtPeso(txtPeso)
                 .registerJDateDataResgate(jDateDataResgate)
+                .registerJDateDataResgateBuscar(jDateDataResgateBuscar)
                 .registerTxtIdade(txtIdade)
                 .registerTxtBuscar(txtBuscar)
                 .registerAnimalTableModel(model)
@@ -109,7 +100,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
         buttonExcluir = new javax.swing.JButton();
         buttonNovo = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateDataResgateBuscar = new com.toedter.calendar.JDateChooser();
         especieComboBox = new javax.swing.JComboBox();
         jLabel21 = new javax.swing.JLabel();
         buttonGerarPDF = new javax.swing.JButton();
@@ -421,7 +412,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Animal");
 
-        jIcon.setIcon(new javax.swing.ImageIcon("/home/alessandra/NetBeansProjects/petGato/src/main/java/com/petgato/Imagens/icones/pata32.png")); // NOI18N
+        jIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pata32.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -570,7 +561,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(especieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jDateDataResgateBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(buttonBuscar)))))
                         .addGap(0, 162, Short.MAX_VALUE)))
@@ -588,7 +579,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateDataResgateBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
@@ -912,7 +903,8 @@ public class CadastroAnimal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAtualizarActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
-        mediator.buscar();
+        mediator.buscar();        
+        
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -920,21 +912,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void especieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_especieComboBoxActionPerformed
-        EntityManager em = getEntityManager();
-        CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery query = builder.createQuery(Animal.class);
-        Root<Animal> root = query.from(Animal.class);
-        Join<Animal, Especie> especie = root.join(Animal_.especie);
-       
-        query.select(root);
-        query.where(builder.equal(especie.get(Especie_.nome), comboBoxEspecie.getSelectedItem()));
-
-        TypedQuery<Animal> typedQuery = em.createQuery(query);
-        typedQuery.getResultList().forEach(System.out::println);
-        
-        
-
-        
+   
     }//GEN-LAST:event_especieComboBoxActionPerformed
 
     private void buttonGerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPDFActionPerformed
@@ -995,8 +973,8 @@ public class CadastroAnimal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateDataResgate;
+    private com.toedter.calendar.JDateChooser jDateDataResgateBuscar;
     private javax.swing.JLabel jIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
