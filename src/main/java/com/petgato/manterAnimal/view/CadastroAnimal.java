@@ -10,6 +10,10 @@ import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.view.modelView.AnimalTableModel;
 import com.petgato.manterAnimal.view.modelView.EspecieComboBoxModel;
 import com.petgato.manterAnimal.view.modelView.RacaComboBoxModel;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -916,7 +920,13 @@ public class CadastroAnimal extends javax.swing.JFrame {
     }//GEN-LAST:event_especieComboBoxActionPerformed
 
     private void buttonGerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPDFActionPerformed
-        // TODO add your handling code here:
+        try {
+            mediator.gerarPDF();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CadastroAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(CadastroAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonGerarPDFActionPerformed
 
     /**

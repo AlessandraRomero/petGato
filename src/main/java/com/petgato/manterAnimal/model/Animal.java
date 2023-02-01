@@ -50,7 +50,6 @@ public class Animal implements Serializable {
         this.raca = builder.raca;
         this.especie = builder.especie;
         this.dataResgate = builder.dataResgate;
-        this.adotado = builder.adotado;
     }
 
     public Long getId() {
@@ -117,19 +116,11 @@ public class Animal implements Serializable {
         this.dataResgate = dataResgate;
     }
 
-    public Adotado getAdotado() {
-        return adotado;
-    }
-
-    public void setAdotado(Adotado adotado) {
-        this.adotado = adotado;
-    }
-
     @Override
     public String toString() {
         return nome;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -141,7 +132,6 @@ public class Animal implements Serializable {
         hash = 41 * hash + Objects.hashCode(this.dataResgate);
         hash = 41 * hash + Objects.hashCode(this.especie);
         hash = 41 * hash + Objects.hashCode(this.raca);
-        hash = 41 * hash + Objects.hashCode(this.adotado);
         return hash;
     }
 
@@ -153,32 +143,32 @@ public class Animal implements Serializable {
         if (obj == null) {
             return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final Animal other = (Animal) obj;
-        if (Float.floatToIntBits(this.idade) != Float.floatToIntBits(other.getIdade())) {
+        if (Float.floatToIntBits(this.idade) != Float.floatToIntBits(other.idade)) {
             return false;
         }
-        if (Float.floatToIntBits(this.peso) != Float.floatToIntBits(other.getPeso())) {
+        if (Float.floatToIntBits(this.peso) != Float.floatToIntBits(other.peso)) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.getNome())) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.sexo, other.getSexo())) {
+        if (!Objects.equals(this.sexo, other.sexo)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.getId())) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.dataResgate, other.getDataResgate())) {
+        if (!Objects.equals(this.dataResgate, other.dataResgate)) {
             return false;
         }
-        if (!Objects.equals(this.especie, other.getEspecie())) {
+        if (!Objects.equals(this.especie, other.especie)) {
             return false;
         }
-        if (!Objects.equals(this.raca, other.getRaca())) {
-            return false;
-        }
-        return Objects.equals(this.adotado, other.getAdotado());
+        return Objects.equals(this.raca, other.raca);
     }
 
     public static class AnimalBuilder {
@@ -193,8 +183,6 @@ public class Animal implements Serializable {
         private Especie especie;
         @ManyToOne
         private Raca raca;
-        @ManyToOne
-        private Adotado adotado;
 
         public AnimalBuilder() {
         }
@@ -236,11 +224,6 @@ public class Animal implements Serializable {
 
         public AnimalBuilder withDataResgate(LocalDate value) {
             this.dataResgate = value;
-            return this;
-        }
-        
-         public AnimalBuilder withAdotado(Adotado value) {
-            this.adotado = value;
             return this;
         }
 

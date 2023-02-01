@@ -12,13 +12,35 @@ import com.petgato.manterAnimal.model.Raca;
 import com.petgato.manterAnimal.view.modelView.AnimalTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -38,6 +60,7 @@ public class AnimalMediator extends AbstractMediator {
     private JComboBox comboBoxEspecie;
     private AnimalController controle;
     private AnimalTableModel model;
+    private List<Animal> resultados;
 
     public AnimalMediator registerTxtId(JTextField txtId) {
         this.txtId = txtId;
@@ -208,9 +231,9 @@ public class AnimalMediator extends AbstractMediator {
             dataResgateBuscar = jDateDataResgateBuscar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
         AnimalCriteriaBuilder builder = new AnimalCriteriaBuilder();
-        List<Animal> resultados = builder.findBy(nome, dataResgateBuscar, especie);
+        this.resultados = builder.findBy(nome, dataResgateBuscar, especie);
 
-        model.atualizar(resultados);
+        model.atualizar(this.resultados);
     }
 
     public void gerarRelatorio() {
@@ -225,5 +248,40 @@ public class AnimalMediator extends AbstractMediator {
     public AnimalMediator registerJDateDataResgateBuscar(JDateChooser jDateDataResgateBuscar) {
         this.jDateDataResgateBuscar = jDateDataResgateBuscar;
         return this;
+    }
+
+    public void gerarPDF() throws FileNotFoundException, JRException {
+        InputStream input = null;
+        try {
+            JRBeanCollectionDataSource itemsJRBeam = new JRBeanCollectionDataSource(this.resultados);
+
+            Map<String, Object> parameters = new HashMap();
+            
+            input = new FileInputStream(new File("/home/alessandra/NetBeansProjects/petGato/src/main/java/com/petgato/manterAnimal/relatorio/relatorio_animal.jrxml"));
+            
+            JasperDesign jasperDesign = JRXmlLoader.load(input);
+            
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, itemsJRBeam);
+            
+            // Abre o preview do jasper (da pra salvar em pdf por ele)
+            JasperViewer.viewReport(jasperPrint);
+            
+            System.out.println("Generating PDF");
+            
+            // Exporta como PDF diretamente
+            OutputStream outputStream = new FileOutputStream(new File("relatorio_animal.pdf"));
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AnimalMediator.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                input.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AnimalMediator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
