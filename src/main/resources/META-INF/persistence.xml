@@ -18,6 +18,9 @@
     <class>com.petgato.manterAdotante.model.Endereco</class>
     <class>com.petgato.manterAdotante.model.Telefone</class>
     <class>com.petgato.manterUsuario.model.Usuario</class>
+    <class>com.petgato.manterAnimal.model.Adotado</class>
+    <class>com.petgato.manterAnimal.model.Adocao</class>
+    <class>com.petgato.manterAnimal.model.Visita</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgatov2?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>

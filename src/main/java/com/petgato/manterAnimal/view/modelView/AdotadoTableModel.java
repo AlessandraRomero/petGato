@@ -13,36 +13,36 @@ import java.util.List;
  *
  * @author alessandra
  */
-public class AdotadoTableModel extends PetGatoTableModel{
-    
-    private String colunas[] = {"id", "Data Adoção", "Adotado?"};
-    private List<Adotado> lista= new ArrayList();
+public class AdotadoTableModel extends PetGatoTableModel {
+
+    private String colunas[] = {"id", "Data Adoção", "Animal", "Adotado?"};
+    private List<Adotado> lista = new ArrayList();
 
     public AdotadoTableModel() {
- 
+
     }
-    
-     public List<Adotado> getAdotados(){
+
+    public List<Adotado> getAdotados() {
         return lista;
     }
-    
-    public void setLista(List<Adotado> lista){
+
+    public void setLista(List<Adotado> lista) {
         this.lista = lista;
     }
-    
-    public void adicionar(Adotado adotado){
+
+    public void adicionar(Adotado adotado) {
         lista.add(adotado);
         fireTableStructureChanged();
     }
-    
-     public void remover(Adotado adotado){
+
+    public void remover(Adotado adotado) {
         lista.remove(adotado);
         fireTableStructureChanged();
     }
 
     @Override
     public void atualizar() {
-           
+
     }
 
     @Override
@@ -69,13 +69,15 @@ public class AdotadoTableModel extends PetGatoTableModel{
             case 1:
                 return adotado.getDataAdocao();
             case 2:
+                return adotado.getAnimais();
+            case 3:
                 return adotado.isAdotado();
             default:
                 return null;
         }
     }
-    
-     public Adotado getValue(int index){
+
+    public Adotado getValue(int index) {
         return lista.get(index);
     }
 }

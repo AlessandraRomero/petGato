@@ -126,6 +126,11 @@ public class Animal implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return nome;
+    }
+    
+    @Override
     public int hashCode() {
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.id);

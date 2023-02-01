@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class VisitaTableModel extends PetGatoTableModel{
     
-    private String colunas[] = {"id", "Data Visita", "Observação", "Status", "Adoção"};
+    private String colunas[] = {"id", "Data Visita", "Observação", "Situação"};
     private List<Visita> lista= new ArrayList();
 
     public VisitaTableModel() {

@@ -5,7 +5,6 @@
 package com.petgato.manterAnimal.view.modelView;
 
 import com.petgato.manterAnimal.model.Adocao;
-import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.padrao.componentsModel.PetGatoTableModel;
 import java.util.ArrayList;
 import java.util.List;

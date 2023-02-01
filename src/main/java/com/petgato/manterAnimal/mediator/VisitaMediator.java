@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 public class VisitaMediator extends AbstractMediator {
 
     private JTextField txtId;
-    private JTextField txtObservacao;
+    private JTextField txtObservacaoVisita;
     private JDateChooser jDataVisita;
     private JComboBox comboBoxStatus;
     private JComboBox comboBoxAdocao;
@@ -42,8 +42,8 @@ public class VisitaMediator extends AbstractMediator {
         return this;
     }
 
-    public VisitaMediator registerTxtObservacao(JTextField txtId) {
-        this.txtId = txtId;
+    public VisitaMediator registerTxtObservacao(JTextField txtObservacaoVisita) {
+        this.txtObservacaoVisita = txtObservacaoVisita;
         return this;
     }
 
@@ -104,7 +104,7 @@ public class VisitaMediator extends AbstractMediator {
 
         if (visita != null) {
             txtId.setText(visita.getId().toString());
-            txtObservacao.setText(visita.getObservacao());
+            txtObservacaoVisita.setText(visita.getObservacao());
             jDataVisita.setDate(Date.from(visita.getDataVisita().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             comboBoxStatus.setSelectedItem(visita.getStatus());
             comboBoxAdocao.setSelectedItem(visita.getAdocao());
@@ -114,10 +114,10 @@ public class VisitaMediator extends AbstractMediator {
 
     public void limpar() {
         txtId.setText("");
-        txtObservacao.setText("");
+        txtObservacaoVisita.setText("");
         jDataVisita.setDate(null);
         comboBoxStatus.setSelectedItem(null);
-        comboBoxAdocao.setSelectedItem(null);
+//        comboBoxAdocao.setSelectedItem(null);
     }
 
     public void novo() {
@@ -147,8 +147,8 @@ public class VisitaMediator extends AbstractMediator {
                     .whitDataVisita(jDataVisita.getDate().toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate())
-                    .whitObservacao(txtObservacao.getText())
-                    .whitStatus(Status.valueOf(comboBoxStatus.getSelectedItem().toString()))
+                    .whitObservacao(txtObservacaoVisita.getText())
+//                    .whitStatus(Status.valueOf(comboBoxStatus.getSelectedItem().toString()))
                     .build();
 
             limpar();
@@ -159,7 +159,7 @@ public class VisitaMediator extends AbstractMediator {
             visita.setDataVisita(jDataVisita.getDate().toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
-            visita.setObservacao(txtObservacao.getText());
+            visita.setObservacao(txtObservacaoVisita.getText());
             visita.setStatus((Status.valueOf(comboBoxStatus.getSelectedItem().toString())));
 
         }

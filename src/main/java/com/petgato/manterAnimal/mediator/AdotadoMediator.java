@@ -5,6 +5,7 @@
 package com.petgato.manterAnimal.mediator;
 
 import com.petgato.manterAnimal.model.Adotado;
+import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.view.modelView.AdotadoTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
@@ -171,8 +172,10 @@ public class AdotadoMediator extends AbstractMediator {
                     .withDataAdocao(jDataAdocao.getDate().toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate())
+                    .withAnimais((List) comboBoxAnimal.getSelectedItem())
                     .withIsAdotado(
                             (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
+                    
                     )
                     .build();
 
@@ -184,6 +187,7 @@ public class AdotadoMediator extends AbstractMediator {
             adotado.setDataAdocao(jDataAdocao.getDate().toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
+            adotado.setAnimais((List<Animal>) comboBoxAnimal.getSelectedItem());
             adotado.setAdotado(
                     (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
             );
