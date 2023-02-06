@@ -36,12 +36,11 @@ public class VisitaController {
         return repository.findById(id);
     }
 
-    public void atualizar(Long id, LocalDate dataVisita, String Observacao, Status status, Adocao adocao) {
+    public void atualizar(Long id, LocalDate dataVisita, String Observacao, Status status) {
         Visita visita = buscarPorId(id);
         visita.setDataVisita(dataVisita);
         visita.setObservacao(Observacao);
         visita.setStatus(status);
-        visita.setAdocao(adocao);
         repository.update(visita);
     }
 

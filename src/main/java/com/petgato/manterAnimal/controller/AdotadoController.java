@@ -37,12 +37,11 @@ public class AdotadoController {
         return repository.findById(id);
     }
 
-    public void atualizar(long id, LocalDate dataAdocao, boolean isAdotado, List<Animal> animais, Adocao adocao) {
+    public void atualizar(long id, LocalDate dataAdocao, boolean isAdotado, List<Animal> animais) {
         Adotado adotad = buscarPorId(id);
         adotad.setDataAdocao(dataAdocao);
         adotad.setAdotado(isAdotado);
         adotad.setAnimais(animais);
-        adotad.setAdocao(adocao);
         repository.update(adotad);
     }
 

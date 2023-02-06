@@ -21,7 +21,6 @@ public class AnimalTableModel extends PetGatoTableModel {
 
     public AnimalTableModel() {
         repository = new AnimalRepository();
-
         this.lista = repository.findAll();
     }
 
@@ -39,6 +38,10 @@ public class AnimalTableModel extends PetGatoTableModel {
         lista.clear();
         lista = resultados;
         fireTableStructureChanged();
+    }
+
+    public List<Animal> getLista() {
+        return this.lista;
     }
 
     @Override

@@ -55,7 +55,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .registerComboBoxAdotante(comboBoxAdotante)
                 .registerComboBoxAtendente(comboBoxAtendente)
                 .registerAdocaoController(controle)
-                .registerJTable(tabelaAdotado)
+                .registerJTable(tabela)
                 .registerJTabbedPane(tab);
 
         visitaMediator = new VisitaMediator();
@@ -149,6 +149,8 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jButtonSalvarVisita = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         txtIdVisita = new javax.swing.JTextField();
+        buttonCancelar = new javax.swing.JButton();
+        buttonCadastrar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         comboBoxAnimal = new javax.swing.JComboBox();
@@ -535,7 +537,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jpAdocaoLayout.setHorizontalGroup(
             jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdocaoLayout.createSequentialGroup()
-                .addContainerGap(222, Short.MAX_VALUE)
+                .addContainerGap(174, Short.MAX_VALUE)
                 .addComponent(buttonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -552,8 +554,8 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jpAdocaoLayout.setVerticalGroup(
             jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAdocaoLayout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(171, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -636,7 +638,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel35.setForeground(new java.awt.Color(89, 199, 162));
         jLabel35.setText("Situação: ");
 
-        comboBoxStatusVisita.setModel(situacaoComboModel);
+        comboBoxStatusVisita.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "APROVADO ", "PENDENTE", "REPROVADO", " " }));
         comboBoxStatusVisita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxStatusVisitaActionPerformed(evt);
@@ -664,10 +666,33 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel36.setForeground(new java.awt.Color(89, 199, 162));
         jLabel36.setText("Id:");
 
+        buttonCancelar.setBackground(new java.awt.Color(240, 152, 139));
+        buttonCancelar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        buttonCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCancelar.setText("Cancelar");
+        buttonCancelar.setBorder(null);
+        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarActionPerformed(evt);
+            }
+        });
+
+        buttonCadastrar.setBackground(new java.awt.Color(240, 152, 139));
+        buttonCadastrar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        buttonCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCadastrar.setText("Gravar");
+        buttonCadastrar.setBorder(null);
+        buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCadastrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
@@ -694,8 +719,12 @@ public class CadastroAdocao extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonSalvarVisita))
                             .addComponent(comboBoxStatusVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 793, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -720,7 +749,10 @@ public class CadastroAdocao extends javax.swing.JFrame {
                         .addComponent(jButtonSalvarVisita)))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         tab2.addTab("Visitas", jPanel9);
@@ -799,7 +831,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonSalvarAdocao)
                     .addComponent(jRadioButtonAnalise))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
             .addComponent(jScrollPane6)
         );
         jPanel10Layout.setVerticalGroup(
@@ -867,7 +899,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tab2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         tab.addTab("Cadastro Adoção", jpAdocao1);
@@ -877,7 +909,9 @@ public class CadastroAdocao extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tab)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tab)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1002,6 +1036,14 @@ public class CadastroAdocao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtObservacaoVisitaActionPerformed
 
+    private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
+        mediator.gravar();
+    }//GEN-LAST:event_buttonCadastrarActionPerformed
+
+    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1041,6 +1083,8 @@ public class CadastroAdocao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgAdotado;
     private javax.swing.JButton buttonAtualizar;
+    private javax.swing.JButton buttonCadastrar;
+    private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JButton buttonGerarPDF;
     private javax.swing.JButton buttonNovo;

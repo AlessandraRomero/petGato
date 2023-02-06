@@ -4,7 +4,6 @@
  */
 package com.petgato.manterAnimal.controller;
 
-import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.model.Especie;
 import com.petgato.manterAnimal.model.Raca;

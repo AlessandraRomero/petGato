@@ -14,25 +14,35 @@ import java.util.List;
  * @author alessandra
  */
 public class AdotanteTableModel extends PetGatoTableModel {
-    
-    private String colunas[] = {"Id", "Nome", "Sobrenome", "Idade", "Email", "RG",
+
+    private String colunas[] = {"Id", "Nome", "Sobrenome", "Nascimento", "Email", "RG",
         "CPF", "Telefone", "Cidade", "Bairro", "Logradouro", "Número", "Referência", "Complemento"};
     private List<Adotante> lista;
     private AdotanteRepository repository;
-    
+
     public AdotanteTableModel() {
         repository = new AdotanteRepository();
         this.lista = repository.findAll();
     }
-    
-     public void atualizar(){
-       atualizar(null);
+
+    public void atualizar() {
+        atualizar("");
     }
-    
+
     public void atualizar(String nome) {
         lista.clear();
         lista.addAll(repository.findByNome(nome));
         fireTableStructureChanged();
+    }
+
+    public void atualizar(List<Adotante> resultados) {
+        lista.clear();
+        lista = resultados;
+        fireTableStructureChanged();
+    }
+
+    public List<Adotante> getLista() {
+        return this.lista;
     }
 
     @Override
@@ -63,29 +73,29 @@ public class AdotanteTableModel extends PetGatoTableModel {
             case 1:
                 return adotante.getNome();
             case 2:
-                return adotante.getSobrenome();     
+                return adotante.getSobrenome();
             case 3:
                 return adotante.getIdade();
             case 4:
-                return adotante.getEmail();   
+                return adotante.getEmail();
             case 5:
                 return adotante.getRg();
             case 6:
-                return adotante.getCpf();  
+                return adotante.getCpf();
             case 7:
-                return adotante.getTelefone();  
+                return adotante.getTelefone();
             case 8:
-                return adotante.getReferencia();   
+                return adotante.getCidade();
             case 9:
-                return adotante.getComplemento();  
-            case 10: 
-                return adotante.getNumero();
+                return adotante.getBairro();
+            case 10:
+                return adotante.getLogradouro();
             case 11:
-                return adotante.getCidade();  
+                return adotante.getNumero();
             case 12:
-                return adotante.getBairro(); 
+                return adotante.getReferencia();
             case 13:
-                return adotante.getLogradouro();     
+                return adotante.getComplemento();
             default:
                 return null;
         }

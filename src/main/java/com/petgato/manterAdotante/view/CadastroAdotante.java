@@ -11,6 +11,10 @@ import com.petgato.manterAdotante.view.modelView.AdotanteTableModel;
 import com.petgato.manterAdotante.view.modelView.BairroComboBoxModel;
 import com.petgato.manterAdotante.view.modelView.CidadeComboBoxModel;
 import com.petgato.manterAdotante.view.modelView.LogradouroComboBoxModel;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -106,6 +110,9 @@ public class CadastroAdotante extends javax.swing.JFrame {
         buttonAtualizar = new javax.swing.JButton();
         buttonExcluir = new javax.swing.JButton();
         buttonNovo = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        comboBoxBairroBuscar = new javax.swing.JComboBox();
+        buttonGerarPDF = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtSobrenome = new javax.swing.JTextField();
@@ -512,6 +519,24 @@ public class CadastroAdotante extends javax.swing.JFrame {
             }
         });
 
+        jLabel28.setBackground(new java.awt.Color(89, 199, 162));
+        jLabel28.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(89, 199, 162));
+        jLabel28.setText("Bairro:");
+
+        comboBoxBairroBuscar.setModel(comboModelBairro);
+
+        buttonGerarPDF.setBackground(new java.awt.Color(240, 152, 139));
+        buttonGerarPDF.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        buttonGerarPDF.setForeground(new java.awt.Color(255, 255, 255));
+        buttonGerarPDF.setText("Gerar PDF");
+        buttonGerarPDF.setBorder(null);
+        buttonGerarPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGerarPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -520,14 +545,19 @@ public class CadastroAdotante extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxBairroBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonBuscar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(85, 85, 85))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(228, 228, 228)
                 .addComponent(buttonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,6 +565,8 @@ public class CadastroAdotante extends javax.swing.JFrame {
                 .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonGerarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -544,14 +576,17 @@ public class CadastroAdotante extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonBuscar))
+                    .addComponent(buttonBuscar)
+                    .addComponent(jLabel28)
+                    .addComponent(comboBoxBairroBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonGerarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -903,9 +938,9 @@ public class CadastroAdotante extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -1027,6 +1062,16 @@ public class CadastroAdotante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxLogradouroActionPerformed
 
+    private void buttonGerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPDFActionPerformed
+        try {
+            mediator.gerarPDF();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CadastroAdotante.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(CadastroAdotante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonGerarPDFActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1069,8 +1114,10 @@ public class CadastroAdotante extends javax.swing.JFrame {
     private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonCancelar;
     private javax.swing.JButton buttonExcluir;
+    private javax.swing.JButton buttonGerarPDF;
     private javax.swing.JButton buttonNovo;
     private javax.swing.JComboBox comboBoxBairro;
+    private javax.swing.JComboBox comboBoxBairroBuscar;
     public javax.swing.JComboBox comboBoxCidade;
     private javax.swing.JComboBox comboBoxLogradouro;
     private javax.swing.JButton jButton1;
@@ -1102,6 +1149,7 @@ public class CadastroAdotante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -8,9 +8,8 @@ import com.petgato.manterAnimal.model.enums.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,14 +22,12 @@ import javax.persistence.Table;
 @Table(name = "visita")
 public class Visita implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+//    @Id
+    private VisitaId id;
     private LocalDate dataVisita;
     private String observacao;
     private Status status;
-    @ManyToOne
-    private Adocao adocao;
 
     public Visita() {
     }
@@ -40,15 +37,15 @@ public class Visita implements Serializable {
         this.dataVisita = builder.dataVisita;
         this.observacao = builder.observacao;
         this.status = builder.status;
-        this.adocao = builder.adocao;
+        
 
     }
 
-    public Long getId() {
+    public VisitaId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(VisitaId id) {
         this.id = id;
     }
 
@@ -76,13 +73,6 @@ public class Visita implements Serializable {
         this.status = status;
     }
 
-    public Adocao getAdocao() {
-        return adocao;
-    }
-
-    public void setAdocao(Adocao adocao) {
-        this.adocao = adocao;
-    }
 
     @Override
     public int hashCode() {
@@ -91,7 +81,6 @@ public class Visita implements Serializable {
         hash = 53 * hash + Objects.hashCode(this.dataVisita);
         hash = 53 * hash + Objects.hashCode(this.observacao);
         hash = 53 * hash + Objects.hashCode(this.status);
-        hash = 53 * hash + Objects.hashCode(this.adocao);
         return hash;
     }
 
@@ -113,15 +102,13 @@ public class Visita implements Serializable {
         if (!Objects.equals(this.dataVisita, other.dataVisita)) {
             return false;
         }
-        if (this.status != other.status) {
-            return false;
-        }
-        return Objects.equals(this.adocao, other.adocao);
+        return this.status == other.status;
     }
 
+   
     public static class VisitaBuilder {
 
-        private Long id;
+        private VisitaId id;
         private LocalDate dataVisita;
         private String observacao;
         private Status status;
@@ -131,7 +118,7 @@ public class Visita implements Serializable {
         public VisitaBuilder() {
         }
 
-        public Visita.VisitaBuilder whitId(Long value) {
+        public Visita.VisitaBuilder whitId(VisitaId value) {
             this.id = value;
             return this;
         }

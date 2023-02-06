@@ -25,7 +25,6 @@ import javax.persistence.Table;
  *
  * @author alessandra
  */
-
 @Entity
 @Table(name = "adocao")
 public class Adocao implements Serializable {
@@ -135,6 +134,37 @@ public class Adocao implements Serializable {
         visitas.remove(visita);
     }
 
+    public Long proximoSequenciaVisita() {
+
+        if (visitas.isEmpty()) {
+            return 1L;
+        } else {
+            Long idVisita;
+            int indice = visitas.size() - 1;
+
+            Visita visita = visitas.get(indice);
+            idVisita = visita.getId().getId();
+
+            return idVisita + 1;
+        }
+    }  
+         
+
+    public Long proximaSequenciaAdotado() {
+
+        if (adotados.isEmpty()) {
+            return 1L;
+        } else {
+            Long idAdotado;
+            int indice = adotados.size() - 1;
+
+            Adotado adotado = adotados.get(indice);
+            idAdotado = adotado.getId().getId();
+
+            return idAdotado + 1;
+        }
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -235,8 +265,8 @@ public class Adocao implements Serializable {
             this.visitas = value;
             return this;
         }
-        
-         public Adocao build() {
+
+        public Adocao build() {
             return new Adocao(this);
         }
     }

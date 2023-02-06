@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -89,6 +88,11 @@ public class AnimalMediator extends AbstractMediator {
 
     public AnimalMediator registerJDateDataResgate(JDateChooser jDateDataResgate) {
         this.jDateDataResgate = jDateDataResgate;
+        return this;
+    }
+
+    public AnimalMediator registerJDateDataResgateBuscar(JDateChooser jDateDataResgateBuscar) {
+        this.jDateDataResgateBuscar = jDateDataResgateBuscar;
         return this;
     }
 
@@ -245,35 +249,30 @@ public class AnimalMediator extends AbstractMediator {
         tab.setSelectedIndex(0);
     }
 
-    public AnimalMediator registerJDateDataResgateBuscar(JDateChooser jDateDataResgateBuscar) {
-        this.jDateDataResgateBuscar = jDateDataResgateBuscar;
-        return this;
-    }
-
     public void gerarPDF() throws FileNotFoundException, JRException {
         InputStream input = null;
         try {
-            JRBeanCollectionDataSource itemsJRBeam = new JRBeanCollectionDataSource(this.resultados);
+            JRBeanCollectionDataSource itemsJRBeam = new JRBeanCollectionDataSource(model.getLista());
 
             Map<String, Object> parameters = new HashMap();
-            
-            input = new FileInputStream(new File("/home/alessandra/NetBeansProjects/petGato/src/main/java/com/petgato/manterAnimal/relatorio/relatorio_animal.jrxml"));
-            
+
+            input = new FileInputStream(new File("/home/alessandra/NetBeansProjects/petGato/src/main/java/com/petgato/manterAnimal/relatorioAnimal/relatorio_animal.jrxml"));
+
             JasperDesign jasperDesign = JRXmlLoader.load(input);
-            
+
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-            
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, itemsJRBeam);
-            
-            // Abre o preview do jasper (da pra salvar em pdf por ele)
+
+            // Abre o preview do jasper da pra salvar em pdf por ele
             JasperViewer.viewReport(jasperPrint);
-            
+
             System.out.println("Generating PDF");
-            
+
             // Exporta como PDF diretamente
             OutputStream outputStream = new FileOutputStream(new File("relatorio_animal.pdf"));
             JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(AnimalMediator.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

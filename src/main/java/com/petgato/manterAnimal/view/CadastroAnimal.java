@@ -683,6 +683,11 @@ public class CadastroAnimal extends javax.swing.JFrame {
         jLabel18.setText("Espécie");
 
         comboBoxEspecie.setModel(especieComboModel);
+        comboBoxEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxEspecieActionPerformed(evt);
+            }
+        });
 
         jLabel19.setBackground(new java.awt.Color(89, 199, 162));
         jLabel19.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -928,6 +933,10 @@ public class CadastroAnimal extends javax.swing.JFrame {
             Logger.getLogger(CadastroAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonGerarPDFActionPerformed
+
+    private void comboBoxEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxEspecieActionPerformed
 
     /**
      * @param args the command line arguments

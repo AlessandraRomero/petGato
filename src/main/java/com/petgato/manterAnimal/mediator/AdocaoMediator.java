@@ -123,6 +123,7 @@ public class AdocaoMediator extends AbstractMediator {
         Adocao adocoes = getAdocao();
 
         if (adocoes != null) {
+            visitaMediator.registerAdocao(adocoes);
             txtId.setText(adocoes.getId().toString());
             comboBoxAtendende.setSelectedItem(adocoes.getAtendente());
             txtStatus.setText(adocoes.getStatus().toString());
@@ -145,6 +146,7 @@ public class AdocaoMediator extends AbstractMediator {
     public void novo() {
         tab.setSelectedIndex(1);
         limpar();
+        visitaMediator.registerAdocao(new Adocao.AdocaoBuilder().build());
     }
 
     public void excluir() {

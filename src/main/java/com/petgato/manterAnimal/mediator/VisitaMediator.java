@@ -4,7 +4,9 @@
  */
 package com.petgato.manterAnimal.mediator;
 
+import com.petgato.manterAnimal.model.Adocao;
 import com.petgato.manterAnimal.model.Visita;
+import com.petgato.manterAnimal.model.VisitaId;
 import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterAnimal.view.modelView.VisitaTableModel;
 import com.petgato.padrao.mediator.AbstractMediator;
@@ -27,7 +29,7 @@ public class VisitaMediator extends AbstractMediator {
     private JTextField txtObservacaoVisita;
     private JDateChooser jDataVisita;
     private JComboBox comboBoxStatus;
-    private JComboBox comboBoxAdocao;
+    private Adocao adocao;
     private JTable tabelaVisita;
 
     private VisitaTableModel model;
@@ -57,8 +59,8 @@ public class VisitaMediator extends AbstractMediator {
         return this;
     }
 
-    public VisitaMediator registerComboBoxAdocao(JComboBox comboBoxAdocao) {
-        this.comboBoxAdocao = comboBoxAdocao;
+    public VisitaMediator registerAdocao(Adocao adocao) {
+        this.adocao = adocao;
         return this;
     }
 
@@ -81,8 +83,8 @@ public class VisitaMediator extends AbstractMediator {
                 "Aviso", JOptionPane.WARNING_MESSAGE);
         return null;
     }
-    
-    public List<Visita> getDados(){
+
+    public List<Visita> getDados() {
         return model.getVisitas();
     }
 
@@ -107,7 +109,6 @@ public class VisitaMediator extends AbstractMediator {
             txtObservacaoVisita.setText(visita.getObservacao());
             jDataVisita.setDate(Date.from(visita.getDataVisita().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             comboBoxStatus.setSelectedItem(visita.getStatus());
-            comboBoxAdocao.setSelectedItem(visita.getAdocao());
             tab.setSelectedIndex(1);
         }
     }
@@ -141,6 +142,7 @@ public class VisitaMediator extends AbstractMediator {
 
     public void gravar() {
         boolean idValido = txtId.getText().matches("\\d+");
+        VisitaId visitaId = new VisitaId(adocao.proximoSequenciaVisita(), adocao);
         if (!idValido) {
 
             Visita visita = new Visita.VisitaBuilder()
@@ -148,7 +150,8 @@ public class VisitaMediator extends AbstractMediator {
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate())
                     .whitObservacao(txtObservacaoVisita.getText())
-//                    .whitStatus(Status.valueOf(comboBoxStatus.getSelectedItem().toString()))
+                    .whitStatus(Status.valueOf(comboBoxStatus.getSelectedItem().toString()))
+                    .whitId(visitaId)
                     .build();
 
             limpar();
@@ -161,7 +164,7 @@ public class VisitaMediator extends AbstractMediator {
                     .toLocalDate());
             visita.setObservacao(txtObservacaoVisita.getText());
             visita.setStatus((Status.valueOf(comboBoxStatus.getSelectedItem().toString())));
-
+            visita.setId(visitaId);
         }
         model.fireTableStructureChanged();
     }

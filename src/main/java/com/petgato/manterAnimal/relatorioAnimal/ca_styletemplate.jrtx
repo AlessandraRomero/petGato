@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperTemplate PUBLIC "-//JasperReports//DTD Template//EN" "http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+
+<jasperTemplate>
+	<style name="ColumnHeader-Frame" mode="Opaque" forecolor="#444444" backcolor="#F4F4F4" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="13" isBold="true">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="DetailText" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="13">
+		<box leftPadding="10" rightPadding="1"/>
+	</style>
+	<style name="DetailLink" forecolor="#156D82" fontName="SansSerif" fontSize="13"/>
+	<style name="GroupHeader1-Frame" mode="Opaque" forecolor="#22465E" backcolor="#EDF8FB" vAlign="Middle" fontName="SansSerif" fontSize="13" isBold="true">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="PageFooter" mode="Opaque" forecolor="#444444" fontName="SansSerif" fontSize="13" isBold="true"/>
+	<style name="Filters Label" forecolor="#444444" fontName="SansSerif" fontSize="13" isBold="true"/>
+	<style name="FilterText" mode="Opaque" forecolor="#444444" fontName="SansSerif" fontSize="13"/>
+	<style name="TableHeader" mode="Opaque" forecolor="#FFFFFF" backcolor="#0168A3" vAlign="Middle" fontName="SansSerif" fontSize="13" isBold="true">
+		<box leftPadding="10">
+			<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Report_Page_Header" mode="Opaque" forecolor="#22465E" backcolor="#FFFFFF" fontName="SansSerif" fontSize="20" isBold="true"/>
+	<style name="FrameBorder" fontName="SansSerif">
+		<box padding="0">
+			<topPen lineWidth="1.0" lineColor="#BABABA"/>
+			<leftPen lineWidth="1.0" lineColor="#BABABA"/>
+			<bottomPen lineWidth="1.0" lineColor="#BABABA"/>
+			<rightPen lineWidth="1.0" lineColor="#BABABA"/>
+		</box>
+	</style>
+	<style name="ReportDescription" mode="Opaque" forecolor="#444444" backcolor="#EDF8FB" fontName="SansSerif" fontSize="13">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="GroupHeader2-Frame" mode="Transparent" backcolor="#DFEFD8">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="GroupHeader-Text" mode="Opaque" forecolor="#22465E" fontName="SansSerif" fontSize="13" isBold="true"/>
+	<style name="DetailFrame" mode="Transparent" forecolor="#000000" backcolor="#FFFFFF" fontName="SansSerif" fontSize="13">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="ColumnHeader-Text" mode="Opaque" forecolor="#444444" fontName="SansSerif" fontSize="13" isBold="true">
+		<box leftPadding="10"/>
+	</style>
+	<style name="RefreshTime" forecolor="#22465E" fontName="SansSerif" fontSize="13" isBold="true"/>
+	<style name="GeneratedBy" forecolor="#22465E" fontName="SansSerif" fontSize="13" isBold="true"/>
+	<style name="GroupFooter" forecolor="#444444" backcolor="#D8D8D8" fontName="SansSerif" fontSize="13" isBold="true">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="NoDataFound" mode="Transparent" forecolor="#125984" fontName="SansSerif" fontSize="13" isBold="true"/>
+	<style name="TableHeader-Frame" mode="Opaque" backcolor="#336699" fontName="SansSerif" fontSize="13">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+</jasperTemplate>
