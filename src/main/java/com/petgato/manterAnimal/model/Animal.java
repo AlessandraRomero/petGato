@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -35,21 +37,26 @@ public class Animal implements Serializable {
     @ManyToOne
     private Raca raca;
     @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "adotado_id", referencedColumnName = "ID"),
+        @JoinColumn(name = "adotado_id", referencedColumnName = "ID")
+    })
     private Adotado adotado;
 
     public Animal() {
     }
 
-    public Animal(AnimalBuilder builder) {
+    public Animal(Animal.AnimalBuilder builder) {
         super();
         this.id = builder.id;
         this.nome = builder.nome;
         this.idade = builder.idade;
         this.sexo = builder.sexo;
         this.peso = builder.peso;
-        this.raca = builder.raca;
-        this.especie = builder.especie;
         this.dataResgate = builder.dataResgate;
+        this.especie = builder.especie;
+        this.raca = builder.raca;
+        this.adotado = builder.adotado;
     }
 
     public Long getId() {
@@ -121,17 +128,26 @@ public class Animal implements Serializable {
         return nome;
     }
 
+    public Adotado getAdotado() {
+        return adotado;
+    }
+
+    public void setAdotado(Adotado adotado) {
+        this.adotado = adotado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.nome);
-        hash = 41 * hash + Float.floatToIntBits(this.idade);
-        hash = 41 * hash + Objects.hashCode(this.sexo);
-        hash = 41 * hash + Float.floatToIntBits(this.peso);
-        hash = 41 * hash + Objects.hashCode(this.dataResgate);
-        hash = 41 * hash + Objects.hashCode(this.especie);
-        hash = 41 * hash + Objects.hashCode(this.raca);
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Float.floatToIntBits(this.idade);
+        hash = 37 * hash + Objects.hashCode(this.sexo);
+        hash = 37 * hash + Float.floatToIntBits(this.peso);
+        hash = 37 * hash + Objects.hashCode(this.dataResgate);
+        hash = 37 * hash + Objects.hashCode(this.especie);
+        hash = 37 * hash + Objects.hashCode(this.raca);
+        hash = 37 * hash + Objects.hashCode(this.adotado);
         return hash;
     }
 
@@ -143,9 +159,7 @@ public class Animal implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+
         final Animal other = (Animal) obj;
         if (Float.floatToIntBits(this.idade) != Float.floatToIntBits(other.idade)) {
             return false;
@@ -168,7 +182,10 @@ public class Animal implements Serializable {
         if (!Objects.equals(this.especie, other.especie)) {
             return false;
         }
-        return Objects.equals(this.raca, other.raca);
+        if (!Objects.equals(this.raca, other.raca)) {
+            return false;
+        }
+        return Objects.equals(this.adotado, other.adotado);
     }
 
     public static class AnimalBuilder {
@@ -183,6 +200,12 @@ public class Animal implements Serializable {
         private Especie especie;
         @ManyToOne
         private Raca raca;
+        @ManyToOne
+        @JoinColumns({
+            @JoinColumn(name = "adotado_id", referencedColumnName = "ID"),
+            @JoinColumn(name = "adotado_id", referencedColumnName = "ID")
+        })
+        private Adotado adotado;
 
         public AnimalBuilder() {
         }
@@ -224,6 +247,11 @@ public class Animal implements Serializable {
 
         public AnimalBuilder withDataResgate(LocalDate value) {
             this.dataResgate = value;
+            return this;
+        }
+        
+        public AnimalBuilder withAdotrado(Adotado value) {
+            this.adotado = value;
             return this;
         }
 

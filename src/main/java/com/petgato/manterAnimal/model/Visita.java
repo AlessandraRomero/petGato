@@ -8,10 +8,14 @@ import com.petgato.manterAnimal.model.enums.Status;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -23,11 +27,13 @@ import javax.persistence.Table;
 public class Visita implements Serializable {
 
     @EmbeddedId
-//    @Id
     private VisitaId id;
     private LocalDate dataVisita;
     private String observacao;
     private Status status;
+    @MapsId("adocao_id")
+    @ManyToOne
+    private Adocao adocao;
 
     public Visita() {
     }
@@ -37,7 +43,6 @@ public class Visita implements Serializable {
         this.dataVisita = builder.dataVisita;
         this.observacao = builder.observacao;
         this.status = builder.status;
-        
 
     }
 
@@ -73,14 +78,21 @@ public class Visita implements Serializable {
         this.status = status;
     }
 
+    public Adocao getAdocao() {
+        return adocao;
+    }
+
+    public void setAdocao(Adocao adocao) {
+        this.adocao = adocao;
+    }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.dataVisita);
-        hash = 53 * hash + Objects.hashCode(this.observacao);
-        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 73 * hash + Objects.hashCode(this.id);
+        hash = 73 * hash + Objects.hashCode(this.dataVisita);
+        hash = 73 * hash + Objects.hashCode(this.observacao);
+        hash = 73 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -90,6 +102,9 @@ public class Visita implements Serializable {
             return true;
         }
         if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
             return false;
         }
         final Visita other = (Visita) obj;
@@ -102,16 +117,19 @@ public class Visita implements Serializable {
         if (!Objects.equals(this.dataVisita, other.dataVisita)) {
             return false;
         }
-        return this.status == other.status;
+        if (this.status != other.status) {
+            return false;
+        }
+        return Objects.equals(this.adocao, other.adocao);
     }
 
-   
     public static class VisitaBuilder {
 
         private VisitaId id;
         private LocalDate dataVisita;
         private String observacao;
         private Status status;
+        @MapsId("adocao_id")
         @ManyToOne
         private Adocao adocao;
 

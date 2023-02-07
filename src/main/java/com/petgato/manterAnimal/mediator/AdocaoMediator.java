@@ -13,6 +13,7 @@ import com.petgato.manterUsuario.model.Usuario;
 import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
 import java.time.ZoneId;
+import java.time.LocalDate;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -182,7 +183,7 @@ public class AdocaoMediator extends AbstractMediator {
                 );
 
             } else {
-                controle.cadastrar(jDateDataEmissao.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                controle.cadastrar(LocalDate.now(ZoneId.systemDefault()),
                         isCampoTextoValido(txtStatus) ? Status.valueOf(txtStatus.getText()) : Status.PENDENTE,
                         (Adotante) comboBoxAdotante.getSelectedItem(),
                         (Usuario) comboBoxAtendende.getSelectedItem(),

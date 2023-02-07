@@ -6,9 +6,8 @@ package com.petgato.manterAnimal.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -17,17 +16,20 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class AdotadoId implements Serializable {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "ADOCAO_ID")
-    private Adocao adocao;
+
+    @Column(name = "adocao_id")
+    private Long adocao_id;
 
     public AdotadoId() {
     }
 
-    public AdotadoId(Long id, Adocao adocao) {
+    public AdotadoId(Long id, Long adocao_id) {
         this.id = id;
-        this.adocao = adocao;
+        this.adocao_id = adocao_id;
     }
 
     public Long getId() {
@@ -38,17 +40,19 @@ public class AdotadoId implements Serializable {
         this.id = id;
     }
 
-    public Adocao getAdocao() {
-        return adocao;
+    public Long getAdocao() {
+        return adocao_id;
     }
 
-    public void setAdocao(Adocao adocao) {
-        this.adocao = adocao;
+    public void setAdocao(Long adocao_id) {
+        this.adocao_id = adocao_id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.adocao_id);
         return hash;
     }
 
@@ -64,6 +68,6 @@ public class AdotadoId implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        return Objects.equals(this.adocao, other.adocao);
+        return Objects.equals(this.adocao_id, other.adocao_id);
     }
 }

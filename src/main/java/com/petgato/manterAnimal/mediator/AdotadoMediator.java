@@ -166,7 +166,7 @@ public class AdotadoMediator extends AbstractMediator {
 
     public void gravar() {
         boolean idValido = txtId.getText().matches("\\d+");
-         AdotadoId adotadoId = new AdotadoId(adocao.proximaSequenciaAdotado(), adocao);
+        AdotadoId adotadoId = new AdotadoId(adocao.proximaSequenciaAdotado(), adocao.getId());
         if (!idValido) {
 
             Adotado adotado = new Adotado.AdotadoBuilder()

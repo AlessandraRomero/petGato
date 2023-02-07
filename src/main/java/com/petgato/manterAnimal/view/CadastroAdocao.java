@@ -57,6 +57,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .registerAdocaoController(controle)
                 .registerJTable(tabela)
                 .registerJTabbedPane(tab);
+        mediator.registerTxtStatus(txtStatus1);
 
         visitaMediator = new VisitaMediator();
         visitaMediator.registerJDataVisita(jDateDataVisita);
@@ -449,8 +450,6 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jIcon.setIcon(new javax.swing.ImageIcon("/home/alessandra/NetBeansProjects/petGato/src/main/java/com/petgato/Imagens/icones/pata32.png")); // NOI18N
-
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -749,7 +748,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                         .addComponent(jButtonSalvarVisita)))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -849,7 +848,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .addComponent(jButtonSalvarAdocao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tab2.addTab("Adoção", jPanel10);
@@ -1010,6 +1009,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
 
     private void jButtonSalvarAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarAdocaoActionPerformed
         // TODO add your handling code here:
+        mediator.gravar();
     }//GEN-LAST:event_jButtonSalvarAdocaoActionPerformed
 
     private void jRadioButtonAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAnaliseActionPerformed

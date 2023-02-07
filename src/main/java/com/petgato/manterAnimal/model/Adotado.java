@@ -12,9 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,7 +22,6 @@ import javax.persistence.Table;
  * @author alessandra
  */
 @Entity
-@IdClass(AdotadoId.class)
 @Table(name = "adotado")
 public class Adotado implements Serializable {
 
@@ -31,11 +29,16 @@ public class Adotado implements Serializable {
     private AdotadoId id;
     private LocalDate dataAdocao;
     private Boolean isAdotado;
-    @OneToMany(mappedBy = "Adotado",
+
+    @OneToMany(mappedBy = "adotado",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Animal> animais;
+
+    @MapsId("adocao_id")
+    @ManyToOne
+    private Adocao adocao;
 
     public Adotado() {
     }
@@ -83,13 +86,22 @@ public class Adotado implements Serializable {
         this.animais = animais;
     }
 
+    public Adocao getAdocao() {
+        return adocao;
+    }
+
+    public void setAdocao(Adocao adocao) {
+        this.adocao = adocao;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.dataAdocao);
-        hash = 71 * hash + Objects.hashCode(this.isAdotado);
-        hash = 71 * hash + Objects.hashCode(this.animais);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.dataAdocao);
+        hash = 41 * hash + Objects.hashCode(this.isAdotado);
+        hash = 41 * hash + Objects.hashCode(this.animais);
+        hash = 41 * hash + Objects.hashCode(this.adocao);
         return hash;
     }
 
@@ -111,7 +123,10 @@ public class Adotado implements Serializable {
         if (!Objects.equals(this.isAdotado, other.isAdotado)) {
             return false;
         }
-        return Objects.equals(this.animais, other.animais);
+        if (!Objects.equals(this.animais, other.animais)) {
+            return false;
+        }
+        return Objects.equals(this.adocao, other.adocao);
     }
 
     public static class AdotadoBuilder {
@@ -124,8 +139,13 @@ public class Adotado implements Serializable {
                 cascade = CascadeType.ALL,
                 orphanRemoval = true)
         private List<Animal> animais;
+
+        @MapsId("adocao_id")
         @ManyToOne
         private Adocao adocao;
+//        
+//        @ManyToOne
+//        private Adocao adocao;
 
         public AdotadoBuilder() {
 
@@ -152,6 +172,7 @@ public class Adotado implements Serializable {
         }
 
         public Adotado.AdotadoBuilder withAnimais(List value) {
+//          this.id.setAnimais(value);
             this.animais = value;
             return this;
         }

@@ -20,10 +20,10 @@ public class EspecieController {
     }
     
      public void cadastrar(String nome) {
-        Especie log = new Especie.EspecieBuilder()
+        Especie esp = new Especie.EspecieBuilder()
                 .whitNome(nome)
                 .build();
-        repository.save(log);
+        repository.save(esp);
     }
      
      public Especie buscarPorId(Long id) {
@@ -31,14 +31,14 @@ public class EspecieController {
     }
 
     public void atualizar(Long id, String nome) {
-        Especie log = buscarPorId(id);
-        log.setNome(nome);
-        repository.update(log);
+        Especie esp = buscarPorId(id);
+        esp.setNome(nome);
+        repository.update(esp);
     }
     
     public void deletar(Long id){
-        Especie log = buscarPorId(id);
-        repository.delete(log);
+        Especie esp = buscarPorId(id);
+        repository.delete(esp);
     }
     
     public Especie buscarPorNome(String nome){

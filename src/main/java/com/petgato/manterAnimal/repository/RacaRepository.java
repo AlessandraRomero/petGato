@@ -14,9 +14,9 @@ import javax.persistence.Query;
  *
  * @author alessandra
  */
-public class RacaRepository extends AdapterRepository<Raca, Long>{
-    
-      @Override
+public class RacaRepository extends AdapterRepository<Raca, Long> {
+
+    @Override
     public List<Raca> findAll() {
         List<Raca> racas = getEntityManager().createQuery("SELECT raca FROM Raca raca", Raca.class).getResultList();
         super.close();

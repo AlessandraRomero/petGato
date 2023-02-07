@@ -34,6 +34,7 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     @Override
     public void save(T value) {
+        entityManager = getEntityManager();
         EntityTransaction tx = entityManager.getTransaction();
 
         try {
@@ -50,6 +51,7 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     @Override
     public void update(T value) {
+        entityManager = getEntityManager();
         EntityTransaction tx = entityManager.getTransaction();
 
         try {
@@ -67,6 +69,7 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     @Override
     public void delete(T value) {
+//        entityManager = getEntityManager();
         EntityTransaction tx = entityManager.getTransaction();
 
         try {
