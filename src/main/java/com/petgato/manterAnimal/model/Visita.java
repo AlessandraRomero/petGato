@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -27,9 +25,6 @@ public class Visita implements Serializable {
     private LocalDate dataVisita;
     private String observacao;
     private Status status;
-    @MapsId("adocao_id")
-    @ManyToOne
-    private Adocao adocao;
 
     public Visita() {
     }
@@ -75,11 +70,11 @@ public class Visita implements Serializable {
     }
 
     public Adocao getAdocao() {
-        return adocao;
+        return id.getAdocao();
     }
 
     public void setAdocao(Adocao adocao) {
-        this.adocao = adocao;
+        this.id.setAdocao(adocao);
     }
 
     @Override
@@ -113,10 +108,7 @@ public class Visita implements Serializable {
         if (!Objects.equals(this.dataVisita, other.dataVisita)) {
             return false;
         }
-        if (this.status != other.status) {
-            return false;
-        }
-        return Objects.equals(this.adocao, other.adocao);
+        return Objects.equals(this.status, other.status);
     }
 
     public static class VisitaBuilder {
@@ -125,9 +117,6 @@ public class Visita implements Serializable {
         private LocalDate dataVisita;
         private String observacao;
         private Status status;
-        @MapsId("adocao_id")
-        @ManyToOne
-        private Adocao adocao;
 
         public VisitaBuilder() {
         }
@@ -153,7 +142,7 @@ public class Visita implements Serializable {
         }
 
         public Visita.VisitaBuilder whitAdocao(Adocao value) {
-            this.adocao = value;
+            this.id.setAdocao(value);
             return this;
         }
 

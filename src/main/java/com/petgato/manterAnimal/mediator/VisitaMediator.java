@@ -142,7 +142,7 @@ public class VisitaMediator extends AbstractMediator {
 
     public void gravar() {
         boolean idValido = txtIdVisita.getText().matches("\\d+");
-        VisitaId visitaId = new VisitaId(adocao.proximoSequenciaVisita(), adocao.getId());
+        VisitaId visitaId = new VisitaId(adocao.proximoSequenciaVisita(), adocao);
         if (!idValido) {
 
             Visita visita = new Visita.VisitaBuilder()

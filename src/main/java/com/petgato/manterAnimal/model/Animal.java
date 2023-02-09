@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -36,12 +34,6 @@ public class Animal implements Serializable {
     private Especie especie;
     @ManyToOne
     private Raca raca;
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "adotado_id", referencedColumnName = "ID"),
-        @JoinColumn(name = "adotado_id", referencedColumnName = "ID")
-    })
-    private Adotado adotado;
 
     public Animal() {
     }
@@ -56,7 +48,6 @@ public class Animal implements Serializable {
         this.dataResgate = builder.dataResgate;
         this.especie = builder.especie;
         this.raca = builder.raca;
-        this.adotado = builder.adotado;
     }
 
     public Long getId() {
@@ -128,14 +119,6 @@ public class Animal implements Serializable {
         return nome;
     }
 
-    public Adotado getAdotado() {
-        return adotado;
-    }
-
-    public void setAdotado(Adotado adotado) {
-        this.adotado = adotado;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -147,7 +130,6 @@ public class Animal implements Serializable {
         hash = 37 * hash + Objects.hashCode(this.dataResgate);
         hash = 37 * hash + Objects.hashCode(this.especie);
         hash = 37 * hash + Objects.hashCode(this.raca);
-        hash = 37 * hash + Objects.hashCode(this.adotado);
         return hash;
     }
 
@@ -182,10 +164,8 @@ public class Animal implements Serializable {
         if (!Objects.equals(this.especie, other.especie)) {
             return false;
         }
-        if (!Objects.equals(this.raca, other.raca)) {
-            return false;
-        }
-        return Objects.equals(this.adotado, other.adotado);
+        
+        return Objects.equals(this.raca, other.raca);
     }
 
     public static class AnimalBuilder {
@@ -196,16 +176,8 @@ public class Animal implements Serializable {
         private String sexo;
         private float peso;
         private LocalDate dataResgate;
-        @ManyToOne
         private Especie especie;
-        @ManyToOne
         private Raca raca;
-        @ManyToOne
-        @JoinColumns({
-            @JoinColumn(name = "adotado_id", referencedColumnName = "ID"),
-            @JoinColumn(name = "adotado_id", referencedColumnName = "ID")
-        })
-        private Adotado adotado;
 
         public AnimalBuilder() {
         }
@@ -247,11 +219,6 @@ public class Animal implements Serializable {
 
         public AnimalBuilder withDataResgate(LocalDate value) {
             this.dataResgate = value;
-            return this;
-        }
-        
-        public AnimalBuilder withAdotrado(Adotado value) {
-            this.adotado = value;
             return this;
         }
 

@@ -39,12 +39,12 @@ public class Adocao implements Serializable {
     private Adotante adotante;
     @ManyToOne
     private Usuario atendente;
-    @OneToMany(mappedBy = "adocao",
+    @OneToMany(mappedBy = "id.adocao",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Adotado> adotados;
-    @OneToMany(mappedBy = "adocao",
+    @OneToMany(mappedBy = "id.adocao",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)

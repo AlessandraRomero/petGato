@@ -9,7 +9,6 @@ import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.repository.AdotadoRepository;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  *
@@ -23,12 +22,12 @@ public class AdotadoController {
         this.repository = new AdotadoRepository();
     }
 
-    public void cadastrar(LocalDate dataAdocao, boolean isAdotado, List<Animal> animais, Adocao adocao) {
+    public void cadastrar(LocalDate dataAdocao, boolean isAdotado, Animal animal, Adocao adocao) {
         Adotado adotad = new Adotado.AdotadoBuilder()
                 .withDataAdocao(dataAdocao)
                 .withIsAdotado(isAdotado)
                 .withAdocao(adocao)
-                .withAnimais(animais)
+                .withAnimal(animal)
                 .build();
         repository.save(adotad);
     }
@@ -37,11 +36,11 @@ public class AdotadoController {
         return repository.findById(id);
     }
 
-    public void atualizar(long id, LocalDate dataAdocao, boolean isAdotado, List<Animal> animais) {
+    public void atualizar(long id, LocalDate dataAdocao, boolean isAdotado, Animal animal) {
         Adotado adotad = buscarPorId(id);
         adotad.setDataAdocao(dataAdocao);
         adotad.setAdotado(isAdotado);
-        adotad.setAnimais(animais);
+        adotad.setAnimal(animal);
         repository.update(adotad);
     }
 

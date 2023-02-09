@@ -6,15 +6,10 @@ package com.petgato.manterAnimal.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,15 +25,8 @@ public class Adotado implements Serializable {
     private LocalDate dataAdocao;
     private Boolean isAdotado;
 
-    @OneToMany(mappedBy = "adotado",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Animal> animais;
-
-    @MapsId("adocao_id")
     @ManyToOne
-    private Adocao adocao;
+    private Animal animal;
 
     public Adotado() {
     }
@@ -47,7 +35,7 @@ public class Adotado implements Serializable {
         this.id = builder.id;
         this.dataAdocao = builder.dataAdocao;
         this.isAdotado = builder.isAdotado;
-        this.animais = builder.animais;
+        this.animal = builder.animal;
     }
 
     public AdotadoId getId() {
@@ -78,20 +66,20 @@ public class Adotado implements Serializable {
         return isAdotado;
     }
 
-    public List<Animal> getAnimais() {
-        return animais;
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public void setAnimais(List<Animal> animais) {
-        this.animais = animais;
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
     public Adocao getAdocao() {
-        return adocao;
+        return id.getAdocao();
     }
 
     public void setAdocao(Adocao adocao) {
-        this.adocao = adocao;
+        this.id.setAdocao(adocao);
     }
 
     @Override
@@ -100,8 +88,7 @@ public class Adotado implements Serializable {
         hash = 41 * hash + Objects.hashCode(this.id);
         hash = 41 * hash + Objects.hashCode(this.dataAdocao);
         hash = 41 * hash + Objects.hashCode(this.isAdotado);
-        hash = 41 * hash + Objects.hashCode(this.animais);
-        hash = 41 * hash + Objects.hashCode(this.adocao);
+        hash = 41 * hash + Objects.hashCode(this.animal);
         return hash;
     }
 
@@ -123,10 +110,8 @@ public class Adotado implements Serializable {
         if (!Objects.equals(this.isAdotado, other.isAdotado)) {
             return false;
         }
-        if (!Objects.equals(this.animais, other.animais)) {
-            return false;
-        }
-        return Objects.equals(this.adocao, other.adocao);
+        
+        return Objects.equals(this.animal, other.animal);
     }
 
     public static class AdotadoBuilder {
@@ -134,18 +119,7 @@ public class Adotado implements Serializable {
         private AdotadoId id;
         private LocalDate dataAdocao;
         private boolean isAdotado;
-        @OneToMany(mappedBy = "Adotado",
-                fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL,
-                orphanRemoval = true)
-        private List<Animal> animais;
-
-        @MapsId("adocao_id")
-        @ManyToOne
-        private Adocao adocao;
-//        
-//        @ManyToOne
-//        private Adocao adocao;
+        private Animal animal;
 
         public AdotadoBuilder() {
 
@@ -167,13 +141,12 @@ public class Adotado implements Serializable {
         }
 
         public Adotado.AdotadoBuilder withAdocao(Adocao value) {
-            this.adocao = value;
+            this.id.setAdocao(value);
             return this;
         }
 
-        public Adotado.AdotadoBuilder withAnimais(List value) {
-//          this.id.setAnimais(value);
-            this.animais = value;
+        public Adotado.AdotadoBuilder withAnimal(Animal value) {
+            this.animal = value;
             return this;
         }
 

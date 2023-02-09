@@ -18,7 +18,9 @@ public class AdotanteRepository extends AdapterRepository<Adotante, Long> {
     
      @Override
     public List<Adotante> findAll() {
-        List<Adotante> adotantes = getEntityManager().createQuery("SELECT adotante FROM Adotante adotante", Adotante.class).getResultList();
+        List<Adotante> adotantes = getEntityManager()
+                .createQuery("SELECT adotante FROM Adotante adotante", Adotante.class)
+                .getResultList();
         super.close();
         return  adotantes;
     }

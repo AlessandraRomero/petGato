@@ -1,34 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="petgato" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.petgato.manterUsuario.model.GrupoUsuario</class>
-    <class>com.petgato.manterProntuario.model.GrupoProduto</class>
-    <class>com.petgato.manterCidade.model.Cidade</class>
-    <class>com.petgato.manterProntuario.model.ItemAtendimento</class>
-    <class>com.petgato.manterAdotante.model.Adotante</class>
-    <class>com.petgato.padrao.model.Pessoa</class>
-    <class>com.petgato.manterAnimal.model.Animal</class>
-    <class>com.petgato.manterAnimal.model.Especie</class>
-    <class>com.petgato.manterAnimal.model.Raca</class>
-    <class>com.petgato.manterBairro.model.Bairro</class>
-    <class>com.petgato.manterLogradouro.model.Logradouro</class>
-    <class>com.petgato.manterProntuario.model.Produto</class>
-    <class>com.petgato.manterProntuario.model.Prontuario</class>
-    <class>com.petgato.manterAdotante.model.Endereco</class>
-    <class>com.petgato.manterAdotante.model.Telefone</class>
-    <class>com.petgato.manterUsuario.model.Usuario</class>
-    <class>com.petgato.manterAnimal.model.Adotado</class>
-    <class>com.petgato.manterAnimal.model.Adocao</class>
-    <class>com.petgato.manterAnimal.model.Visita</class>
-<!--    <class>com.petgato.manterAnimal.model.VisitaId</class>
-    <class>com.petgato.manterAnimal.model.AdotadoId</class>-->
+    <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdpetgatov3?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="Info@1234"/>
-      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
       <!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

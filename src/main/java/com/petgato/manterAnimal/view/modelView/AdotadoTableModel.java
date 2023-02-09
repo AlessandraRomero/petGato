@@ -69,7 +69,7 @@ public class AdotadoTableModel extends PetGatoTableModel {
             case 1:
                 return adotado.getDataAdocao();
             case 2:
-                return adotado.getAnimais();
+                return adotado.getAnimal();
             case 3:
                 return adotado.isAdotado();
             default:

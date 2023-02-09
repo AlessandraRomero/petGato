@@ -61,8 +61,8 @@ public class AdotadoMediator extends AbstractMediator {
         this.adocao = adocao;
         return this;
     }
-    
-     public AdotadoMediator registerComboBoxAdotado(JComboBox comboBoxAnimal) {
+
+    public AdotadoMediator registerComboBoxAdotado(JComboBox comboBoxAnimal) {
         this.comboBoxAnimal = comboBoxAnimal;
         return this;
     }
@@ -124,7 +124,7 @@ public class AdotadoMediator extends AbstractMediator {
 
         if (adotado != null) {
             txtId.setText(adotado.getId().toString());
-            if (adotado.getIsAdotado()!= null) {
+            if (adotado.getIsAdotado() != null) {
                 jRadioButtonAnalise.setSelected(true);
 
             } else if (adotado.isAdotado()) {
@@ -133,7 +133,7 @@ public class AdotadoMediator extends AbstractMediator {
                 jRadioButtonN.setSelected(true);
             }
             jDataAdocao.setDate(Date.from(adotado.getDataAdocao().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            comboBoxAnimal.setSelectedItem(adotado.getAnimais());
+            comboBoxAnimal.setSelectedItem(adotado.getAnimal());
             tab.setSelectedIndex(1);
         }
     }
@@ -166,17 +166,16 @@ public class AdotadoMediator extends AbstractMediator {
 
     public void gravar() {
         boolean idValido = txtId.getText().matches("\\d+");
-        AdotadoId adotadoId = new AdotadoId(adocao.proximaSequenciaAdotado(), adocao.getId());
+        AdotadoId adotadoId = new AdotadoId(adocao.proximaSequenciaAdotado(), adocao);
         if (!idValido) {
 
             Adotado adotado = new Adotado.AdotadoBuilder()
                     .withDataAdocao(jDataAdocao.getDate().toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDate())
-                    .withAnimais((List) comboBoxAnimal.getSelectedItem())
+                    .withAnimal((Animal) comboBoxAnimal.getSelectedItem())
                     .withIsAdotado(
                             (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
-                    
                     )
                     .withId(adotadoId)
                     .build();
@@ -189,7 +188,7 @@ public class AdotadoMediator extends AbstractMediator {
             adotado.setDataAdocao(jDataAdocao.getDate().toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
-            adotado.setAnimais((List<Animal>) comboBoxAnimal.getSelectedItem());
+            adotado.setAnimal((Animal) comboBoxAnimal.getSelectedItem());
             adotado.setAdotado(
                     (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
             );
