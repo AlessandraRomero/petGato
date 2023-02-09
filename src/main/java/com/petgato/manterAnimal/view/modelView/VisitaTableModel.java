@@ -65,7 +65,7 @@ public class VisitaTableModel extends PetGatoTableModel{
         Visita visita = lista.get(row);
         switch (column) {
             case 0:
-                return visita.getId();
+                return visita.getId().getId();
             case 1:
                 return visita.getDataVisita();
             case 2:

@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  */
 public class VisitaMediator extends AbstractMediator {
 
-    private JTextField txtId;
+    private JTextField txtIdVisita;
     private JTextField txtObservacaoVisita;
     private JDateChooser jDataVisita;
     private JComboBox comboBoxStatus;
@@ -39,8 +39,8 @@ public class VisitaMediator extends AbstractMediator {
         return this;
     }
 
-    public VisitaMediator registerTxtId(JTextField txtId) {
-        this.txtId = txtId;
+    public VisitaMediator registerTxtId(JTextField txtIdVisita) {
+        this.txtIdVisita = txtIdVisita;
         return this;
     }
 
@@ -105,7 +105,7 @@ public class VisitaMediator extends AbstractMediator {
         Visita visita = getVisita();
 
         if (visita != null) {
-            txtId.setText(visita.getId().toString());
+            txtIdVisita.setText(visita.getId().toString());
             txtObservacaoVisita.setText(visita.getObservacao());
             jDataVisita.setDate(Date.from(visita.getDataVisita().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             comboBoxStatus.setSelectedItem(visita.getStatus());
@@ -114,7 +114,7 @@ public class VisitaMediator extends AbstractMediator {
     }
 
     public void limpar() {
-        txtId.setText("");
+        txtIdVisita.setText("");
         txtObservacaoVisita.setText("");
         jDataVisita.setDate(null);
         comboBoxStatus.setSelectedItem(null);
@@ -141,7 +141,7 @@ public class VisitaMediator extends AbstractMediator {
     }
 
     public void gravar() {
-        boolean idValido = txtId.getText().matches("\\d+");
+        boolean idValido = txtIdVisita.getText().matches("\\d+");
         VisitaId visitaId = new VisitaId(adocao.proximoSequenciaVisita(), adocao.getId());
         if (!idValido) {
 

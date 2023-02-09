@@ -20,19 +20,18 @@ import java.util.List;
  * @author alessandra
  */
 public class AdocaoController {
-     
+
     private AdocaoRepository repository;
 
     public AdocaoController() {
         this.repository = new AdocaoRepository();
     }
-    
-     public void cadastrar(LocalDate dataEmissao, Status status, Adotante adotante,
-             Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
+
+    public void cadastrar(LocalDate dataEmissao, Status status, Adotante adotante,
+            Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
         Adocao adocao = new Adocao.AdocaoBuilder()
                 .whitDataEmissao(dataEmissao)
                 .whitStatus(status)
-                .whitAdotante(adotante)
                 .whitAdotante(adotante)
                 .whitAtendente(atendente)
                 .whitAdotados(adotados)
@@ -40,13 +39,13 @@ public class AdocaoController {
                 .build();
         repository.save(adocao);
     }
-     
-     public Adocao buscarPorId(Long id) {
+
+    public Adocao buscarPorId(Long id) {
         return repository.findById(id);
     }
 
     public void atualizar(Long id, LocalDate dataEmissao, Status status, Adotante adotante,
-             Usuario atendente, List<Adotado> adotados, List<Visita> Visitas) {
+            Usuario atendente, List<Adotado> adotados, List<Visita> Visitas) {
         Adocao adocao = buscarPorId(id);
         adocao.setDataEmissao(dataEmissao);
         adocao.setStatus(status);
@@ -56,13 +55,13 @@ public class AdocaoController {
         adocao.setVisitas(Visitas);
         repository.update(adocao);
     }
-    
-    public void deletar(Long id){
+
+    public void deletar(Long id) {
         Adocao adocao = buscarPorId(id);
         repository.delete(adocao);
     }
-    
-    public Animal buscarPorNome(String nome){
+
+    public Animal buscarPorNome(String nome) {
         return (Animal) repository.findByNome(nome);
     }
 }

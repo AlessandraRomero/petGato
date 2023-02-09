@@ -9,6 +9,7 @@ import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterUsuario.model.Usuario;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -50,6 +51,8 @@ public class Adocao implements Serializable {
     private List<Visita> visitas;
 
     public Adocao() {
+        visitas = new ArrayList();
+        adotados = new ArrayList();
     }
 
     public Adocao(AdocaoBuilder builder) {
@@ -147,8 +150,7 @@ public class Adocao implements Serializable {
 
             return idVisita + 1;
         }
-    }  
-         
+    }
 
     public Long proximaSequenciaAdotado() {
 
@@ -229,6 +231,8 @@ public class Adocao implements Serializable {
         private List<Visita> visitas;
 
         public AdocaoBuilder() {
+            visitas = new ArrayList();
+            adotados = new ArrayList();
         }
 
         public Adocao.AdocaoBuilder whitId(Long value) {

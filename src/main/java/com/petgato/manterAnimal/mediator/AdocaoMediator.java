@@ -14,6 +14,7 @@ import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
 import java.time.ZoneId;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,7 +28,6 @@ public class AdocaoMediator extends AbstractMediator {
     private JTextField txtId;
     private JDateChooser jDateDataEmissao;
     private JComboBox comboBoxAdotante;
-    private JComboBox comboBoxAdotado;
     private JComboBox comboBoxAtendende;
     private JTextField txtStatus;
     private JDateChooser jDateDataVisita;
@@ -63,11 +63,6 @@ public class AdocaoMediator extends AbstractMediator {
 
     public AdocaoMediator registerComboBoxAdotante(JComboBox comboBoxAdotante) {
         this.comboBoxAdotante = comboBoxAdotante;
-        return this;
-    }
-
-    public AdocaoMediator registerComboBoxAdotado(JComboBox comboBoxAdotado) {
-        this.comboBoxAdotado = comboBoxAdotado;
         return this;
     }
 
@@ -129,7 +124,7 @@ public class AdocaoMediator extends AbstractMediator {
             comboBoxAtendende.setSelectedItem(adocoes.getAtendente());
             txtStatus.setText(adocoes.getStatus().toString());
             comboBoxAdotante.setSelectedItem(adocoes.getAdotante());
-            comboBoxAdotado.setSelectedItem(adocoes.getAdotados());
+//            comboBoxAdotado.setSelectedItem(adocoes.getAdotados());
             visitaMediator.carregarDados(adocoes.getVisitas());
             adotadoMediator.carregarDados(adocoes.getAdotados());
             tab.setSelectedIndex(1);
@@ -140,14 +135,17 @@ public class AdocaoMediator extends AbstractMediator {
         txtId.setText("");
         comboBoxAtendende.setSelectedItem(null);
         comboBoxAdotante.setSelectedItem(null);
-        comboBoxAdotado.setSelectedItem(null);
+//        comboBoxAdotado.setSelectedItem(null);
 
     }
 
     public void novo() {
+        Adocao adocao = new Adocao.AdocaoBuilder().build();
         tab.setSelectedIndex(1);
         limpar();
-        visitaMediator.registerAdocao(new Adocao.AdocaoBuilder().build());
+        visitaMediator.registerAdocao(adocao);
+        visitaMediator.carregarDados(adocao.getVisitas());
+        adotadoMediator.carregarDados(adocao.getAdotados());
     }
 
     public void excluir() {
@@ -200,7 +198,7 @@ public class AdocaoMediator extends AbstractMediator {
     }
 
     public void buscar() {
-   
+
     }
 
     public void cancelar() {

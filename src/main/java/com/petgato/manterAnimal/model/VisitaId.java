@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 public class VisitaId implements Serializable {
 
     private Long id;
-
     @Column(name = "adocao_id")
     private Long adocao_id;
 

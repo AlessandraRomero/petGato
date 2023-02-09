@@ -103,6 +103,7 @@ public class CidadeMediator extends AbstractMediator{
             model.atualizar();
             JOptionPane.showMessageDialog(null, "Exclusão realizada", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
         }
+
     }
 
     private boolean isCampoTextoValido(JTextField campo) {
