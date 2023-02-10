@@ -5,6 +5,7 @@
 package com.petgato.manterAnimal.view.modelView;
 
 import com.petgato.manterAnimal.model.Adocao;
+import com.petgato.manterAnimal.repository.AdocaoRepository;
 import com.petgato.padrao.componentsModel.PetGatoTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +14,45 @@ import java.util.List;
  *
  * @author alessandra
  */
-public class AdocaoTableModel extends PetGatoTableModel{
-    
+public class AdocaoTableModel extends PetGatoTableModel {
+
     private String colunas[] = {"id", "DT Emissão", "Adotante", "Atendente", "Status"};
-    private List<Adocao> lista= new ArrayList();
+    private List<Adocao> lista = new ArrayList();
+    private AdocaoRepository repository;
 
     public AdocaoTableModel() {
- 
+        repository = new AdocaoRepository();
+        this.lista = repository.findAll();
     }
-    
-    public void setLista(List<Adocao> lista){
+
+    public void atualizar() {
+        atualizar("");
+    }
+
+    public void atualizar(String nome) {
+        lista.clear();
+        lista.addAll(repository.findByNome(nome));
+        fireTableStructureChanged();
+    }
+
+    public void atualizar(List<Adocao> resultados) {
+        lista.clear();
+        lista = resultados;
+        fireTableStructureChanged();
+    }
+
+    public void setLista(List<Adocao> lista) {
         this.lista = lista;
     }
-    
-    public void adicionar(Adocao adocao){
+
+    public void adicionar(Adocao adocao) {
         lista.add(adocao);
         fireTableStructureChanged();
     }
-    
-     public void remover(Adocao adocao){
+
+    public void remover(Adocao adocao) {
         lista.remove(adocao);
         fireTableStructureChanged();
-    }
-
-    @Override
-    public void atualizar() {
-           
     }
 
     @Override

@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "adotanteSequence", sequenceName = "pessoaSequence", allocationSize = 1)
 public class Adotante extends Pessoa {
 
+  
     private String rg;
     private String cpf;
     private String telefone;
@@ -176,9 +177,6 @@ public class Adotante extends Pessoa {
         }
         return Objects.equals(this.bairro, other.bairro);
     }
-
-    
-    
 
     public static class AdotanteBuilder extends PessoaBuilder {
 

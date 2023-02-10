@@ -13,36 +13,37 @@ import java.util.List;
  *
  * @author alessandra
  */
-public class VisitaTableModel extends PetGatoTableModel{
-    
+public class VisitaTableModel extends PetGatoTableModel {
+
     private String colunas[] = {"id", "Data Visita", "Observação", "Situação"};
-    private List<Visita> lista= new ArrayList();
+    private List<Visita> lista = new ArrayList();
 
     public VisitaTableModel() {
- 
+
     }
-    
-    public List<Visita> getVisitas(){
+
+    public List<Visita> getVisitas() {
         return lista;
     }
-    
-    public void setLista(List<Visita> lista){
+
+    public void setLista(List<Visita> lista) {
         this.lista = lista;
+        fireTableStructureChanged();
     }
-    
-    public void adicionar(Visita visita){
+
+    public void adicionar(Visita visita) {
         lista.add(visita);
         fireTableStructureChanged();
     }
-    
-     public void remover(Visita visita){
+
+    public void remover(Visita visita) {
         lista.remove(visita);
         fireTableStructureChanged();
     }
 
     @Override
     public void atualizar() {
-           
+
     }
 
     @Override
@@ -76,8 +77,8 @@ public class VisitaTableModel extends PetGatoTableModel{
                 return null;
         }
     }
-    
-    public Visita getValue(int index){
+
+    public Visita getValue(int index) {
         return lista.get(index);
     }
 }

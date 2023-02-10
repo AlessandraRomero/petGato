@@ -57,6 +57,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .registerAdocaoController(controle)
                 .registerJTable(tabela)
                 .registerJTabbedPane(tab);
+        mediator.registerAdocaoModel(model);
         mediator.registerTxtStatus(txtStatus1);
 
         visitaMediator = new VisitaMediator();
@@ -163,6 +164,8 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tabelaAdotado = new javax.swing.JTable();
         jRadioButtonAnalise = new javax.swing.JRadioButton();
+        txtId1 = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -776,6 +779,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel38.setForeground(new java.awt.Color(89, 199, 162));
         jLabel38.setText("Adotado?:");
 
+        bgAdotado.add(jRadioButtonS);
         jRadioButtonS.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jRadioButtonS.setForeground(new java.awt.Color(89, 199, 162));
         jRadioButtonS.setText("Sim");
@@ -785,6 +789,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
+        bgAdotado.add(jRadioButtonN);
         jRadioButtonN.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jRadioButtonN.setForeground(new java.awt.Color(89, 199, 162));
         jRadioButtonN.setText("Não");
@@ -805,6 +810,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
         tabelaAdotado.setModel(adotadoTableModel);
         jScrollPane6.setViewportView(tabelaAdotado);
 
+        bgAdotado.add(jRadioButtonAnalise);
         jRadioButtonAnalise.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jRadioButtonAnalise.setForeground(new java.awt.Color(89, 199, 162));
         jRadioButtonAnalise.setText("Em Análise");
@@ -814,27 +820,49 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
+        txtId1.setEditable(false);
+        txtId1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtId1ActionPerformed(evt);
+            }
+        });
+
+        jLabel39.setBackground(new java.awt.Color(89, 199, 162));
+        jLabel39.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(89, 199, 162));
+        jLabel39.setText("Id:");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel37)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboBoxAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonS)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButtonN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSalvarAdocao)
-                    .addComponent(jRadioButtonAnalise))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(529, 529, 529)
+                        .addComponent(jButtonSalvarAdocao))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButtonAnalise)))
+                .addContainerGap(91, Short.MAX_VALUE))
             .addComponent(jScrollPane6)
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(372, 372, 372)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(373, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -846,12 +874,18 @@ public class CadastroAdocao extends javax.swing.JFrame {
                     .addComponent(jRadioButtonN)
                     .addComponent(jLabel37)
                     .addComponent(comboBoxAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonAnalise))
+                    .addComponent(jRadioButtonAnalise)
+                    .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(jButtonSalvarAdocao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(200, 200, 200)
+                    .addComponent(jLabel39)
+                    .addContainerGap(200, Short.MAX_VALUE)))
         );
 
         tab2.addTab("Adoção", jPanel10);
@@ -1010,8 +1044,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonNActionPerformed
 
     private void jButtonSalvarAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarAdocaoActionPerformed
-        // TODO add your handling code here:
-        mediator.gravar();
+        adotadoMediator.gravar();
     }//GEN-LAST:event_jButtonSalvarAdocaoActionPerformed
 
     private void jRadioButtonAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAnaliseActionPerformed
@@ -1045,6 +1078,10 @@ public class CadastroAdocao extends javax.swing.JFrame {
     private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
         mediator.gravar();
     }//GEN-LAST:event_buttonCadastrarActionPerformed
+
+    private void txtId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtId1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtId1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1122,6 +1159,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1154,6 +1192,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
     private javax.swing.JTable tabelaAdotado;
     private javax.swing.JTable tabelaVisita;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtId1;
     private javax.swing.JTextField txtIdVisita;
     private javax.swing.JTextField txtObservacaoVisita;
     private javax.swing.JTextField txtStatus1;

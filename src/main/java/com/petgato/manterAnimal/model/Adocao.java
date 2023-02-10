@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +36,7 @@ public class Adocao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dataEmissao;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne
     private Adotante adotante;
@@ -260,15 +263,16 @@ public class Adocao implements Serializable {
             return this;
         }
 
-        public Adocao.AdocaoBuilder whitAdotados(List value) {
+        public Adocao.AdocaoBuilder whitAdotados(List<Adotado> value) {
             this.adotados = value;
             return this;
         }
 
-        public Adocao.AdocaoBuilder whitVisitas(List value) {
+        public Adocao.AdocaoBuilder whitVisitas(List<Visita> value) {        
             this.visitas = value;
             return this;
         }
+        
 
         public Adocao build() {
             return new Adocao(this);

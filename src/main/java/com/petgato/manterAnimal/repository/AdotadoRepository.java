@@ -35,7 +35,7 @@ public class AdotadoRepository extends AdapterRepository<Adotado, Long>{
         List<Adotado> adotado = null;
         boolean hasNome = value != null && !value.isBlank() && !value.isEmpty();
         if (hasNome) {
-            condicao = "WHERE esp.nome LIKE ?1 ";
+            condicao = "WHERE adotado.nome LIKE ?1 ";
         }
 
         Query query = em.createQuery("SELECT adotado FROM Adotado adotado " + condicao);

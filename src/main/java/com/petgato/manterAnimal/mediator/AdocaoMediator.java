@@ -14,7 +14,6 @@ import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
 import java.time.ZoneId;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -30,16 +29,17 @@ public class AdocaoMediator extends AbstractMediator {
     private JComboBox comboBoxAdotante;
     private JComboBox comboBoxAtendende;
     private JTextField txtStatus;
-    private JDateChooser jDateDataVisita;
-    private JComboBox comboBoxSituacao;
-    private JTextField txtObservacao;
-    private JDateChooser jDateDataAdocao;
 
     private AdocaoController controle;
     private AdocaoTableModel model;
 
     private VisitaMediator visitaMediator = new VisitaMediator();
     private AdotadoMediator adotadoMediator = new AdotadoMediator();
+
+    public AdocaoMediator registerAdocaoModel(AdocaoTableModel model) {
+        this.model = model;
+        return this;
+    }
 
     public AdocaoMediator registerVisitaMediator(VisitaMediator visitaMediator) {
         this.visitaMediator = visitaMediator;
@@ -73,21 +73,6 @@ public class AdocaoMediator extends AbstractMediator {
 
     public AdocaoMediator registerTxtStatus(JTextField txtStatus) {
         this.txtStatus = txtStatus;
-        return this;
-    }
-
-    public AdocaoMediator registerJDateDataVisita(JDateChooser jDateDataVisita) {
-        this.jDateDataVisita = jDateDataVisita;
-        return this;
-    }
-
-    public AdocaoMediator registerComboBoxSituacao(JComboBox comboBoxSituacao) {
-        this.comboBoxSituacao = comboBoxSituacao;
-        return this;
-    }
-
-    public AdocaoMediator registerTxtJDateDataAdocao(JDateChooser jDateDataAdocao) {
-        this.jDateDataAdocao = jDateDataAdocao;
         return this;
     }
 
@@ -126,7 +111,7 @@ public class AdocaoMediator extends AbstractMediator {
             comboBoxAdotante.setSelectedItem(adocoes.getAdotante());
 //            comboBoxAdotado.setSelectedItem(adocoes.getAdotados());
             visitaMediator.carregarDados(adocoes.getVisitas());
-            adotadoMediator.carregarDados(adocoes.getAdotados());
+            adotadoMediator.registerAdocao(adocoes);
             tab.setSelectedIndex(1);
         }
     }

@@ -34,9 +34,15 @@ public class AdocaoController {
                 .whitStatus(status)
                 .whitAdotante(adotante)
                 .whitAtendente(atendente)
-                .whitAdotados(adotados)
-                .whitVisitas(visitas)
                 .build();
+        for (int i = 0; i < visitas.size(); i++) {
+            visitas.get(i).setAdocao(adocao);
+        }
+          for (int i = 0; i < adotados.size(); i++) {
+            adotados.get(i).setAdocao(adocao);
+        }
+        adocao.setVisitas(visitas);
+        adocao.setAdotados(adotados);
         repository.save(adocao);
     }
 

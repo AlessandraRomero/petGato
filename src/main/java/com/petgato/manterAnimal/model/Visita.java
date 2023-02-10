@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +26,7 @@ public class Visita implements Serializable {
     private VisitaId id;
     private LocalDate dataVisita;
     private String observacao;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Visita() {

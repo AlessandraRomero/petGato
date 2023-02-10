@@ -19,7 +19,9 @@ public class UsuarioRepository extends AdapterRepository<Usuario, Long>{
     
     @Override
     public List<Usuario> findAll() {
-        List<Usuario> usuarios = getEntityManager().createQuery("SELECT user FROM Usuario user", Usuario.class).getResultList();
+        List<Usuario> usuarios = getEntityManager()
+                .createQuery("SELECT user FROM Usuario user", Usuario.class)
+                .getResultList();
         super.close();
         return  usuarios;
     }
