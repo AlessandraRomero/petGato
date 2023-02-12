@@ -35,9 +35,7 @@ public class Adocao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dataEmissao;
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    public LocalDate dataEmissao;
     @ManyToOne
     private Adotante adotante;
     @ManyToOne
@@ -61,7 +59,7 @@ public class Adocao implements Serializable {
     public Adocao(AdocaoBuilder builder) {
         this.id = builder.id;
         this.dataEmissao = builder.dataEmissao;
-        this.status = builder.status;
+//        this.status = builder.status;
         this.adotante = builder.adotante;
         this.atendente = builder.atendente;
         this.adotados = builder.adotados;
@@ -84,13 +82,13 @@ public class Adocao implements Serializable {
         this.dataEmissao = dataEmissao;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+//    public Status getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(Status status) {
+//        this.status = status;
+//    }
 
     public Adotante getAdotante() {
         return adotante;
@@ -175,7 +173,7 @@ public class Adocao implements Serializable {
         int hash = 3;
         hash = 71 * hash + Objects.hashCode(this.id);
         hash = 71 * hash + Objects.hashCode(this.dataEmissao);
-        hash = 71 * hash + Objects.hashCode(this.status);
+//        hash = 71 * hash + Objects.hashCode(this.status);
         hash = 71 * hash + Objects.hashCode(this.adotante);
         hash = 71 * hash + Objects.hashCode(this.atendente);
         hash = 71 * hash + Objects.hashCode(this.adotados);
@@ -198,9 +196,9 @@ public class Adocao implements Serializable {
         if (!Objects.equals(this.dataEmissao, other.dataEmissao)) {
             return false;
         }
-        if (this.status != other.status) {
-            return false;
-        }
+//        if (this.status != other.status) {
+//            return false;
+//        }
         if (!Objects.equals(this.adotante, other.adotante)) {
             return false;
         }
@@ -217,7 +215,7 @@ public class Adocao implements Serializable {
 
         private Long id;
         private LocalDate dataEmissao;
-        private Status status;
+//        private Status status;
         @ManyToOne
         private Adotante adotante;
         @ManyToOne
@@ -248,10 +246,10 @@ public class Adocao implements Serializable {
             return this;
         }
 
-        public Adocao.AdocaoBuilder whitStatus(Status value) {
-            this.status = value;
-            return this;
-        }
+//        public Adocao.AdocaoBuilder whitStatus(Status value) {
+//            this.status = value;
+//            return this;
+//        }
 
         public Adocao.AdocaoBuilder whitAdotante(Adotante value) {
             this.adotante = value;

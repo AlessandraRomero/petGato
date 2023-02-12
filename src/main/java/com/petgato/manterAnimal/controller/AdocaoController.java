@@ -9,7 +9,6 @@ import com.petgato.manterAnimal.model.Adocao;
 import com.petgato.manterAnimal.model.Adotado;
 import com.petgato.manterAnimal.model.Animal;
 import com.petgato.manterAnimal.model.Visita;
-import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterAnimal.repository.AdocaoRepository;
 import com.petgato.manterUsuario.model.Usuario;
 import java.time.LocalDate;
@@ -27,18 +26,18 @@ public class AdocaoController {
         this.repository = new AdocaoRepository();
     }
 
-    public void cadastrar(LocalDate dataEmissao, Status status, Adotante adotante,
+    public void cadastrar(LocalDate dataEmissao, Adotante adotante,
             Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
         Adocao adocao = new Adocao.AdocaoBuilder()
                 .whitDataEmissao(dataEmissao)
-                .whitStatus(status)
                 .whitAdotante(adotante)
                 .whitAtendente(atendente)
+//                .whitStatus(status)
                 .build();
         for (int i = 0; i < visitas.size(); i++) {
             visitas.get(i).setAdocao(adocao);
         }
-          for (int i = 0; i < adotados.size(); i++) {
+        for (int i = 0; i < adotados.size(); i++) {
             adotados.get(i).setAdocao(adocao);
         }
         adocao.setVisitas(visitas);
@@ -50,15 +49,14 @@ public class AdocaoController {
         return repository.findById(id);
     }
 
-    public void atualizar(Long id, LocalDate dataEmissao, Status status, Adotante adotante,
-            Usuario atendente, List<Adotado> adotados, List<Visita> Visitas) {
+    public void atualizar(Long id, Adotante adotante,
+            Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
         Adocao adocao = buscarPorId(id);
-        adocao.setDataEmissao(dataEmissao);
-        adocao.setStatus(status);
         adocao.setAdotante(adotante);
         adocao.setAtendente(atendente);
         adocao.setAdotados(adotados);
-        adocao.setVisitas(Visitas);
+//        adocao.setStatus(status);
+        adocao.setVisitas(visitas);
         repository.update(adocao);
     }
 

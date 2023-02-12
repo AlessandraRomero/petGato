@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -31,8 +32,10 @@ public class VisitaMediator extends AbstractMediator {
     private JComboBox comboBoxStatus;
     private Adocao adocao;
     private JTable tabelaVisita;
+    private JTabbedPane tab2;
 
     private VisitaTableModel model;
+    
 
     public VisitaMediator registerTabelaVisita(JTable tabelaVisita) {
         this.tabelaVisita = tabelaVisita;
@@ -64,17 +67,13 @@ public class VisitaMediator extends AbstractMediator {
         return this;
     }
 
-//    public VisitaMediator registerTxtBuscar(JTextField txtBuscar) {
-//        this.txtBuscar = txtBuscar;
-//        return this;
-//    }
     public VisitaMediator registerVisitaTableModel(VisitaTableModel model) {
         this.model = model;
         return this;
     }
 
     private Long getIdVisitaFromTable() {
-        int linha = tabela.getSelectedRow();
+        int linha = tabelaVisita.getSelectedRow();
 
         if (linha >= 0) {
             return (Long) model.getValueAt(linha, 0);
@@ -108,8 +107,7 @@ public class VisitaMediator extends AbstractMediator {
             txtIdVisita.setText(visita.getId().toString());
             txtObservacaoVisita.setText(visita.getObservacao());
             jDataVisita.setDate(Date.from(visita.getDataVisita().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            comboBoxStatus.setSelectedItem(visita.getStatus());
-            tab.setSelectedIndex(1);
+            comboBoxStatus.setSelectedItem(visita.getStatus());   
         }
     }
 
@@ -118,7 +116,7 @@ public class VisitaMediator extends AbstractMediator {
         txtObservacaoVisita.setText("");
         jDataVisita.setDate(null);
         comboBoxStatus.setSelectedItem(null);
-//        comboBoxAdocao.setSelectedItem(null);
+
     }
 
     public void novo() {
@@ -144,7 +142,6 @@ public class VisitaMediator extends AbstractMediator {
         boolean idValido = txtIdVisita.getText().matches("\\d+");
         VisitaId visitaId = new VisitaId(adocao.proximoSequenciaVisita(), null);
         if (!idValido) {
-
             Visita visita = new Visita.VisitaBuilder()
                     .whitDataVisita(jDataVisita.getDate().toInstant()
                             .atZone(ZoneId.systemDefault())

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class AdocaoTableModel extends PetGatoTableModel {
 
-    private String colunas[] = {"id", "DT Emissão", "Adotante", "Atendente", "Status"};
+    private String colunas[] = {"id", "DT Emissão", "Adotante", "Atendente"};
     private List<Adocao> lista = new ArrayList();
     private AdocaoRepository repository;
 
@@ -43,6 +43,10 @@ public class AdocaoTableModel extends PetGatoTableModel {
 
     public void setLista(List<Adocao> lista) {
         this.lista = lista;
+    }
+    
+    public List<Adocao> getLista() {
+        return this.lista;
     }
 
     public void adicionar(Adocao adocao) {
@@ -82,8 +86,8 @@ public class AdocaoTableModel extends PetGatoTableModel {
                 return adocao.getAdotante().getNome();
             case 3:
                 return adocao.getAtendente().getNome();
-            case 4:
-                return adocao.getStatus();
+//            case 4:
+//                return adocao.getStatus();
             default:
                 return null;
         }

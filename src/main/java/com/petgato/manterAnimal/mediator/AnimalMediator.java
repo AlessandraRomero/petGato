@@ -149,7 +149,6 @@ public class AnimalMediator extends AbstractMediator {
             txtIdade.setText(String.valueOf(animais.getIdade()));
             txtSexo.setText(animais.getSexo());
             txtPeso.setText(String.valueOf(animais.getPeso()));
-//            txtAdotado.setText(String.valueOf(animais.getAdotado().isAdotado()));
             if (animais.getDataResgate() != null) {
                 jDateDataResgate.setDate(Date.from(animais.getDataResgate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             }
@@ -238,10 +237,6 @@ public class AnimalMediator extends AbstractMediator {
         this.resultados = builder.findBy(nome, dataResgateBuscar, especie);
 
         model.atualizar(this.resultados);
-    }
-
-    public void gerarRelatorio() {
-
     }
 
     public void cancelar() {

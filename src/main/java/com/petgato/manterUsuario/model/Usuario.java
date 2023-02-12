@@ -81,14 +81,6 @@ public class Usuario extends Pessoa {
         this.bloqueado = bloqueado;
     }
 
-//    public String getSituacao() {
-//        return situacao;
-//    }
-//
-//    public void setSituacao(String situacao) {
-//        this.situacao = situacao;
-//    }
-
     @Override
     public int hashCode() {
         int hash = 7;

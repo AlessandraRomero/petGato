@@ -26,8 +26,8 @@ public class AdotadoController {
         Adotado adotad = new Adotado.AdotadoBuilder()
                 .withDataAdocao(dataAdocao)
                 .withIsAdotado(isAdotado)
-                .withAdocao(adocao)
                 .withAnimal(animal)
+                .withAdocao(adocao)
                 .build();
         repository.save(adotad);
     }
@@ -36,9 +36,8 @@ public class AdotadoController {
         return repository.findById(id);
     }
 
-    public void atualizar(long id, LocalDate dataAdocao, boolean isAdotado, Animal animal) {
+    public void atualizar(Long id, boolean isAdotado, Animal animal) {
         Adotado adotad = buscarPorId(id);
-        adotad.setDataAdocao(dataAdocao);
         adotad.setAdotado(isAdotado);
         adotad.setAnimal(animal);
         repository.update(adotad);

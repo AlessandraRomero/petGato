@@ -16,6 +16,10 @@ import com.petgato.manterAnimal.view.modelView.AnimalComboBoxModel;
 import com.petgato.manterAnimal.view.modelView.SituacaoVisitaComboBoxModel;
 import com.petgato.manterAnimal.view.modelView.VisitaTableModel;
 import com.petgato.manterUsuario.view.modelView.UsuarioComboBoxModel;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -52,13 +56,15 @@ public class CadastroAdocao extends javax.swing.JFrame {
 
         mediator = new AdocaoMediator();
         mediator.registerTxtId(txtId)
+                .registerjDateStart(jDateStart)
+                .registerjDateEnd(jDateEnd)
                 .registerComboBoxAdotante(comboBoxAdotante)
                 .registerComboBoxAtendente(comboBoxAtendente)
                 .registerAdocaoController(controle)
                 .registerJTable(tabela)
                 .registerJTabbedPane(tab);
         mediator.registerAdocaoModel(model);
-        mediator.registerTxtStatus(txtStatus1);
+//        mediator.registerTxtStatus(txtStatus);
 
         visitaMediator = new VisitaMediator();
         visitaMediator.registerJDataVisita(jDateDataVisita);
@@ -66,11 +72,11 @@ public class CadastroAdocao extends javax.swing.JFrame {
         visitaMediator.registerTxtObservacao(txtObservacaoVisita);
         visitaMediator.registerVisitaTableModel(visitaTableModel);
         visitaMediator.registerTabelaVisita(tabelaVisita);
-        visitaMediator.registerTxtId(txtId);
+        visitaMediator.registerTxtId(txtIdVisita);
         mediator.registerVisitaMediator(visitaMediator);
 
         adotadoMediator = new AdotadoMediator();
-        adotadoMediator.registerTxtId(txtId);
+        adotadoMediator.registerTxtIdAdotado(txtIdAdotado);
         adotadoMediator.registerJRadioButtonAnalise(jRadioButtonAnalise);
         adotadoMediator.registerJRadioButtonN(jRadioButtonN);
         adotadoMediator.registerJRadioButtonS(jRadioButtonS);
@@ -129,14 +135,21 @@ public class CadastroAdocao extends javax.swing.JFrame {
         buttonExcluir = new javax.swing.JButton();
         buttonNovo = new javax.swing.JButton();
         buttonGerarPDF = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jDateStart = new com.toedter.calendar.JDateChooser();
+        jDateEnd = new com.toedter.calendar.JDateChooser();
+        jLabel15 = new javax.swing.JLabel();
+        buttonBuscar = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
+        comboBoxFAdotante = new javax.swing.JComboBox();
+        comboBoxAtendente1 = new javax.swing.JComboBox();
+        jLabel32 = new javax.swing.JLabel();
         jpAdocao1 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         comboBoxAdotante = new javax.swing.JComboBox();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        txtStatus1 = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
         comboBoxAtendente = new javax.swing.JComboBox();
         tab2 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -146,7 +159,6 @@ public class CadastroAdocao extends javax.swing.JFrame {
         txtObservacaoVisita = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         comboBoxStatusVisita = new javax.swing.JComboBox();
-        jButtonExcluirVisita = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tabelaVisita = new javax.swing.JTable();
         jButtonSalvarVisita = new javax.swing.JButton();
@@ -154,18 +166,22 @@ public class CadastroAdocao extends javax.swing.JFrame {
         txtIdVisita = new javax.swing.JTextField();
         buttonCadastrar = new javax.swing.JButton();
         buttonCancelar = new javax.swing.JButton();
+        jButtonExcluirVisita = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         comboBoxAnimal = new javax.swing.JComboBox();
         jLabel38 = new javax.swing.JLabel();
         jRadioButtonS = new javax.swing.JRadioButton();
         jRadioButtonN = new javax.swing.JRadioButton();
-        jButtonSalvarAdocao = new javax.swing.JButton();
+        jButtonSalvarAdotado = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabelaAdotado = new javax.swing.JTable();
         jRadioButtonAnalise = new javax.swing.JRadioButton();
-        txtId1 = new javax.swing.JTextField();
+        txtIdAdotado = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
+        buttonCancelarAdotado = new javax.swing.JButton();
+        buttonCadastrarAdotado = new javax.swing.JButton();
+        jButtonExcluirAdotado = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -537,6 +553,47 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(89, 199, 162));
+        jLabel14.setText("Emissões de Adocões de:");
+
+        jLabel15.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(89, 199, 162));
+        jLabel15.setText("até:");
+
+        buttonBuscar.setBackground(new java.awt.Color(240, 152, 139));
+        buttonBuscar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        buttonBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        buttonBuscar.setText("Buscar");
+        buttonBuscar.setBorder(null);
+        buttonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel40.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(89, 199, 162));
+        jLabel40.setText("Adotante:");
+
+        comboBoxFAdotante.setModel(adotanteComboModel);
+        comboBoxFAdotante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxFAdotanteActionPerformed(evt);
+            }
+        });
+
+        comboBoxAtendente1.setModel(usuarioComboModel);
+        comboBoxAtendente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxAtendente1ActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(89, 199, 162));
+        jLabel32.setText("Atendente:");
+
         javax.swing.GroupLayout jpAdocaoLayout = new javax.swing.GroupLayout(jpAdocao);
         jpAdocao.setLayout(jpAdocaoLayout);
         jpAdocaoLayout.setHorizontalGroup(
@@ -553,15 +610,54 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .addGap(203, 203, 203))
             .addGroup(jpAdocaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jpAdocaoLayout.createSequentialGroup()
+                        .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpAdocaoLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpAdocaoLayout.createSequentialGroup()
+                                .addComponent(jLabel40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboBoxFAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboBoxAtendente1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpAdocaoLayout.setVerticalGroup(
             jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAdocaoLayout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addGap(9, 9, 9)
+                .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpAdocaoLayout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jLabel14))
+                        .addComponent(jDateStart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel15)
+                    .addComponent(jDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboBoxFAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel32)
+                        .addComponent(comboBoxAtendente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpAdocaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -601,17 +697,6 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
-        txtStatus1.setEditable(false);
-        txtStatus1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStatus1ActionPerformed(evt);
-            }
-        });
-
-        jLabel32.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel32.setForeground(new java.awt.Color(89, 199, 162));
-        jLabel32.setText("Status");
-
         comboBoxAtendente.setModel(usuarioComboModel);
         comboBoxAtendente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -643,23 +728,18 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel35.setForeground(new java.awt.Color(89, 199, 162));
         jLabel35.setText("Situação: ");
 
-        comboBoxStatusVisita.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "APROVADO ", "PENDENTE", "REPROVADO", " " }));
+        comboBoxStatusVisita.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "APROVADO", "PENDENTE", "REPROVADO", "" }));
         comboBoxStatusVisita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxStatusVisitaActionPerformed(evt);
             }
         });
 
-        jButtonExcluirVisita.setText("Excluir");
-        jButtonExcluirVisita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirVisitaActionPerformed(evt);
-            }
-        });
-
         tabelaVisita.setModel(visitaTableModel);
         jScrollPane5.setViewportView(tabelaVisita);
 
+        jButtonSalvarVisita.setBackground(new java.awt.Color(240, 152, 139));
+        jButtonSalvarVisita.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalvarVisita.setText("Salvar");
         jButtonSalvarVisita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -670,6 +750,8 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(89, 199, 162));
         jLabel36.setText("Id:");
+
+        txtIdVisita.setEditable(false);
 
         buttonCadastrar.setBackground(new java.awt.Color(240, 152, 139));
         buttonCadastrar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -693,6 +775,15 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
+        jButtonExcluirVisita.setBackground(new java.awt.Color(240, 152, 139));
+        jButtonExcluirVisita.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExcluirVisita.setText("Excluir");
+        jButtonExcluirVisita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirVisitaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -708,24 +799,25 @@ public class CadastroAdocao extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel36)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
+                        .addComponent(txtIdVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
                         .addComponent(jLabel33)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDateDataVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jButtonExcluirVisita)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonSalvarVisita))
                     .addComponent(comboBoxStatusVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(279, 279, 279))
@@ -749,13 +841,13 @@ public class CadastroAdocao extends javax.swing.JFrame {
                         .addComponent(txtObservacaoVisita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel34))
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonExcluirVisita)
-                        .addComponent(jButtonSalvarVisita)))
+                        .addComponent(jButtonSalvarVisita)
+                        .addComponent(jButtonExcluirVisita)))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                     .addComponent(buttonCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -799,11 +891,13 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
-        jButtonSalvarAdocao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jButtonSalvarAdocao.setText("Salvar");
-        jButtonSalvarAdocao.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvarAdotado.setBackground(new java.awt.Color(240, 152, 139));
+        jButtonSalvarAdotado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButtonSalvarAdotado.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSalvarAdotado.setText("Salvar");
+        jButtonSalvarAdotado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalvarAdocaoActionPerformed(evt);
+                jButtonSalvarAdotadoActionPerformed(evt);
             }
         });
 
@@ -820,10 +914,10 @@ public class CadastroAdocao extends javax.swing.JFrame {
             }
         });
 
-        txtId1.setEditable(false);
-        txtId1.addActionListener(new java.awt.event.ActionListener() {
+        txtIdAdotado.setEditable(false);
+        txtIdAdotado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtId1ActionPerformed(evt);
+                txtIdAdotadoActionPerformed(evt);
             }
         });
 
@@ -832,18 +926,50 @@ public class CadastroAdocao extends javax.swing.JFrame {
         jLabel39.setForeground(new java.awt.Color(89, 199, 162));
         jLabel39.setText("Id:");
 
+        buttonCancelarAdotado.setBackground(new java.awt.Color(240, 152, 139));
+        buttonCancelarAdotado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        buttonCancelarAdotado.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCancelarAdotado.setText("Cancelar");
+        buttonCancelarAdotado.setBorder(null);
+        buttonCancelarAdotado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCancelarAdotadoActionPerformed(evt);
+            }
+        });
+
+        buttonCadastrarAdotado.setBackground(new java.awt.Color(240, 152, 139));
+        buttonCadastrarAdotado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        buttonCadastrarAdotado.setForeground(new java.awt.Color(255, 255, 255));
+        buttonCadastrarAdotado.setText("Gravar");
+        buttonCadastrarAdotado.setBorder(null);
+        buttonCadastrarAdotado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCadastrarAdotadoActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluirAdotado.setBackground(new java.awt.Color(240, 152, 139));
+        jButtonExcluirAdotado.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
+        jButtonExcluirAdotado.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExcluirAdotado.setText("Excluir");
+        jButtonExcluirAdotado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirAdotadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(529, 529, 529)
-                        .addComponent(jButtonSalvarAdocao))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdAdotado, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel37)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -853,16 +979,21 @@ public class CadastroAdocao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButtonS)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonAnalise)))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonN)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonAnalise))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                .addComponent(jButtonExcluirAdotado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonSalvarAdotado))))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(buttonCadastrarAdotado, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCancelarAdotado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(91, Short.MAX_VALUE))
-            .addComponent(jScrollPane6)
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel10Layout.createSequentialGroup()
-                    .addGap(372, 372, 372)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(373, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -875,17 +1006,19 @@ public class CadastroAdocao extends javax.swing.JFrame {
                     .addComponent(jLabel37)
                     .addComponent(comboBoxAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonAnalise)
-                    .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(jButtonSalvarAdocao)
+                    .addComponent(txtIdAdotado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel39))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSalvarAdotado)
+                    .addComponent(jButtonExcluirAdotado))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel10Layout.createSequentialGroup()
-                    .addGap(200, 200, 200)
-                    .addComponent(jLabel39)
-                    .addContainerGap(200, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonCadastrarAdotado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonCancelarAdotado, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tab2.addTab("Adoção", jPanel10);
@@ -903,17 +1036,13 @@ public class CadastroAdocao extends javax.swing.JFrame {
                 .addGroup(jpAdocao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpAdocao1Layout.createSequentialGroup()
                         .addComponent(comboBoxAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpAdocao1Layout.createSequentialGroup()
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel30)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpAdocao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(comboBoxAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(tab2)
         );
@@ -928,10 +1057,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
                     .addComponent(comboBoxAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpAdocao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpAdocao1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboBoxAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel32))
+                    .addComponent(comboBoxAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tab2))
@@ -1003,54 +1129,6 @@ public class CadastroAdocao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void comboBoxAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAdotanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxAdotanteActionPerformed
-
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
-
-    private void txtStatus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatus1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStatus1ActionPerformed
-
-    private void comboBoxAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAtendenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxAtendenteActionPerformed
-
-    private void comboBoxStatusVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxStatusVisitaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxStatusVisitaActionPerformed
-
-    private void jButtonExcluirVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirVisitaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonExcluirVisitaActionPerformed
-
-    private void jButtonSalvarVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarVisitaActionPerformed
-        visitaMediator.gravar();
-    }//GEN-LAST:event_jButtonSalvarVisitaActionPerformed
-
-    private void comboBoxAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAnimalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxAnimalActionPerformed
-
-    private void jRadioButtonSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonSActionPerformed
-
-    private void jRadioButtonNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonNActionPerformed
-
-    private void jButtonSalvarAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarAdocaoActionPerformed
-        adotadoMediator.gravar();
-    }//GEN-LAST:event_jButtonSalvarAdocaoActionPerformed
-
-    private void jRadioButtonAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAnaliseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonAnaliseActionPerformed
-
     private void buttonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtualizarActionPerformed
         mediator.alterar();
     }//GEN-LAST:event_buttonAtualizarActionPerformed
@@ -1064,12 +1142,62 @@ public class CadastroAdocao extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonNovoActionPerformed
 
     private void buttonGerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGerarPDFActionPerformed
-        // TODO add your handling code here:
+        try {
+            mediator.gerarPDF();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CadastroAdocao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(CadastroAdocao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonGerarPDFActionPerformed
 
-    private void txtObservacaoVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtObservacaoVisitaActionPerformed
+    private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
+       mediator.buscar();
+    }//GEN-LAST:event_buttonBuscarActionPerformed
+
+    private void comboBoxFAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFAdotanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtObservacaoVisitaActionPerformed
+    }//GEN-LAST:event_comboBoxFAdotanteActionPerformed
+
+    private void jButtonExcluirAdotadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirAdotadoActionPerformed
+        adotadoMediator.excluir();
+    }//GEN-LAST:event_jButtonExcluirAdotadoActionPerformed
+
+    private void buttonCadastrarAdotadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarAdotadoActionPerformed
+        mediator.gravar();
+    }//GEN-LAST:event_buttonCadastrarAdotadoActionPerformed
+
+    private void buttonCancelarAdotadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarAdotadoActionPerformed
+        mediator.cancelar();
+    }//GEN-LAST:event_buttonCancelarAdotadoActionPerformed
+
+    private void txtIdAdotadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdAdotadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdAdotadoActionPerformed
+
+    private void jRadioButtonAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAnaliseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonAnaliseActionPerformed
+
+    private void jButtonSalvarAdotadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarAdotadoActionPerformed
+        adotadoMediator.gravar();
+    }//GEN-LAST:event_jButtonSalvarAdotadoActionPerformed
+
+    private void jRadioButtonNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonNActionPerformed
+
+    private void jRadioButtonSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonSActionPerformed
+
+    private void comboBoxAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAnimalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxAnimalActionPerformed
+
+    private void jButtonExcluirVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirVisitaActionPerformed
+        visitaMediator.excluir();
+    }//GEN-LAST:event_jButtonExcluirVisitaActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         mediator.cancelar();
@@ -1079,9 +1207,33 @@ public class CadastroAdocao extends javax.swing.JFrame {
         mediator.gravar();
     }//GEN-LAST:event_buttonCadastrarActionPerformed
 
-    private void txtId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtId1ActionPerformed
+    private void jButtonSalvarVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarVisitaActionPerformed
+        visitaMediator.gravar();
+    }//GEN-LAST:event_jButtonSalvarVisitaActionPerformed
+
+    private void comboBoxStatusVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxStatusVisitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtId1ActionPerformed
+    }//GEN-LAST:event_comboBoxStatusVisitaActionPerformed
+
+    private void txtObservacaoVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtObservacaoVisitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtObservacaoVisitaActionPerformed
+
+    private void comboBoxAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAtendenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxAtendenteActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void comboBoxAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAdotanteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxAdotanteActionPerformed
+
+    private void comboBoxAtendente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAtendente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxAtendente1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1122,31 +1274,41 @@ public class CadastroAdocao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgAdotado;
     private javax.swing.JButton buttonAtualizar;
+    private javax.swing.JButton buttonBuscar;
     private javax.swing.JButton buttonCadastrar;
+    private javax.swing.JButton buttonCadastrarAdotado;
     private javax.swing.JButton buttonCancelar;
+    private javax.swing.JButton buttonCancelarAdotado;
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JButton buttonGerarPDF;
     private javax.swing.JButton buttonNovo;
     private javax.swing.JComboBox comboBoxAdotante;
     private javax.swing.JComboBox comboBoxAnimal;
     private javax.swing.JComboBox comboBoxAtendente;
+    private javax.swing.JComboBox comboBoxAtendente1;
+    private javax.swing.JComboBox comboBoxFAdotante;
     private javax.swing.JComboBox comboBoxStatusVisita;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonExcluirAdotado;
     private javax.swing.JButton jButtonExcluirVisita;
-    private javax.swing.JButton jButtonSalvarAdocao;
+    private javax.swing.JButton jButtonSalvarAdotado;
     private javax.swing.JButton jButtonSalvarVisita;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateDataVisita;
+    private com.toedter.calendar.JDateChooser jDateEnd;
+    private com.toedter.calendar.JDateChooser jDateStart;
     private javax.swing.JLabel jIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1161,6 +1323,7 @@ public class CadastroAdocao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1192,10 +1355,9 @@ public class CadastroAdocao extends javax.swing.JFrame {
     private javax.swing.JTable tabelaAdotado;
     private javax.swing.JTable tabelaVisita;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtId1;
+    private javax.swing.JTextField txtIdAdotado;
     private javax.swing.JTextField txtIdVisita;
     private javax.swing.JTextField txtObservacaoVisita;
-    private javax.swing.JTextField txtStatus1;
     // End of variables declaration//GEN-END:variables
 
 //    private void setIcon() {

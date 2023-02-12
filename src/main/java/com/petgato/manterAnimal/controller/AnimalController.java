@@ -51,7 +51,6 @@ public class AnimalController {
         animal.setRaca(raca);
         animal.setDataResgate(dataResgate);
         animal.setEspecie(especie);
-//        animal.setAdotado(adotado);
         repository.update(animal);
     }
 

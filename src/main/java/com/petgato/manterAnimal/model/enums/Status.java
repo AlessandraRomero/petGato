@@ -9,7 +9,7 @@ package com.petgato.manterAnimal.model.enums;
  * @author alessandra
  */
 public enum Status {
+    APROVADO,
     PENDENTE,
-    APROVADO, 
     REPROVADO
 }

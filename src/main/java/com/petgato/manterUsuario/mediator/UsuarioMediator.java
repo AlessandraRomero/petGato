@@ -180,7 +180,7 @@ public class UsuarioMediator extends AbstractMediator {
             model.atualizar();
             tab.setSelectedIndex(0);
         } else {
-            JOptionPane.showMessageDialog(null, "Campo nome não deve ser vazio", "aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Campo " +txtNome+ " não deve ser vazio", "aviso", JOptionPane.WARNING_MESSAGE);
             txtNome.requestFocusInWindow();
         }
     }
