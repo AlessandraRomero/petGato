@@ -13,7 +13,6 @@ import com.petgato.padrao.mediator.AbstractMediator;
 import com.toedter.calendar.JDateChooser;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -35,7 +34,8 @@ public class AdotadoMediator extends AbstractMediator {
     private JRadioButton jRadioButtonN;
     private JRadioButton jRadioButtonAnalise;
     private JTable tabelaAdotado;
-
+    private String selecionado;
+    
     private AdotadoTableModel model;
 
     public AdotadoMediator registerTabelaAdotado(JTable tabelaAdotado) {
@@ -117,16 +117,15 @@ public class AdotadoMediator extends AbstractMediator {
 
     public void alterar() {
         Adotado adotado = getAdotado();
-
+        int isAdotado;
         if (adotado != null) {
             txtIdAdotado.setText(adotado.getId().toString());
-            if (adotado.getIsAdotado() != null) {
-                jRadioButtonAnalise.setSelected(true);
-
-            } else if (adotado.isAdotado()) {
-                jRadioButtonS.setSelected(true);
-            } else {
-                jRadioButtonN.setSelected(true);
+            if(jRadioButtonN.isSelected()){
+                isAdotado = 0;
+            }else if(jRadioButtonS.isSelected()){
+                isAdotado = 1;
+            }else if(jRadioButtonAnalise.isSelected()){
+                isAdotado = 2;
             }
 //            jDataAdocao.setDate(Date.from(adotado.getDataAdocao().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             comboBoxAnimal.setSelectedItem(adotado.getAnimal());
@@ -162,13 +161,18 @@ public class AdotadoMediator extends AbstractMediator {
         boolean idValido = txtIdAdotado.getText().matches("\\d+");
         AdotadoId adotadoId = new AdotadoId(adocao.proximaSequenciaAdotado(), null);
         if (!idValido) {
-
+            int isAdotado = 0;
+            if(jRadioButtonN.isSelected()){
+                isAdotado = 0;
+            }else if(jRadioButtonS.isSelected()){
+                isAdotado = 1;
+            }else if(jRadioButtonAnalise.isSelected()){
+                isAdotado = 2;
+            }
             Adotado adotado = new Adotado.AdotadoBuilder()
                     .withDataAdocao(LocalDate.now(ZoneId.systemDefault()))
                     .withAnimal((Animal) comboBoxAnimal.getSelectedItem())
-                    .withIsAdotado(
-                            (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
-                    )
+                    .withAdotado(isAdotado)      
                     .withId(adotadoId)
                     .build();
 
@@ -178,9 +182,8 @@ public class AdotadoMediator extends AbstractMediator {
             int linhaAdotado = tabelaAdotado.getSelectedRow();
             Adotado adotado = model.getValue(linhaAdotado);
             adotado.setAnimal((Animal) comboBoxAnimal.getSelectedItem());
-            adotado.setAdotado(
-                    (jRadioButtonAnalise.isSelected() ? null : jRadioButtonS.isSelected())
-            );
+            int isAdotado = 0;
+            adotado.setAdotado(isAdotado);
             adotado.setId(adotadoId);
         }
         model.fireTableStructureChanged();

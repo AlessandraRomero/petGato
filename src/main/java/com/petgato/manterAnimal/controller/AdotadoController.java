@@ -22,10 +22,10 @@ public class AdotadoController {
         this.repository = new AdotadoRepository();
     }
 
-    public void cadastrar(LocalDate dataAdocao, boolean isAdotado, Animal animal, Adocao adocao) {
+    public void cadastrar(LocalDate dataAdocao, int adotado, Animal animal, Adocao adocao) {
         Adotado adotad = new Adotado.AdotadoBuilder()
                 .withDataAdocao(dataAdocao)
-                .withIsAdotado(isAdotado)
+                .withAdotado(adotado)
                 .withAnimal(animal)
                 .withAdocao(adocao)
                 .build();
@@ -36,9 +36,9 @@ public class AdotadoController {
         return repository.findById(id);
     }
 
-    public void atualizar(Long id, boolean isAdotado, Animal animal) {
+    public void atualizar(Long id, int adotado, Animal animal) {
         Adotado adotad = buscarPorId(id);
-        adotad.setAdotado(isAdotado);
+        adotad.setAdotado(adotado);
         adotad.setAnimal(animal);
         repository.update(adotad);
     }

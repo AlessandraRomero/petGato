@@ -23,7 +23,8 @@ public class Adotado implements Serializable {
     @EmbeddedId
     private AdotadoId id;
     private LocalDate dataAdocao;
-    private Boolean isAdotado;
+    private int adotado;
+    
 
     @ManyToOne
     private Animal animal;
@@ -34,7 +35,7 @@ public class Adotado implements Serializable {
     public Adotado(AdotadoBuilder builder) {
         this.id = builder.id;
         this.dataAdocao = builder.dataAdocao;
-        this.isAdotado = builder.isAdotado;
+        this.adotado = builder.adotado;
         this.animal = builder.animal;
     }
 
@@ -54,16 +55,12 @@ public class Adotado implements Serializable {
         this.dataAdocao = dataAdocao;
     }
 
-    public boolean isAdotado() {
-        return isAdotado;
+    public int getAdotado() {
+        return adotado;
     }
 
-    public void setAdotado(Boolean isAdotado) {
-        this.isAdotado = isAdotado;
-    }
-
-    public Boolean getIsAdotado() {
-        return isAdotado;
+    public void setAdotado(int adotado) {
+        this.adotado = adotado;
     }
 
     public Animal getAnimal() {
@@ -87,7 +84,7 @@ public class Adotado implements Serializable {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.id);
         hash = 41 * hash + Objects.hashCode(this.dataAdocao);
-        hash = 41 * hash + Objects.hashCode(this.isAdotado);
+        hash = 41 * hash + Objects.hashCode(this.adotado);
         hash = 41 * hash + Objects.hashCode(this.animal);
         return hash;
     }
@@ -107,7 +104,7 @@ public class Adotado implements Serializable {
         if (!Objects.equals(this.dataAdocao, other.getDataAdocao())) {
             return false;
         }
-        if (!Objects.equals(this.isAdotado, other.isAdotado)) {
+        if (!Objects.equals(this.adotado, other.adotado)) {
             return false;
         }
         
@@ -118,7 +115,7 @@ public class Adotado implements Serializable {
 
         private AdotadoId id;
         private LocalDate dataAdocao;
-        private boolean isAdotado;
+        private int adotado;
         private Animal animal;
 
         public AdotadoBuilder() {
@@ -135,8 +132,8 @@ public class Adotado implements Serializable {
             return this;
         }
 
-        public Adotado.AdotadoBuilder withIsAdotado(boolean value) {
-            this.isAdotado = value;
+        public Adotado.AdotadoBuilder withAdotado(int value) {
+            this.adotado = value;
             return this;
         }
 

@@ -72,7 +72,13 @@ public class AdotadoTableModel extends PetGatoTableModel {
             case 2:
                 return adotado.getAnimal();
             case 3:
-                return adotado.isAdotado() ? "Sim" : "Não";
+                if (adotado.getAdotado() == 0) {
+                    return "Não";
+                } else if (adotado.getAdotado() == 1) {
+                    return "Sim";
+                } else {
+                    return "Em Análise";
+                }
             default:
                 return null;
         }
