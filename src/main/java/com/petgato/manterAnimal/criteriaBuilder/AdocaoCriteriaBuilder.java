@@ -28,7 +28,7 @@ public class AdocaoCriteriaBuilder {
 
     EntityManager em = getEntityManager();
 
-    public List<Adocao> findBy(LocalDate dataEmissao, Adotante adotante, Usuario atendente) {
+    public List<Adocao> findBy(LocalDate inicio, LocalDate fim, Adotante adotante, Usuario atendente) {
 
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Adocao> query = builder.createQuery(Adocao.class);
@@ -36,9 +36,9 @@ public class AdocaoCriteriaBuilder {
 
         List<Predicate> predicates = new ArrayList();
 
-        if (dataEmissao != null) {
-            Predicate onStart = builder.greaterThanOrEqualTo(root.get("startDate"), dataEmissao);
-            Predicate onEnd = builder.lessThanOrEqualTo(root.get("endDate"), dataEmissao);
+        if (inicio != null && fim != null) {
+            Predicate onStart = builder.greaterThanOrEqualTo(root.get("dataEmissao"), inicio);
+            Predicate onEnd = builder.lessThanOrEqualTo(root.get("dataEmissao"), fim);
             predicates.add(onStart);
             predicates.add(onEnd);
 

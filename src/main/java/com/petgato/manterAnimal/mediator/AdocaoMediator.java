@@ -231,7 +231,7 @@ public class AdocaoMediator extends AbstractMediator {
         }
         
         AdocaoCriteriaBuilder builder = new AdocaoCriteriaBuilder();
-        this.resultados = builder.findBy(dateStart, adotante, atendente);
+        this.resultados = builder.findBy(dateStart, dateEnd, adotante, atendente);
 
         model.atualizar(this.resultados);
 
