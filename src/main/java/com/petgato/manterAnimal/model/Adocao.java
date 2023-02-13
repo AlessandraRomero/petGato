@@ -5,7 +5,6 @@
 package com.petgato.manterAnimal.model;
 
 import com.petgato.manterAdotante.model.Adotante;
-import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterUsuario.model.Usuario;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,8 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -176,7 +176,7 @@ public class AnimalMediator extends AbstractMediator {
 
     public void excluir() {
         Long id = getIdAnimalFromTable();
-        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse animal?",
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro?",
                 "Confirmação", JOptionPane.YES_OPTION);
         if (id != null && resposta == JOptionPane.YES_OPTION) {
             controle.deletar(id);
@@ -190,9 +190,15 @@ public class AnimalMediator extends AbstractMediator {
         return !(campo.getText().isEmpty() || campo.getText().isBlank());
     }
 
+    private boolean isCamposValidos() {
+        return comboBoxRaca.getSelectedItem() != null && comboBoxEspecie.getSelectedItem() != null;
+    }
+
     public void gravar() {
         boolean idValido = isCampoTextoValido(txtId);
-        if (isCampoTextoValido(txtNome) && isCampoTextoValido(txtIdade) && isCampoTextoValido(txtPeso)) {
+        if (isCampoTextoValido(txtNome) && isCampoTextoValido(txtIdade)
+                && isCampoTextoValido(txtSexo) && isCampoTextoValido(txtPeso)
+                && jDateDataResgate.getDate() != null && comboBoxRaca.getSelectedItem() != null && comboBoxEspecie.getSelectedItem() != null) {
             if (idValido) {
                 controle.atualizar(Long.parseLong(txtId.getText()), txtNome.getText(),
                         Float.parseFloat(txtIdade.getText()),
@@ -209,13 +215,28 @@ public class AnimalMediator extends AbstractMediator {
             model.atualizar();
             tab.setSelectedIndex(0);
         } else {
-            JOptionPane.showMessageDialog(null, "Nenhum campo deve ser vazio", "aviso", JOptionPane.WARNING_MESSAGE);
-            txtNome.requestFocusInWindow();
-            txtIdade.requestFocusInWindow();
-            txtPeso.requestFocusInWindow();
-            jDateDataResgate.requestFocusInWindow();
-            comboBoxEspecie.requestFocusInWindow();
-            comboBoxRaca.requestFocusInWindow();
+            if (txtNome.getText().isEmpty() || txtNome.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Campo Nome deve ser preenchido", "aviso", JOptionPane.WARNING_MESSAGE);
+                txtNome.requestFocusInWindow();
+            } else if (txtIdade.getText().isEmpty() || txtIdade.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Campo Idade deve ser preenchido", "aviso", JOptionPane.WARNING_MESSAGE);
+                txtIdade.requestFocusInWindow();
+            } else if (txtPeso.getText().isEmpty() || txtPeso.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Campo Peso deve ser preenchido", "aviso", JOptionPane.WARNING_MESSAGE);
+                txtPeso.requestFocusInWindow();
+             } else if (txtSexo.getText().isEmpty() || txtSexo.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Campo Sexo deve ser preenchido", "aviso", JOptionPane.WARNING_MESSAGE);
+                txtSexo.requestFocusInWindow();    
+            }  else if (comboBoxEspecie.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Campo Espécie deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
+                comboBoxEspecie.requestFocusInWindow();
+            } else if((comboBoxRaca.getSelectedItem() == null)){
+                JOptionPane.showMessageDialog(null, "Campo Raça deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
+                comboBoxRaca.requestFocusInWindow();
+            }else if(jDateDataResgate.getDate() == null){
+                JOptionPane.showMessageDialog(null, "Campo Data Resgate deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
+                jDateDataResgate.requestFocusInWindow();
+            }
         }
     }
 

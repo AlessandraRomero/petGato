@@ -51,7 +51,7 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
     @Override
     public void update(T value) {
-        entityManager = getEntityManager();
+//        entityManager = getEntityManager();
         EntityTransaction tx = entityManager.getTransaction();
 
         try {

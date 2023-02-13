@@ -24,8 +24,6 @@ public class Adotado implements Serializable {
     private AdotadoId id;
     private LocalDate dataAdocao;
     private int adotado;
-    
-
     @ManyToOne
     private Animal animal;
 

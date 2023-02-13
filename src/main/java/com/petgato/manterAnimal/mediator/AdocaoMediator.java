@@ -165,7 +165,9 @@ public class AdocaoMediator extends AbstractMediator {
 
     public void excluir() {
         Long id = getIdAdocaoFromTable();
-        if (id != null) {
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro de adoção?",
+                "Confirmação", JOptionPane.YES_OPTION);
+        if (id != null && resposta == JOptionPane.YES_OPTION) {
             controle.deletar(id);
             model.atualizar();
             JOptionPane.showMessageDialog(null, "Exclusão realizada",
@@ -229,7 +231,7 @@ public class AdocaoMediator extends AbstractMediator {
         if (comboBoxAtendende.getSelectedItem() != null) {
             atendente = (Usuario) comboBoxAtendende.getSelectedItem();
         }
-        
+
         AdocaoCriteriaBuilder builder = new AdocaoCriteriaBuilder();
         this.resultados = builder.findBy(dateStart, dateEnd, adotante, atendente);
 
