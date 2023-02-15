@@ -86,7 +86,6 @@ public class Adocao implements Serializable {
 //    public void setStatus(Status status) {
 //        this.status = status;
 //    }
-
     public Adotante getAdotante() {
         return adotante;
     }
@@ -108,7 +107,8 @@ public class Adocao implements Serializable {
     }
 
     public void setAdotados(List<Adotado> adotados) {
-        this.adotados = adotados;
+        this.adotados.clear();
+        this.adotados.addAll(adotados);
     }
 
     public List<Visita> getVisitas() {
@@ -116,7 +116,8 @@ public class Adocao implements Serializable {
     }
 
     public void setVisitas(List<Visita> visitas) {
-        this.visitas = visitas;
+        this.visitas.clear();
+        this.visitas.addAll(visitas);
     }
 
     public void adicionar(Adotado adotado) {
@@ -247,7 +248,6 @@ public class Adocao implements Serializable {
 //            this.status = value;
 //            return this;
 //        }
-
         public Adocao.AdocaoBuilder whitAdotante(Adotante value) {
             this.adotante = value;
             return this;
@@ -263,11 +263,10 @@ public class Adocao implements Serializable {
             return this;
         }
 
-        public Adocao.AdocaoBuilder whitVisitas(List<Visita> value) {        
+        public Adocao.AdocaoBuilder whitVisitas(List<Visita> value) {
             this.visitas = value;
             return this;
         }
-        
 
         public Adocao build() {
             return new Adocao(this);

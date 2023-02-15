@@ -56,7 +56,7 @@ public abstract class AdapterRepository<T, K> implements Repository<T, K> {
 
         try {
             tx.begin();
-            entityManager.detach(value);
+//            entityManager.detach(value);
             entityManager.merge(value);
             tx.commit();
         } catch (Throwable t) {

@@ -5,8 +5,6 @@
 package com.petgato.manterProntuario.controller;
 
 import com.petgato.manterProntuario.model.ItemAtendimento;
-import com.petgato.manterProntuario.model.Produto;
-import static com.petgato.manterProntuario.model.Produto_.nome;
 import com.petgato.manterProntuario.repository.ItemAtendimentoRepository;
 
 

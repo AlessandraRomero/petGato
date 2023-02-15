@@ -32,7 +32,7 @@ public class AdocaoController {
                 .whitDataEmissao(dataEmissao)
                 .whitAdotante(adotante)
                 .whitAtendente(atendente)
-//                .whitStatus(status)
+                //                .whitStatus(status)
                 .build();
         for (int i = 0; i < visitas.size(); i++) {
             visitas.get(i).setAdocao(adocao);
@@ -50,7 +50,7 @@ public class AdocaoController {
     }
 
     public void atualizar(Long id, Adotante adotante,
-            Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
+        Usuario atendente, List<Adotado> adotados, List<Visita> visitas) {
         Adocao adocao = buscarPorId(id);
         adocao.setAdotante(adotante);
         adocao.setAtendente(atendente);

@@ -12,11 +12,12 @@ import com.petgato.manterAnimal.view.CadastroRaca;
 import com.petgato.manterBairro.view.CadastroBairro;
 import com.petgato.manterLogradouro.view.CadastroLogradouro;
 import com.petgato.manterUsuario.model.Usuario;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import mdlaf.MaterialLookAndFeel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.Timer;
 
 /**
  *
@@ -43,7 +44,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        jLabel1 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLhora = new javax.swing.JLabel();
+        jLdata = new javax.swing.JLabel();
         JMenuBar = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuIUsuario = new javax.swing.JMenuItem();
@@ -56,20 +61,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuEspecie = new javax.swing.JMenuItem();
         jMenuRaça = new javax.swing.JMenuItem();
         jMenuAdocao = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuRelatorioUsuarios = new javax.swing.JMenuItem();
-        jMenuRelatorioAdotante = new javax.swing.JMenuItem();
-        jMenuRelatorioAnimais = new javax.swing.JMenuItem();
-        jMenuRelatorioAdocoes = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jInternalFrame1.setBackground(new java.awt.Color(255, 255, 255));
         jInternalFrame1.setBorder(null);
         jInternalFrame1.setForeground(new java.awt.Color(255, 255, 255));
+        jInternalFrame1.setTitle("Sistema de Gerenciamento de Adoção PetGato");
         jInternalFrame1.setVisible(true);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pata-grande.png"))); // NOI18N
 
         jPanel12.setBackground(new java.awt.Color(121, 214, 183));
 
@@ -77,11 +85,41 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 759, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 15, Short.MAX_VALUE)
+        );
+
+        jLhora.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLhora.setForeground(new java.awt.Color(102, 102, 102));
+
+        jLdata.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLdata.setForeground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLdata, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jLhora, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLdata, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLhora, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         JMenuBar.setBackground(new java.awt.Color(121, 214, 183));
@@ -215,53 +253,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         JMenuBar.add(jMenuCadastro);
 
-        jMenu2.setBackground(new java.awt.Color(121, 214, 183));
-        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/relatorio24.png"))); // NOI18N
-        jMenu2.setText("Relatório");
-        jMenu2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jMenu2.setOpaque(true);
-
-        jMenuRelatorioUsuarios.setBackground(new java.awt.Color(121, 214, 183));
-        jMenuRelatorioUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuRelatorioUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
-        jMenuRelatorioUsuarios.setText("Usuários");
-        jMenuRelatorioUsuarios.setOpaque(true);
-        jMenuRelatorioUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuRelatorioUsuariosActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuRelatorioUsuarios);
-
-        jMenuRelatorioAdotante.setBackground(new java.awt.Color(121, 214, 183));
-        jMenuRelatorioAdotante.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuRelatorioAdotante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adotante.png"))); // NOI18N
-        jMenuRelatorioAdotante.setText("Adotantes");
-        jMenuRelatorioAdotante.setOpaque(true);
-        jMenuRelatorioAdotante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuRelatorioAdotanteActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuRelatorioAdotante);
-
-        jMenuRelatorioAnimais.setBackground(new java.awt.Color(121, 214, 183));
-        jMenuRelatorioAnimais.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuRelatorioAnimais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animais.png"))); // NOI18N
-        jMenuRelatorioAnimais.setText("Animais");
-        jMenuRelatorioAnimais.setOpaque(true);
-        jMenu2.add(jMenuRelatorioAnimais);
-
-        jMenuRelatorioAdocoes.setBackground(new java.awt.Color(121, 214, 183));
-        jMenuRelatorioAdocoes.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuRelatorioAdocoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adocao1.png"))); // NOI18N
-        jMenuRelatorioAdocoes.setText("Adoçoẽs");
-        jMenuRelatorioAdocoes.setOpaque(true);
-        jMenu2.add(jMenuRelatorioAdocoes);
-
-        JMenuBar.add(jMenu2);
-
+        jMenu3.setBackground(new java.awt.Color(121, 214, 183));
+        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/opcoes1.png"))); // NOI18N
         jMenu3.setText("Opções");
         jMenu3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -281,14 +274,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addGap(524, 524, 524)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(271, 271, 271))
+            .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addGap(0, 430, Short.MAX_VALUE)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -296,9 +297,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jInternalFrame1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,60 +305,62 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuIUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIUsuarioActionPerformed
-        CadastroUsuario usuario = new CadastroUsuario();
-        usuario.setVisible(true);
-    }//GEN-LAST:event_jMenuIUsuarioActionPerformed
-
-    private void jMenuGrupoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGrupoUsuarioActionPerformed
-        CadastroGrupoUsuario grupoUsuario = new CadastroGrupoUsuario();
-        grupoUsuario.setVisible(true);
-    }//GEN-LAST:event_jMenuGrupoUsuarioActionPerformed
-
-    private void jMenuAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdotanteActionPerformed
-        CadastroAdotante adotante = new CadastroAdotante();
-        adotante.setVisible(true);
-    }//GEN-LAST:event_jMenuAdotanteActionPerformed
-
-    private void jMenuBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBairroActionPerformed
-        CadastroBairro bairro = new CadastroBairro();
-        bairro.setVisible(true);
-    }//GEN-LAST:event_jMenuBairroActionPerformed
-
-    private void jMenuLogradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLogradouroActionPerformed
-        CadastroLogradouro logradouro = new CadastroLogradouro();
-        logradouro.setVisible(true);
-    }//GEN-LAST:event_jMenuLogradouroActionPerformed
-
-    private void jMenuAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAnimalActionPerformed
-        CadastroAnimal animal = new CadastroAnimal();
-        animal.setVisible(true);
-    }//GEN-LAST:event_jMenuAnimalActionPerformed
-
-    private void jMenuEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEspecieActionPerformed
-        CadastroEspecie especie = new CadastroEspecie();
-        especie.setVisible(true);
-    }//GEN-LAST:event_jMenuEspecieActionPerformed
-
-    private void jMenuRaçaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRaçaActionPerformed
-        CadastroRaca raca = new CadastroRaca();
-        raca.setVisible(true);
-    }//GEN-LAST:event_jMenuRaçaActionPerformed
 
     private void jMenuAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdocaoActionPerformed
         CadastroAdocao adocao = new CadastroAdocao();
         adocao.setVisible(true);
     }//GEN-LAST:event_jMenuAdocaoActionPerformed
 
-    private void jMenuRelatorioUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioUsuariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuRelatorioUsuariosActionPerformed
+    private void jMenuRaçaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRaçaActionPerformed
+        CadastroRaca raca = new CadastroRaca();
+        raca.setVisible(true);
+    }//GEN-LAST:event_jMenuRaçaActionPerformed
 
-    private void jMenuRelatorioAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatorioAdotanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuRelatorioAdotanteActionPerformed
+    private void jMenuEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEspecieActionPerformed
+        CadastroEspecie especie = new CadastroEspecie();
+        especie.setVisible(true);
+    }//GEN-LAST:event_jMenuEspecieActionPerformed
+
+    private void jMenuAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAnimalActionPerformed
+        CadastroAnimal animal = new CadastroAnimal();
+        animal.setVisible(true);
+    }//GEN-LAST:event_jMenuAnimalActionPerformed
+
+    private void jMenuLogradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLogradouroActionPerformed
+        CadastroLogradouro logradouro = new CadastroLogradouro();
+        logradouro.setVisible(true);
+    }//GEN-LAST:event_jMenuLogradouroActionPerformed
+
+    private void jMenuBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBairroActionPerformed
+        CadastroBairro bairro = new CadastroBairro();
+        bairro.setVisible(true);
+    }//GEN-LAST:event_jMenuBairroActionPerformed
+
+    private void jMenuAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdotanteActionPerformed
+        CadastroAdotante adotante = new CadastroAdotante();
+        adotante.setVisible(true);
+    }//GEN-LAST:event_jMenuAdotanteActionPerformed
+
+    private void jMenuGrupoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGrupoUsuarioActionPerformed
+        CadastroGrupoUsuario grupoUsuario = new CadastroGrupoUsuario();
+        grupoUsuario.setVisible(true);
+    }//GEN-LAST:event_jMenuGrupoUsuarioActionPerformed
+
+    private void jMenuIUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuIUsuarioActionPerformed
+        CadastroUsuario usuario = new CadastroUsuario();
+        usuario.setVisible(true);
+    }//GEN-LAST:event_jMenuIUsuarioActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Date dataSistema = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        jLdata.setText(formato.format(dataSistema));
+
+        Timer timer = new Timer(1000, new hora() {});
+        timer.start();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -404,7 +405,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar JMenuBar;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLdata;
+    private javax.swing.JLabel jLhora;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem jMenuAdocao;
     private javax.swing.JMenuItem jMenuAdotante;
@@ -417,11 +420,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuIUsuario;
     private javax.swing.JMenuItem jMenuLogradouro;
     private javax.swing.JMenuItem jMenuRaça;
-    private javax.swing.JMenuItem jMenuRelatorioAdocoes;
-    private javax.swing.JMenuItem jMenuRelatorioAdotante;
-    private javax.swing.JMenuItem jMenuRelatorioAnimais;
-    private javax.swing.JMenuItem jMenuRelatorioUsuarios;
     private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     // End of variables declaration//GEN-END:variables
+
+    private void localDate(String dateFormat) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    abstract class hora implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            Calendar now = Calendar.getInstance();
+            jLhora.setText(String.format("%1$tH:%1$tM:%1tS", now));
+        }
+    }
+
 }
