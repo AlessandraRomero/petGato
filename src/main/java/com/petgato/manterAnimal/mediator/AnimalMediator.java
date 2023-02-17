@@ -167,6 +167,7 @@ public class AnimalMediator extends AbstractMediator {
         jDateDataResgate.setDate(null);
         comboBoxRaca.setSelectedItem(null);
         comboBoxEspecie.setSelectedItem(null);
+        jDateDataResgateBuscar.setDate(null);
     }
 
     public void novo() {
@@ -176,13 +177,15 @@ public class AnimalMediator extends AbstractMediator {
 
     public void excluir() {
         Long id = getIdAnimalFromTable();
-        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro?",
-                "Confirmação", JOptionPane.YES_OPTION);
-        if (id != null && resposta == JOptionPane.YES_OPTION) {
-            controle.deletar(id);
-            model.atualizar();
-            JOptionPane.showMessageDialog(null, "Excluído com sucesso!",
-                    "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+        if (id != null) {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro?",
+                    "Confirmação", JOptionPane.YES_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                controle.deletar(id);
+                model.atualizar();
+                JOptionPane.showMessageDialog(null, "Excluído com sucesso!",
+                        "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -224,16 +227,16 @@ public class AnimalMediator extends AbstractMediator {
             } else if (txtPeso.getText().isEmpty() || txtPeso.getText().isBlank()) {
                 JOptionPane.showMessageDialog(null, "Campo Peso deve ser preenchido", "aviso", JOptionPane.WARNING_MESSAGE);
                 txtPeso.requestFocusInWindow();
-             } else if (txtSexo.getText().isEmpty() || txtSexo.getText().isBlank()) {
+            } else if (txtSexo.getText().isEmpty() || txtSexo.getText().isBlank()) {
                 JOptionPane.showMessageDialog(null, "Campo Sexo deve ser preenchido", "aviso", JOptionPane.WARNING_MESSAGE);
-                txtSexo.requestFocusInWindow();    
-            }  else if (comboBoxEspecie.getSelectedItem() == null) {
+                txtSexo.requestFocusInWindow();
+            } else if (comboBoxEspecie.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Campo Espécie deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
                 comboBoxEspecie.requestFocusInWindow();
-            } else if((comboBoxRaca.getSelectedItem() == null)){
+            } else if ((comboBoxRaca.getSelectedItem() == null)) {
                 JOptionPane.showMessageDialog(null, "Campo Raça deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
                 comboBoxRaca.requestFocusInWindow();
-            }else if(jDateDataResgate.getDate() == null){
+            } else if (jDateDataResgate.getDate() == null) {
                 JOptionPane.showMessageDialog(null, "Campo Data Resgate deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
                 jDateDataResgate.requestFocusInWindow();
             }
@@ -257,7 +260,9 @@ public class AnimalMediator extends AbstractMediator {
         AnimalCriteriaBuilder builder = new AnimalCriteriaBuilder();
         this.resultados = builder.findBy(nome, dataResgateBuscar, especie);
 
+        limpar();
         model.atualizar(this.resultados);
+
     }
 
     public void cancelar() {

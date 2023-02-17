@@ -8,7 +8,6 @@ import com.petgato.manterAdotante.model.Adotante;
 import com.petgato.manterAnimal.controller.AdocaoController;
 import com.petgato.manterAnimal.criteriaBuilder.AdocaoCriteriaBuilder;
 import com.petgato.manterAnimal.model.Adocao;
-import com.petgato.manterAnimal.model.enums.Status;
 import com.petgato.manterAnimal.view.modelView.AdocaoTableModel;
 import com.petgato.manterUsuario.model.Usuario;
 import com.petgato.padrao.mediator.AbstractMediator;
@@ -138,7 +137,7 @@ public class AdocaoMediator extends AbstractMediator {
             adotadoMediator.registerAdocao(adocoes);
             txtId.setText(adocoes.getId().toString());
             comboBoxAtendende.setSelectedItem(adocoes.getAtendente());
-//            txtStatus.setText(adocoes.getStatus().toString());
+//           txtStatus.setText(adocoes.getStatus().toString());
             comboBoxAdotante.setSelectedItem(adocoes.getAdotante());
             visitaMediator.carregarDados(adocoes.getVisitas());
             adotadoMediator.carregarDados(adocoes.getAdotados());
@@ -150,7 +149,7 @@ public class AdocaoMediator extends AbstractMediator {
         txtId.setText("");
         comboBoxAtendende.setSelectedItem(null);
         comboBoxAdotante.setSelectedItem(null);
-//        txtStatus.setText("");
+//      txtStatus.setText("");
     }
 
     public void novo() {
@@ -165,13 +164,15 @@ public class AdocaoMediator extends AbstractMediator {
 
     public void excluir() {
         Long id = getIdAdocaoFromTable();
-        int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro de adoção?",
-                "Confirmação", JOptionPane.YES_OPTION);
-        if (id != null && resposta == JOptionPane.YES_OPTION) {
-            controle.deletar(id);
-            model.atualizar();
-            JOptionPane.showMessageDialog(null, "Exclusão realizada",
-                    "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+        if (id != null) {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja excluir esse registro de adoção?",
+                    "Confirmação", JOptionPane.YES_OPTION);
+            if (id != null && resposta == JOptionPane.YES_OPTION) {
+                controle.deletar(id);
+                model.atualizar();
+                JOptionPane.showMessageDialog(null, "Exclusão realizada",
+                        "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -208,8 +209,11 @@ public class AdocaoMediator extends AbstractMediator {
             model.atualizar();
             tab.setSelectedIndex(0);
         } else {
-            JOptionPane.showMessageDialog(null, "Nenhum campo deve ser vazio", "aviso", JOptionPane.WARNING_MESSAGE);
-
+            if (comboBoxAdotante.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Campo adotante deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
+            } else if (comboBoxAtendende.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Campo atendente deve ser selecionado", "aviso", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 
